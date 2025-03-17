@@ -2,12 +2,12 @@
     "appUser":{
         "firstname": "string",
         "lastname": "string" ,
-        "mail": "string",
+        "email": "string",
         "password": "string",
         "username": "string | null",
         "role": "string",
         "firstConnexion": "boolean",
-        "token": "number",
+        "connectionToken": "string",
         "note": "number",
         "chat": [
             {   
