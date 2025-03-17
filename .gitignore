@@ -1,41 +1,74 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# Node.js dependencies
+node_modules/
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+*.log
+.npm/
+.pnp/
+.pnp.js
 
-# dependencies
-/node_modules
-/.pnp
-.pnp.*
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/versions
+# Next.js build & cache
+.next/
+out/
+.next/cache/
+.vercel/
+dist/
+*.next
 
-# testing
-/coverage
+# Prisma
+prisma/dev.db
+prisma/dev.db-journal
+prisma/migrations/
+prisma/.env
 
-# next.js
-/.next/
-/out/
-
-# production
-/build
-
-# misc
-.DS_Store
+# MongoDB related
 *.pem
+mongodb.log
+dump/
+data/db/
 
-# debug
+# dotenv environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.envrc
+
+# Editor/IDE files
+.idea/
+.vscode/
+*.swp
+*.swo
+*.swn
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Logs & Debugging
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-.pnpm-debug.log*
+pnpm-debug.log*
+debug.log
+output.log
+logs/
 
-# env files (can opt-in for committing if needed)
-.env*
+# Miscellaneous
+*.bak
+*.tmp
+*.cache
+*.swp
+*.swo
+*.swn
+*.pid
+*.seed
+*.lock
+*.gz
 
-# vercel
-.vercel
-
-# typescript
-*.tsbuildinfo
-next-env.d.ts
+# Dependencies & Binaries
+bin/
+obj/
+lib/
