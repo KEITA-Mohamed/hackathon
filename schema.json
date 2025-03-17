@@ -1,0 +1,29 @@
+{
+    "appUser":{
+        "firstname": "string",
+        "lastname": "string" ,
+        "mail": "string",
+        "password": "string",
+        "username": "string | null",
+        "role": "string",
+        "firstConnexion": "boolean",
+        "token": "number",
+        "note": "number",
+        "chat": [
+            {   
+                "prompt": "string",                
+                "answer": "string",                
+                "model": "string",                
+                "timeStamp": "Date",
+                "credits": "number"
+            },
+            {   
+                "prompt": "string",                
+                "answer": "string",                
+                "model": "string",                
+                "timeStamp": "Date",
+                "credits": "number"
+            }
+        ]
+    }
+}
