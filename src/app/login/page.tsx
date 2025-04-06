@@ -1,5 +1,11 @@
-export default function Login () {
-    return (
-        <div>salut</div>
-    )
+import SigninForm from "@/components/sigin-form/SiginForm";
+
+
+
+const SigninPage = ()=>{
+
+    return <SigninForm />
+
 }
+
+export default SigninPage;
