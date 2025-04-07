@@ -18,9 +18,9 @@
     }
 
     .active-btn{
-        background-color: var(--foreground);
+        background-color: var(--black-09);
         color: var(--background);
-        border: 1px solid var(--foreground);
+        border: 1px solid var(--black-09);
     }
 }
 
@@ -29,8 +29,12 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 50%;
+    width: 45%;
     height: fit-content;
+    border: 1px solid var(--light-grey);
+    box-shadow: var(--box-shadow);
+    border-radius: 30px;
+    overflow: hidden;
 
     .login-containers{
         width: 100%;
@@ -39,13 +43,15 @@
         flex-direction: row;
         justify-content: flex-start;
         align-items: center;
-        border-radius: 100px;
-        box-shadow: var(--box-shadow);
         background-color: var(--white-025);
-        border: 1px solid var(--light-grey);
-        margin-bottom: 1em;
+        margin-bottom: 0em;
         height: 3em;
-        padding: 2.3em 2em;
+        padding: 2em 2em;
+        border-bottom: 1px solid var(--light-grey);
+
+        &:last-of-type{
+            border-bottom: 0px solid var(--light-grey);
+        }
 
         p{
             width: fit-content;
@@ -89,7 +95,7 @@ button{
     display: flex;
     
     a{
-        padding: 1.2em 2.5em;
+        padding: .9em 2em;
         transition: 200ms all;
         font-variation-settings: 'wght' 700;
         font-size: 1.3em;

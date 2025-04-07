@@ -28,11 +28,11 @@ export default function Form ({ connexionMethod }: { connexionMethod: string }) 
                         <p>Valider le mot de passe&thinsp;: </p><input type="text" />
                     </div>
                 }
-
-                <button>
-                    <a href="/chat">Connexion</a>
-                </button>
             </div>
+
+            <button>
+                <a href="/chat">Connexion</a>
+            </button>
         </div>
     )
 }
