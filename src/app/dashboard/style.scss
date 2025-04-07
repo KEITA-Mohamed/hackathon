@@ -1,0 +1,60 @@
+#main-container{
+    display: flex;
+    flex-direction: row;
+}
+
+#student-list{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    height: 100%;
+    border-radius: 25px;
+    border: 1px solid var(--light-grey);
+    background-color: var(--white-025);
+    box-shadow: var(--box-shadow);
+    overflow: hidden;
+    width: 80%;
+    height: 90%;
+
+    h3{
+        width: 100%;
+        background-color: var(--black-09) !important;
+        color: white;
+        padding: 1em 1.5em;
+        font-variation-settings: 'wght' 600, 'wdth' 190;
+        font-size: 1.4em;
+        text-align: center;
+    }
+    
+    ul{
+        width: 100%;
+        
+        li{
+            width: 100%;
+            border-bottom: 1px solid var(--grey);
+            background-color: var(--background);
+            cursor: pointer;
+            
+            a{
+                transition: 200ms all;
+                padding: 1em 1.5em;
+                display: flex;
+                flex-direction: column;
+                font-size: 1.3em;
+                font-variation-settings: 'wght' 700, 'wdth' 150;
+
+                &:hover{
+                    background-color: var(--light-grey-025);
+                }
+    
+                span{
+                    font-variation-settings: 'wght' 300, 'wdth' 120;
+                    font-size: .8em !important;
+                    font-family: 'poppins';
+                }
+            }
+        }
+    }
+}
+

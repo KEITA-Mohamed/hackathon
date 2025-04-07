@@ -1,0 +1,21 @@
+#settings{
+    width: 1em;
+    height: 1em;
+    border-radius: 100%;
+    border: 1px solid var(--light-grey-05);
+    background-color: var(--white-025);
+    box-shadow: var(--box-shadow);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+    padding: .7em;
+    font-variation-settings: 'wght' 400, 'wdth' 120;
+    cursor: pointer;
+    transition: 200ms all;
+
+    &:hover{
+        background-color: var(--background);
+    }
+}

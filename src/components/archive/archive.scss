@@ -1,0 +1,95 @@
+#chat-list{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    height: 100%;
+    border-radius: 25px;
+    border: 1px solid var(--light-grey-05);
+    background-color: var(--white-025);
+    box-shadow: var(--box-shadow);
+    overflow: hidden;
+    width: 100%;
+
+    h3{
+        width: 100%;
+        background-color: var(--black-09) !important;
+        color: white;
+        padding: 1.2em 1.5em;
+        font-variation-settings: 'wght' 900;
+        font-size: 1.2em;
+        text-align: center;
+        font-family: 'unbounded';
+        border-bottom: 1px solid var(--light-grey-05);
+    }
+    
+    ul{
+        width: 100%;
+        
+        li{
+            width: 100%;
+            border-bottom: 1px solid var(--light-grey-05);
+            // background-color: var(--white-025);
+            background-color: white;
+            font-variation-settings: 'wght' 600, 'wdth' 130;
+            cursor: pointer;
+            
+            a{
+                transition: 200ms all;
+                padding: 1.3em 2em;
+                display: flex;
+                flex-direction: column;
+
+                &:hover{
+                    background-color: var(--light-grey-025);
+                }
+    
+                span{
+                    font-variation-settings: 'wght' 300, 'wdth' 120;
+                    font-size: .95em;
+                    margin-top: .1em;
+                    font-family: 'poppins';
+                }
+            }
+        }
+    }
+
+}
+
+#current-chat{
+    width: 100%;
+    height: fit-content;
+    border: 1px solid var(--light-grey-05);
+    background-color: var(--white-025);
+    color: var(--grey);
+    border-radius: 100px;
+    margin-top: 1em;
+    box-shadow: var(--box-shadow);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+
+    a{
+        width: 100%;
+        padding: 1em 2em;
+        // background-color: var(--light-grey-025);
+        font-variation-settings: 'wght' 800, 'wdth' 140;
+        font-size: 1em;
+        display: flex;
+        flex-direction: column;
+        transition: 200ms all;
+
+        &:hover{
+            background-color: var(--light-grey-03) !important;
+            color: var(--foreground);
+        }
+
+        span{
+            font-family: 'poppins';
+            font-variation-settings: 'wght' 300, 'wdth' 120;
+            font-size: .9em;
+        }
+    }
+}

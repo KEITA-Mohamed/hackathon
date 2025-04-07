@@ -1,0 +1,45 @@
+#user-info-container{
+    display: flex;
+    flex-direction: row;
+
+    p{
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        border: 1px solid var(--light-grey-05);
+        // background-color: var(--white-025);
+        border-radius: 100px;
+        overflow: hidden;
+        box-shadow: var(--box-shadow);
+        width: fit-content;
+        margin-right: 1.5em;
+    }
+    
+    span{
+        padding: .4em 1.2em;
+        font-family: 'poppins';
+    
+        &:first-of-type{
+            padding-right: .8em;
+            background-color: white;
+        }
+    
+        &:last-of-type{
+            padding-left: .8em;            
+        }
+    }
+    
+    #credit-counter, #user-name{
+        background-color: var(--white-025);
+        color: var(--foreground);
+        font-variation-settings: 'wght' 800, 'wdth' 170;
+        width: fit-content;
+        border-left: 1px solid var(--light-grey-05);
+    }
+    
+    #user-name{
+        font-family: 'unbounded';
+        font-variation-settings: 'wght' 800, 'wdth' 120;
+    }
+}

@@ -1,0 +1,42 @@
+#main-container{
+    display: flex;
+    flex-direction: row;
+}
+
+section{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100%;
+
+
+    &:first-of-type{
+        width: 30%;
+        margin-right: 2em;
+    }
+
+    &:last-of-type{
+        width: 70%;
+    }
+}
+
+#chat-container{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+}
+
+#chat-header{
+    position: absolute;
+    width: 100%;
+    top: 0%;
+    right: 0%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+}
