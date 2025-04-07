@@ -90,7 +90,7 @@ export const config = {
          * 4. /favicon.ico, /sitemap.xml, /robots.txt (fichiers statiques courants)
          * 5. /login, /register (pages d'authentification)
          */
-        '/((?!api|_next|_static|favicon.ico|sitemap.xml|robots.txt|login).*)',
+        '/((?!api|_next|_static|favicon.ico|sitemap.xml|robots.txt|login|signup).*)',
     ],
 };
 
