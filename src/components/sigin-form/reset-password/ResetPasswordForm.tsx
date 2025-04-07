@@ -85,7 +85,7 @@ export default function ResetPasswordForm({ userId, token }: ResetPasswordProps)
         try {
 
             const response = await fetch("/api/users/resetPassword", {
-                method: "POST",
+                method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
                 },
