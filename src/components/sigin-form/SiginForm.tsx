@@ -1,12 +1,7 @@
 "use client"
-
+import './style.scss';
 import type React from "react"
 import { useState } from "react"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { useRouter } from "next/navigation"
 
 export default function SigninForm() {
@@ -81,74 +76,60 @@ export default function SigninForm() {
     }
 
     return (
-        <div className="w-full max-w-md mx-auto">
-            <Card>
-                <CardHeader className="space-y-1">
-                    <CardTitle className="text-2xl text-center">Connexion</CardTitle>
-                    <CardDescription className="text-center">Entrez vos identifiants pour vous connecter</CardDescription>
-                </CardHeader>
+        <div className="connexion-container">
+                <header>
+                    <p>Connexion</p>
+                </header>
                 <form onSubmit={handleSubmit}>
-                    <CardContent className="space-y-4">
-                        {statusMessage && (
-                            <div
-                                className={`p-3 rounded-md ${
-                                    statusMessage.type === "success"
-                                        ? "bg-green-100 border border-green-200 text-green-800"
-                                        : "bg-red-100 border border-red-200 text-red-800"
-                                }`}
-                            >
-                                <p className="text-sm">{statusMessage.message}</p>
-                            </div>
-                        )}
-
-                        <div className="space-y-2">
-                            <Label htmlFor="email">Email</Label>
-                            <Input
-                                id="email"
-                                name="email"
-                                type="email"
-                                placeholder="exemple@email.com"
-                                value={formData.email}
-                                onChange={handleChange}
-                                disabled={isLoading}
-                            />
-                            {errors.email && <p className="text-sm text-red-500">{errors.email}</p>}
+                    {statusMessage && (
+                        <div
+                            className={`p-3 rounded-md ${
+                                statusMessage.type === "success"
+                                    ? "bg-green-100 border border-green-200 text-green-800"
+                                    : "bg-red-100 border border-red-200 text-red-800"
+                            }`}
+                        >
+                            <p>{statusMessage.message}</p>
                         </div>
+                    )}
 
-                        <div className="space-y-2">
-                            <div className="flex items-center justify-between">
-                                <Label htmlFor="password">Mot de passe</Label>
-                                <Link href="/login/forgotPassword" className="text-sm text-primary hover:underline">
-                                    Mot de passe oublié?
-                                </Link>
-                            </div>
-                            <Input
-                                id="password"
-                                name="password"
-                                type="password"
-                                placeholder="Entrez votre mot de passe"
-                                value={formData.password}
-                                onChange={handleChange}
-                                disabled={isLoading}
-                            />
-                            {errors.password && <p className="text-sm text-red-500">{errors.password}</p>}
+                    <div className='mail-container'>
+                        <p>Email</p>
+                        <input
+                            id="email"
+                            name="email"
+                            type="email"
+                            placeholder="exemple@email.com"
+                            value={formData.email}
+                            onChange={handleChange}
+                            disabled={isLoading}
+                        />
+                        {errors.email && <p className="error">{errors.email}</p>}
+                    </div>
+
+                    <div className='password-container'>
+                        <div className='password-header'>
+                            <p>Mot de passe</p>
+                            <a href="/login/forgotPassword">Mot de passe oublié ?</a>                             
                         </div>
-                    </CardContent>
-
-                    <CardFooter className="flex flex-col space-y-4">
-                        <Button type="submit" className="w-full" disabled={isLoading}>
-                            {isLoading ? "Connexion en cours..." : "Se connecter"}
-                        </Button>
-
-                        <div className="text-center text-sm">
-                            Vous n&apos;avez pas de compte?{" "}
-                            <Link href="/inscription" className="text-primary hover:underline">
-                                S&apos;inscrire
-                            </Link>
-                        </div>
-                    </CardFooter>
+                        <input
+                            id="password"
+                            name="password"
+                            type="password"
+                            placeholder="Entrez votre mot de passe"
+                            value={formData.password}
+                            onChange={handleChange}
+                            disabled={isLoading}
+                        />
+                        {errors.password && <p className="error">{errors.password}</p>}
+                    </div>
                 </form>
-            </Card>
+
+                <footer>
+                    <button type="submit" disabled={isLoading}>
+                        {isLoading ? "Connexion en cours..." : "Se connecter"}
+                    </button>
+                </footer>
         </div>
     )
 }

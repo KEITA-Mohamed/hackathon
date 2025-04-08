@@ -2,3 +2,5 @@
 - Retour au Dashboard pour admin
 - Analytique a ajouter sur prompt
 - Prompt sont anonyme
+
+- Afficher plusieurs conversation simultanément 

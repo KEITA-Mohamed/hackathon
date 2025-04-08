@@ -9,6 +9,7 @@
         "firstConnexion": "boolean",
         "connectionToken": "string",
         "note": "number",
+        "formationLevel": ["L1", "L2"],
         "chat": [
             {   
                 "prompt": "string",                
@@ -27,3 +28,4 @@
         ]
     }
 }
+

@@ -1,17 +1,7 @@
 import type { Metadata } from "next";
 // import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.scss";
-import Header from "@/components/header/Header";
-
-// const geistSans = Geist({
-//     variable: "--font-geist-sans",
-//     subsets: ["latin"],
-// });
-
-// const geistMono = Geist_Mono({
-//     variable: "--font-geist-mono",
-//     subsets: ["latin"],
-// });
+// import Header from "@/components/header/Header";
 
 export const metadata: Metadata = {
   title: "Prompt evaluation",
@@ -21,14 +11,8 @@ export const metadata: Metadata = {
 export default function RootLayout({children,}: Readonly<{ children: React.ReactNode; }>) {
     return (
         <html lang="en">
-        <body
-
-        >
-        <Header />
-        <main>
+        <body>
             {children}
-        </main>
-
         </body>
         </html>
     );

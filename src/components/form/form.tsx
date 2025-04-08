@@ -14,12 +14,10 @@ export default function Form ({ connexionMethod }: { connexionMethod: string }) 
 
             <div id="login-container">
                 <div className='login-containers'>
-                    {/* <p>Mail&thinsp;:</p> */}
                     <input type="text" placeholder='Mail'/>
                 </div>
 
                 <div className='login-containers'>
-                    {/* <p>Mot de passe&thinsp;: </p> */}
                     <input type="text" placeholder='Mot de passe'/>
                 </div>
 
