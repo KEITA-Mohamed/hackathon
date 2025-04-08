@@ -71,5 +71,5 @@ logs/
 # Dependencies & Binaries
 bin/
 obj/
-lib/
+
 todo.md

@@ -1,5 +1,6 @@
 import './style.scss'
 import Background from '../../components/background/background'
+import Dashboard from "@/components/dashboard/Dashboard";
 
 export default function History () {
     return (
@@ -18,6 +19,7 @@ export default function History () {
                     </li>
                 </ul>
             </section>
+            <Dashboard />
         </div>
     )
 }

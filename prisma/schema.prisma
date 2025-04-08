@@ -14,30 +14,32 @@ datasource db {
 }
 
 model User {
-  id                String    @id @default(auto()) @map("_id") @db.ObjectId
-  firstname         String
-  lastname          String 
-  email             String 
-  password          String?
-  username          String? 
-  role              Role
-  firstConnexion    Boolean?
-  connectionToken   String?
-  note              Int?
-  createdAt         DateTime @default(now())
-  updatedAt         DateTime @default(now())
-  credit            Int      @default(100)
-  chat              Chat[]
+  id                      String    @id @default(auto()) @map("_id") @db.ObjectId
+  firstname               String
+  lastname                String
+  email                   String    @unique
+  emailToken              String?
+  password                String?
+  passwordToken           String?
+  passwordTokenEXPIRATION DateTime?
+  role                    Role
+  firstConnexion          Boolean?
+  isActive                Boolean   @default(false)
+  note                    Int?
+  createdAt               DateTime  @default(now())
+  updatedAt               DateTime  @default(now())
+  credit                  Int       @default(100)
+  chat                    Chat[]
 }
 
 model Chat {
-  id                String   @id @default(auto()) @map("_id") @db.ObjectId
-  user              User     @relation(fields: [userId], references: [id])
-  userId            String   @db.ObjectId
-  prompt            String
-  answer            String?
-  model             iaModel
-  createdAt         DateTime @default(now())
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String   @db.ObjectId
+  prompt    String?
+  answer    String?
+  model     iaModel?
+  createdAt DateTime @default(now())
 }
 
 enum Role {
