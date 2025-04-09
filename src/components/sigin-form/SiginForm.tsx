@@ -1,5 +1,5 @@
 "use client"
-import './style.scss';
+import './SiginForm.scss';
 import type React from "react"
 import { useState } from "react"
 import { useRouter } from "next/navigation"
@@ -77,22 +77,22 @@ export default function SigninForm() {
 
     return (
         <div className="connexion-container">
-                <header>
-                    <p>Connexion</p>
-                </header>
-                <form onSubmit={handleSubmit}>
-                    {statusMessage && (
-                        <div
-                            className={`p-3 rounded-md ${
-                                statusMessage.type === "success"
-                                    ? "bg-green-100 border border-green-200 text-green-800"
-                                    : "bg-red-100 border border-red-200 text-red-800"
-                            }`}
-                        >
-                            <p>{statusMessage.message}</p>
-                        </div>
-                    )}
-
+            {statusMessage && (
+                <div
+                    className={`p-3 rounded-md ${
+                        statusMessage.type === "success"
+                            ? "bg-green-100 border border-green-200 text-green-800"
+                            : "bg-red-100 border border-red-200 text-red-800"
+                    }`}
+                >
+                    <p>{statusMessage.message}</p>
+                </div>
+            )}
+            <header>
+                <p>Connexion</p>
+            </header>
+            <form onSubmit={handleSubmit}>                    
+                <div id='card'>
                     <div className='mail-container'>
                         <p>Email</p>
                         <input
@@ -123,13 +123,14 @@ export default function SigninForm() {
                         />
                         {errors.password && <p className="error">{errors.password}</p>}
                     </div>
-                </form>
+                </div>
 
                 <footer>
                     <button type="submit" disabled={isLoading}>
                         {isLoading ? "Connexion en cours..." : "Se connecter"}
                     </button>
                 </footer>
+            </form>
         </div>
     )
 }

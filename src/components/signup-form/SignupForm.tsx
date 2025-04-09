@@ -1,7 +1,7 @@
 "use client"
 
+import './SignupForm.scss';
 import type React from "react"
-
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -117,167 +117,166 @@ export default function FormulaireInscription() {
     }
 
     return (
-        <div className="w-full max-w-md mx-auto p-4">
-            <Card>
-                <CardHeader>
-                    <CardTitle className="text-2xl">Inscription</CardTitle>
-                    <CardDescription>Créez votre compte en remplissant le formulaire ci-dessous.</CardDescription>
-                </CardHeader>
+        <div className="connexion-container">
+            <header>
+                <p>Inscription
+                    {/* <span>Créez votre compte en remplissant le formulaire ci-dessous.</span> */}
+                </p>
+            </header>
 
-                {submitSuccess ? (
-                    <CardContent>
-                        <Alert className="bg-green-50 border-green-200">
-                            <AlertDescription className="text-green-800">
-                                Votre compte a été créé avec succès! Vous pouvez maintenant vous connecter.
-                            </AlertDescription>
-                        </Alert>
-                        <div className="mt-4">
-                            <Button onClick={() => setSubmitSuccess(false)} className="w-full">
-                                Créer un autre compte
-                            </Button>
+            {submitSuccess ? (
+                <div>
+                    <Alert className="bg-green-50 border-green-200">
+                        <AlertDescription className="text-green-800">
+                            Votre compte a été créé avec succès! Vous pouvez maintenant vous connecter.
+                        </AlertDescription>
+                    </Alert>
+                    <div>
+                        <button onClick={() => setSubmitSuccess(false)}>
+                            Créer un autre compte
+                        </button>
+                    </div>
+                </div>
+            ) : (
+                <form onSubmit={handleSubmit}>
+                    <div className='form-main-container'>
+                        <div className='name-container'>
+                            <div className='form-field-container'>
+                                <p>Prénom</p>
+                                <input
+                                    id="prenom"
+                                    name="prenom"
+                                    placeholder="Entrez votre prénom"
+                                    value={formData.prenom}
+                                    onChange={handleChange}
+
+                                    aria-invalid={!!errors.prenom}
+                                    aria-describedby={errors.prenom ? "prenom-error" : undefined}
+                                />
+                                {errors.prenom && (
+                                    <p id="prenom-error">
+                                        {errors.prenom}
+                                    </p>
+                                )}
+                            </div>
+                            <div className='form-field-container'>
+                                <p>Nom</p>
+                                <input
+                                    id="nom"
+                                    name="nom"
+                                    placeholder="Entrez votre nom"
+                                    value={formData.nom}
+                                    onChange={handleChange}
+
+                                    aria-invalid={!!errors.nom}
+                                    aria-describedby={errors.nom ? "nom-error" : undefined}
+                                />
+                                {errors.nom && (
+                                    <p id="nom-error">
+                                        {errors.nom}
+                                    </p>
+                                )}
+                            </div>
                         </div>
-                    </CardContent>
-                ) : (
-                    <form onSubmit={handleSubmit}>
-                        <CardContent className="space-y-4">
-                            <div className="grid grid-cols-2 gap-4">
-                                <div className="space-y-2">
-                                    <Label htmlFor="prenom">Prénom</Label>
-                                    <Input
-                                        id="prenom"
-                                        name="prenom"
-                                        placeholder="Entrez votre prénom"
-                                        value={formData.prenom}
-                                        onChange={handleChange}
 
-                                        aria-invalid={!!errors.prenom}
-                                        aria-describedby={errors.prenom ? "prenom-error" : undefined}
-                                    />
-                                    {errors.prenom && (
-                                        <p id="prenom-error" className="text-sm text-destructive mt-1">
-                                            {errors.prenom}
-                                        </p>
-                                    )}
-                                </div>
-                                <div className="space-y-2">
-                                    <Label htmlFor="nom">Nom</Label>
-                                    <Input
-                                        id="nom"
-                                        name="nom"
-                                        placeholder="Entrez votre nom"
-                                        value={formData.nom}
-                                        onChange={handleChange}
+                        <div className='form-field-container'>
+                            <p>Email</p>
+                            <input
+                                id="email"
+                                name="email"
+                                type="email"
+                                placeholder="exemple@email.com"
+                                value={formData.email}
+                                onChange={handleChange}
 
-                                        aria-invalid={!!errors.nom}
-                                        aria-describedby={errors.nom ? "nom-error" : undefined}
-                                    />
-                                    {errors.nom && (
-                                        <p id="nom-error" className="text-sm text-destructive mt-1">
-                                            {errors.nom}
-                                        </p>
-                                    )}
-                                </div>
-                            </div>
+                                aria-invalid={!!errors.email}
+                                aria-describedby={errors.email ? "email-error" : undefined}
+                            />
+                            {errors.email && (
+                                <p id="email-error">
+                                    {errors.email}
+                                </p>
+                            )}
+                        </div>
 
-                            <div className="space-y-2">
-                                <Label htmlFor="email">Email</Label>
-                                <Input
-                                    id="email"
-                                    name="email"
-                                    type="email"
-                                    placeholder="exemple@email.com"
-                                    value={formData.email}
-                                    onChange={handleChange}
+                        <div className='form-field-container'>
+                            <p>Mot de passe</p>
+                            <input
+                                id="password"
+                                name="password"
+                                type="password"
+                                placeholder="Entrez votre mot de passe"
+                                value={formData.password}
+                                onChange={handleChange}
 
-                                    aria-invalid={!!errors.email}
-                                    aria-describedby={errors.email ? "email-error" : undefined}
-                                />
-                                {errors.email && (
-                                    <p id="email-error" className="text-sm text-destructive mt-1">
-                                        {errors.email}
-                                    </p>
-                                )}
-                            </div>
+                                aria-invalid={!!errors.password}
+                                aria-describedby={errors.password ? "password-error" : undefined}
+                            />
+                            {errors.password && (
+                                <p id="password-error">
+                                    {errors.password}
+                                </p>
+                            )}
+                        </div>
 
-                            <div className="space-y-2">
-                                <Label htmlFor="password">Mot de passe</Label>
-                                <Input
-                                    id="password"
-                                    name="password"
-                                    type="password"
-                                    placeholder="Entrez votre mot de passe"
-                                    value={formData.password}
-                                    onChange={handleChange}
+                        <div className='form-field-container'>
+                            <p>Confirmer le mot de passe</p>
+                            <input
+                                id="confirmPassword"
+                                name="confirmPassword"
+                                type="password"
+                                placeholder="Confirmez votre mot de passe"
+                                value={formData.confirmPassword}
+                                onChange={handleChange}
 
-                                    aria-invalid={!!errors.password}
-                                    aria-describedby={errors.password ? "password-error" : undefined}
-                                />
-                                {errors.password && (
-                                    <p id="password-error" className="text-sm text-destructive mt-1">
-                                        {errors.password}
-                                    </p>
-                                )}
-                            </div>
+                                aria-invalid={!!errors.confirmPassword}
+                                aria-describedby={errors.confirmPassword ? "confirm-password-error" : undefined}
+                            />
+                            {errors.confirmPassword && (
+                                <p id="confirm-password-error">
+                                    {errors.confirmPassword}
+                                </p>
+                            )}
+                        </div>
 
-                            <div className="space-y-2">
-                                <Label htmlFor="confirmPassword">Confirmer le mot de passe</Label>
-                                <Input
-                                    id="confirmPassword"
-                                    name="confirmPassword"
-                                    type="password"
-                                    placeholder="Confirmez votre mot de passe"
-                                    value={formData.confirmPassword}
-                                    onChange={handleChange}
+                        <div className='form-field-container'>
+                            <p>Rôle</p>
+                            <Select onValueChange={handleRoleChange} value={formData.role}>
+                                <SelectTrigger
+                                    id="role"
+                                    aria-invalid={!!errors.role}
+                                    aria-describedby={errors.role ? "role-error" : undefined}
+                                >
+                                    <SelectValue placeholder="Sélectionnez un rôle" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    <SelectItem value="ADMIN">Admin</SelectItem>
+                                    <SelectItem value="TEACHER">Teacher</SelectItem>
+                                    <SelectItem value="STUDENT">Student</SelectItem>
+                                </SelectContent>
+                            </Select>
+                            {errors.role && (
+                                <p id="role-error">
+                                    {errors.role}
+                                </p>
+                            )}
+                        </div>
+                    </div>
 
-                                    aria-invalid={!!errors.confirmPassword}
-                                    aria-describedby={errors.confirmPassword ? "confirm-password-error" : undefined}
-                                />
-                                {errors.confirmPassword && (
-                                    <p id="confirm-password-error" className="text-sm text-destructive mt-1">
-                                        {errors.confirmPassword}
-                                    </p>
-                                )}
-                            </div>
-
-                            <div className="space-y-2">
-                                <Label htmlFor="role">Rôle</Label>
-                                <Select onValueChange={handleRoleChange} value={formData.role}>
-                                    <SelectTrigger
-                                        id="role"
-                                        aria-invalid={!!errors.role}
-                                        aria-describedby={errors.role ? "role-error" : undefined}
-                                    >
-                                        <SelectValue placeholder="Sélectionnez un rôle" />
-                                    </SelectTrigger>
-                                    <SelectContent>
-                                        <SelectItem value="ADMIN">Admin</SelectItem>
-                                        <SelectItem value="TEACHER">Teacher</SelectItem>
-                                        <SelectItem value="STUDENT">Student</SelectItem>
-                                    </SelectContent>
-                                </Select>
-                                {errors.role && (
-                                    <p id="role-error" className="text-sm text-destructive mt-1">
-                                        {errors.role}
-                                    </p>
-                                )}
-                            </div>
-                        </CardContent>
-
-                        <CardFooter>
-                            <Button type="submit" className="w-full" disabled={isSubmitting}>
-                                {isSubmitting ? (
-                                    <>
-                                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                                        Traitement en cours...
-                                    </>
-                                ) : (
-                                    "S'inscrire"
-                                )}
-                            </Button>
-                        </CardFooter>
-                    </form>
-                )}
-            </Card>
+                    <footer>
+                        <button type="submit" disabled={isSubmitting}>
+                            {isSubmitting ? (
+                                <>
+                                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                                    Traitement en cours...
+                                </>
+                            ) : (
+                                "S'inscrire"
+                            )}
+                        </button>
+                    </footer>
+                </form>
+            )}
         </div>
     )
 }

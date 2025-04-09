@@ -1,24 +1,19 @@
+@use '/src/app/mixin';
+
 #user-info-container{
-    display: flex;
-    flex-direction: row;
+    @include mixin.flex(row, flex-start, flex-start);
 
     p{
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-start;
-        align-items: center;
-        border: 1px solid var(--light-grey-05);
-        // background-color: var(--white-025);
-        border-radius: 100px;
+        @include mixin.flex(row, flex-start, center);    
+        @include mixin.size(fit-content, 100%);  
+        @include mixin.border(100px, var(--box-shadow), var(--border));                                     
         overflow: hidden;
-        box-shadow: var(--box-shadow);
-        width: fit-content;
         margin-right: 1.5em;
     }
     
     span{
+        @include mixin.font('poppins');  
         padding: .4em 1.2em;
-        font-family: 'poppins';
     
         &:first-of-type{
             padding-right: .8em;
@@ -31,15 +26,10 @@
     }
     
     #credit-counter, #user-name{
+        @include mixin.font('unbounded', inherit, 800);  
+        @include mixin.size(fit-content, 100%);  
         background-color: var(--white-025);
         color: var(--foreground);
-        font-variation-settings: 'wght' 800, 'wdth' 170;
-        width: fit-content;
-        border-left: 1px solid var(--light-grey-05);
-    }
-    
-    #user-name{
-        font-family: 'unbounded';
-        font-variation-settings: 'wght' 800, 'wdth' 120;
+        border-left: var(--border);
     }
 }

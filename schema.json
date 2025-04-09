@@ -4,28 +4,100 @@
         "lastname": "string" ,
         "email": "string",
         "password": "string",
-        "username": "string | null",
+        "username": ["string", "null"],
         "role": "string",
         "firstConnexion": "boolean",
         "connectionToken": "string",
-        "note": "number",
-        "formationLevel": ["L1", "L2"],
-        "chat": [
-            {   
-                "prompt": "string",                
-                "answer": "string",                
-                "model": "string",                
-                "timeStamp": "Date",
-                "credits": "number"
+
+        "age": "string",
+        "experienceTime": "float",
+        "etpNumber": "float",
+        "activityType": "string",
+        "currentPosition": "string",
+        "lastDegree": "string",
+        "studyType": "string",
+        "studentLevel": ["L1", "L2", "L3", "M1", "M2", "D1", "D2", "D3"],
+        "group": {
+            "id": "number",
+            "name": "string"
+        },
+        "autoEval": [
+            {
+                "task": "string",
+                "note": "number"
             },
-            {   
-                "prompt": "string",                
-                "answer": "string",                
-                "model": "string",                
-                "timeStamp": "Date",
-                "credits": "number"
+            {
+                "task": "string",
+                "note": "number"
+            }
+        ],
+        "conv": [
+            {
+                "id": "number",
+                "teamId": "number",
+                "task": "string",
+                "comment": "string",
+                "question": "string",
+                "note": "number",
+                "chat":  [
+                    {   
+                        "id": "number",
+                        "prompt": "string",                
+                        "answer": "string",                
+                        "model": "string",                
+                        "timeStamp": "Date",
+                        "credits": "number",
+                        "comment": "string",
+                        "question": "string",
+                        "note": "number"
+                    },
+                    {   
+                        "id": "number",
+                        "prompt": "string",                
+                        "answer": "string",                
+                        "model": "string",                
+                        "timeStamp": "Date",
+                        "credits": "number",
+                        "comment": "string",
+                        "question": "string",
+                        "note": "number"
+                    }
+                ]
+            },
+            {
+                "id": "number",
+                "teamId": "number",
+                "task": "string",
+                "comment": "string",
+                "question": "string",
+                "grade": "number",
+                "chat":  [
+                    {   
+                        "id": "number",
+                        "prompt": "string",                
+                        "answer": "string",                
+                        "model": "string",                
+                        "timeStamp": "Date",
+                        "credits": "number",
+                        "comment": "string",
+                        "question": "string",
+                        "note": "number"
+                    },
+                    {   
+                        "id": "number",
+                        "prompt": "string",                
+                        "answer": "string",                
+                        "model": "string",                
+                        "timeStamp": "Date",
+                        "credits": "number",
+                        "comment": "string",
+                        "question": "string",
+                        "note": "number"
+                    }
+                ]
             }
         ]
+                                             
     }
 }
 

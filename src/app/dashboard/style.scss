@@ -1,57 +1,46 @@
+@use '/src/app/mixin';
+
 #main-container{
-    display: flex;
-    flex-direction: row;
+    @include mixin.flex(row, flex-start, flex-start);
 }
 
 #student-list{
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    height: 100%;
-    border-radius: 25px;
-    border: 1px solid var(--light-grey);
+    @include mixin.flex(column, flex-start, flex-start);
+    @include mixin.size(80%, 90%);
+    @include mixin.border(25px, var(--box-shadow), var(--border));                                     
     background-color: var(--white-025);
-    box-shadow: var(--box-shadow);
     overflow: hidden;
-    width: 80%;
-    height: 90%;
 
     h3{
-        width: 100%;
+        @include mixin.size(100%, fit-content);
+        @include mixin.font('unbounded', 1.4em, 600);
         background-color: var(--black-09) !important;
-        color: white;
         padding: 1em 1.5em;
-        font-variation-settings: 'wght' 600, 'wdth' 190;
-        font-size: 1.4em;
+        color: white;        
         text-align: center;
     }
     
     ul{
-        width: 100%;
+        @include mixin.size(100%, fit-content);
         
         li{
-            width: 100%;
-            border-bottom: 1px solid var(--grey);
+            @include mixin.size(100%, fit-content);
             background-color: var(--background);
+            border-bottom: var(--border);
             cursor: pointer;
             
             a{
-                transition: 200ms all;
-                padding: 1em 1.5em;
-                display: flex;
-                flex-direction: column;
-                font-size: 1.3em;
-                font-variation-settings: 'wght' 700, 'wdth' 150;
+                @include mixin.flex(column, flex-start, flex-start);
+                @include mixin.font('unbounded', 1.3em, 700);
+                padding: 1em 1.5em;                
+                transition: var(--transition-time) all;
 
                 &:hover{
                     background-color: var(--light-grey-025);
                 }
     
                 span{
-                    font-variation-settings: 'wght' 300, 'wdth' 120;
-                    font-size: .8em !important;
-                    font-family: 'poppins';
+                    @include mixin.font('poppins', .8em, 300);                   
                 }
             }
         }

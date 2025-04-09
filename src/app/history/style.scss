@@ -1,42 +1,33 @@
+@use '/src/app/mixin';
+
 #main-container{
-    display: flex;
-    flex-direction: row;
+    @include mixin.flex(row, flex-start, flex-start);
 }
 
 section{
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    height: 100%;
-
+    @include mixin.flex(column, flex-start, center);
+    @include mixin.size(100%, 100%);
 
     &:first-of-type{
-        width: 30%;
+        @include mixin.size(30%, 100%);
         margin-right: 2em;
     }
 
     &:last-of-type{
-        width: 70%;
+        @include mixin.size(70%, 100%);
     }
 }
 
 #chat-container{
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: flex-start;
-    width: 100%;
+    @include mixin.flex(column, space-between, flex-start);
+    @include mixin.size(100%, 100%);
+    position: relative;    
 }
 
 #chat-header{
+    @include mixin.flex(row, space-between, flex-start);
+    @include mixin.size(100%, fit-content);
     position: absolute;
-    width: 100%;
     top: 0%;
     right: 0%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-start;
 }

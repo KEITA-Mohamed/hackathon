@@ -1,85 +1,63 @@
+@use '/src/app/mixin';
+
 #chat-list{
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    height: 100%;
-    border-radius: 25px;
-    border: 1px solid var(--light-grey-05);
-    background-color: var(--white-025);
-    box-shadow: var(--box-shadow);
-    overflow: hidden;
-    width: 100%;
+    @include mixin.flex(column, flex-start, center);
+    @include mixin.size(100%, 100%);
+    @include mixin.border(25px, var(--box-shadow), var(--border));                                     
 
     h3{
-        width: 100%;
-        background-color: var(--black-09) !important;
-        color: white;
-        padding: 1.2em 1.5em;
-        font-variation-settings: 'wght' 900;
-        font-size: 1.2em;
+        @include mixin.size(fit-content, fit-content);
+        @include mixin.font('unbounded', 1.2em, 900);
+        background-color: var(--background) !important;
+        color: var(--light-grey);
         text-align: center;
-        font-family: 'unbounded';
-        border-bottom: 1px solid var(--light-grey-05);
+        padding: 0em 1em;
+        border-radius: 100px;
+        transform: translate(0%, -50%);
     }
     
     ul{
-        width: 100%;
+        @include mixin.size(100%, fit-content);
+        margin-top: -3%;
         
         li{
-            width: 100%;
-            border-bottom: 1px solid var(--light-grey-05);
-            // background-color: var(--white-025);
-            background-color: white;
-            font-variation-settings: 'wght' 600, 'wdth' 130;
+            @include mixin.size(100%, fit-content);
+            @include mixin.font('unbounded', .9em, 600);
+            border-bottom: var(--border);
             cursor: pointer;
             
             a{
-                transition: 200ms all;
+                @include mixin.flex(column, flex-start, flex-start);
                 padding: 1.3em 2em;
-                display: flex;
-                flex-direction: column;
+                transition: var(--transition-time) all;
 
                 &:hover{
                     background-color: var(--light-grey-025);
                 }
     
                 span{
-                    font-variation-settings: 'wght' 300, 'wdth' 120;
-                    font-size: .95em;
+                    @include mixin.font('poppins', .95em, 300);
                     margin-top: .1em;
-                    font-family: 'poppins';
                 }
             }
         }
     }
-
 }
 
 #current-chat{
-    width: 100%;
-    height: fit-content;
-    border: 1px solid var(--light-grey-05);
+    @include mixin.flex(column, center, center);
+    @include mixin.size(100%, fit-content);
+    @include mixin.border(100px, var(--box-shadow), var(--border));                                     
     background-color: var(--white-025);
     color: var(--grey);
-    border-radius: 100px;
     margin-top: 1em;
-    box-shadow: var(--box-shadow);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
 
     a{
-        width: 100%;
-        padding: 1em 2em;
-        // background-color: var(--light-grey-025);
-        font-variation-settings: 'wght' 800, 'wdth' 140;
-        font-size: 1em;
-        display: flex;
-        flex-direction: column;
-        transition: 200ms all;
+        @include mixin.flex(column, center, center);
+        @include mixin.size(100%, fit-content);
+        @include mixin.font('unbounded', 1em, 800);
+        padding: 1em 2em;        
+        transition: var(--transition-time) all;
 
         &:hover{
             background-color: var(--light-grey-03) !important;
@@ -87,9 +65,7 @@
         }
 
         span{
-            font-family: 'poppins';
-            font-variation-settings: 'wght' 300, 'wdth' 120;
-            font-size: .9em;
+            @include mixin.font('poppins', .9em, 300);            
         }
     }
 }

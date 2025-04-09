@@ -1,16 +1,12 @@
+@use '/src/app/mixin';
+
 #messages-container{
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: flex-start;
+    @include mixin.flex(column, flex-end, flex-start);
     height: 100%;
 
     .message-container{
+        @include mixin.flex(row, flex-start, center);
         margin-bottom: 2em;
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-start;
-        align-items: center;
 
         &:last-of-type{
             margin-bottom: 0em;
@@ -18,38 +14,31 @@
     }
     
     .message{
-        display: flex;
-        flex-direction: row;
+        @include mixin.flex(row, flex-start, flex-start);
+        @include mixin.size(60%, fit-content);   
+        @include mixin.border(25px, var(--box-shadow), var(--border));                                     
         flex-wrap: wrap;
-        // background-color: var(--white-025);
         background-color: white;
-        border: 1px solid var(--light-grey-05);
         padding: 1.2em 2em;
-        border-radius: 25px;
         color: var(--foreground);
-        width: 60%;
-        box-shadow: var(--box-shadow);
 
         p{
             font-size: 1.1em;
         }
 
         .message-from{
-            font-variation-settings: 'wght' 700;
-            font-size: 1.3em;
+            @include mixin.font(inherit, 1.3em, 700); 
             margin-bottom: .5em;
         }
 
         .message-text{
-            font-family: 'poppins';
+            @include mixin.font('poppins', 1.2, 350); 
             padding-left: 2em;
             border-left: 1px solid var(--light-grey-03);
         }
 
         .message-infos{
-            font-family: 'poppins';
-            font-variation-settings: 'wght' 300;
-            font-size: .95em;
+            @include mixin.font('poppins', .95em, 300); 
             margin-top: .9em;
             color: var(--grey);
 
@@ -58,21 +47,12 @@
             }
         }
     }
-    
-
-    // .ia-message{
-    //     .message{
-    //         background-color: var(--white-025);
-    //     }
-    // }
 
     .user-message{
         justify-content: flex-end;
+
         .message{
             background-color: var(--white-025);
-        }
-        // .message{
-        //     background-color: coral;
-        // }        
+        }       
     }
 }

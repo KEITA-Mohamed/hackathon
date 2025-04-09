@@ -1,0 +1,23 @@
+@mixin size($width: fit-content, $height: fit-content) {
+  width: $width;
+  height: $height;
+}
+
+@mixin flex($direction: row, $justify: flex-start, $align: flex-start) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align; 
+}
+
+@mixin border($radius: 20px, $shadow: none, $border: none) {
+  border-radius: $radius;
+  box-shadow: $shadow;
+  border: $border;
+}
+  
+@mixin font($family: "unbounded", $size: 1em, $weight: 500) {
+  font-family: $family;    
+  font-size: $size;
+  font-variation-settings: 'wght' $weight;
+}
