@@ -19,7 +19,7 @@
 - Auto-eval également pour les étudiants (réponse a un qcm au préalable, puis notifier des résultats de ce QCM lors de l'inscription)
 - Se passe sur plusieurs jours
 - Possibilité de recharger la page et garder le contexte (compliqué a mettre en place)
-- L'utilisateur dois sélectionner le type de prompt avec de prompter
+- L'utilisateur dois sélectionner le type de prompt avant de prompter
 - Note + commentaire + question sont uniquement sur la tache finale, non pas sur le prompt ni sur la conversation
 - Le jury ne vois que la production, non pas nom, groupe ou modéle.
 - Le jury ''a accés qu'au résultat final et non pas a la succésion de prompt.

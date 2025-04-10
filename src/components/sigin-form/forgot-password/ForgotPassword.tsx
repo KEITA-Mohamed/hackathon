@@ -1,12 +1,7 @@
 "use client"
-
+import './ForgotPassword.scss'
 import type React from "react"
-
 import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 
 export default function ForgotPassword() {
     const [email, setEmail] = useState("")
@@ -56,44 +51,40 @@ export default function ForgotPassword() {
     }
 
     return (
-        <Card className="w-full max-w-md mx-auto">
-            <CardHeader>
-                <CardTitle className="text-2xl">Mot de passe oublié</CardTitle>
-                <CardDescription>
-                    Entrez votre adresse email pour recevoir un lien de réinitialisation de mot de passe.
-                </CardDescription>
-            </CardHeader>
+        <div className="main-container">
+            <header>
+                <h1>Mot de passe oublié</h1>
+                {/* <p>Entrez votre adresse email pour recevoir un lien de réinitialisation de mot de passe.</p> */}
+            </header>
             <form onSubmit={handleSubmit}>
-                <CardContent>
-                    <div className="space-y-4">
-                        <div className="space-y-2">
-                            <Label htmlFor="email">Adresse email</Label>
-                            <Input
-                                id="email"
-                                type="email"
-                                placeholder="exemple@domaine.com"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                required
-                                disabled={isLoading}
-                            />
-                        </div>
-                        {message && (
-                            <div
-                                className={`mt-4 p-3 rounded-md ${message.type === "success" ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"}`}
-                            >
-                                {message.text}
-                            </div>
-                        )}
+                <div className='form-container'>
+                    <div>
+                        <h2>Adresse email</h2>
+                        <input
+                            id="email"
+                            type="email"
+                            placeholder="exemple@domaine.com"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                            disabled={isLoading}
+                        />
                     </div>
-                </CardContent>
-                <CardFooter>
-                    <Button type="submit" className="w-full" disabled={isLoading}>
-                        {isLoading ? "Envoi en cours..." : "Envoyer le lien de réinitialisation"}
-                    </Button>
-                </CardFooter>
+                    {message && (
+                        <div
+                            className={`mt-4 p-3 rounded-md ${message.type === "success" ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"}`}
+                        >
+                            {message.text}
+                        </div>
+                    )}
+                </div>
+                <footer>
+                    <button type="submit" disabled={isLoading}>
+                        {isLoading ? "Envoi en cours..." : "Réinitialisation"}
+                    </button>
+                </footer>
             </form>
-        </Card>
+        </div>
     )
 }
 

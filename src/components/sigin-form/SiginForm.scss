@@ -8,13 +8,21 @@
         @include mixin.flex(column, flex-start, center);
         @include mixin.size(100%, fit-content);
         
-        p, a {
+        h1, h2, p, a {
             white-space: nowrap;
         }
     }
     
-    header {
+    header{
         transform: translate(0%, 50%);
+
+        h1{
+            @include mixin.font('unbounded', 1.6em, 800);  
+            background-color: var(--background);
+            padding: 1% 4%;            
+            color: var(--light-grey);
+            border-radius: 100px;
+        }
     }
 
     footer{
@@ -27,73 +35,61 @@
             color: white !important;
             padding:  1.5% 4% !important;
             cursor: pointer;
-            transition: var(--transition-time) all;
     
             &:hover{
                 background-color: var(--black-09) !important;
             }
         }
     }
-
-    header{
-        p{
-            @include mixin.font('unbounded', 1.6em, 800);  
-            background-color: var(--background);
-            padding: 1% 4%;            
-            color: var(--light-grey);
-            border-radius: 100px;
-        }
-    }
-
-    #card{
-        @include mixin.border(20px, var(--box-shadow), var(--border));
-        @include mixin.size(100%, fit-content);
-    }
-
-    form{
-        padding: 0% 0% 0% 0%;
-
-        input{
-            @include mixin.border(20px, none, var(--border));
+    
+    form{        
+        #card{
+            @include mixin.border(20px, var(--box-shadow), var(--border));
             @include mixin.size(100%, fit-content);
-            @include mixin.font('poppins', 1em, 400);  
-            background-color: white;            
-            border-radius: 100px;
-            padding: 1% 2%;
-            margin-top: 1%;
-            transition: var(--transition-time) all;
+            padding-top: 3%;
+            
+            input{
+                @include mixin.border(20px, none, var(--border));
+                @include mixin.size(100%, fit-content);
+                @include mixin.font('poppins', 1em, 400);  
+                background-color: white;            
+                border-radius: 100px;
+                padding: 1% 2%;
+                margin-top: 1%;
+                
+                &:hover{
+                    border: 1px solid var(--black-09);
+                }
+            }
+        }
 
-            &:hover{
-                border: 1px solid var(--black-09);
+        .mail-container, .password-container {   
+            @include mixin.flex(column, flex-start, flex-start);
+            @include mixin.size(100%, fit-content);
+            padding: 3%;
+    
+            h2{
+                margin-left: 1%;
+            }
+        }
+        
+        .mail-container{
+            border-bottom: 1px solid var(--light-grey)
+        }
+        
+        .password-header{
+            @include mixin.flex(row, space-between, flex-start);
+            @include mixin.size(100%, fit-content);
+    
+            a{
+                color: var(--light-grey);
+    
+                &:hover{
+                    color: var(--black-09);
+                }
             }
         }
     }
 
-    .mail-container, .password-container {   
-        @include mixin.flex(column, flex-start, flex-start);
-        @include mixin.size(100%, fit-content);
-        padding: 4%;
-
-        p{
-            margin-left: 1%;
-        }
-    }
     
-    .mail-container{
-        border-bottom: 1px solid var(--light-grey)
-    }
-    
-    .password-header{
-        @include mixin.flex(row, space-between, flex-start);
-        @include mixin.size(100%, fit-content);
-
-        a{
-            color: var(--light-grey);
-            transition: var(--transition-time) all;
-
-            &:hover{
-                color: var(--black-09);
-            }
-        }
-    }
 }

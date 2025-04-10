@@ -26,7 +26,6 @@
         cursor: pointer;
         border-top: 0px;
         border-left: 0px;
-        transition: var(--transition-time) all;
         padding: 1em 2em;        
 
         &:hover{
@@ -69,7 +68,6 @@
         background-color: var(--light-grey-025);
         color: var(--light-grey);
         padding: .5%;
-        transition: var(--transition-time) all;
 
         &:hover{
             background-color: var(--light-grey);

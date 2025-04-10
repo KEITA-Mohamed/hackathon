@@ -7,7 +7,6 @@
     background-color: var(--white-025);
     padding: .8%;
     cursor: pointer;
-    transition: var(--transition-time) all;
 
     img{
         @include mixin.size(20px, 20px);  

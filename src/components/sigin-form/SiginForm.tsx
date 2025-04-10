@@ -89,12 +89,12 @@ export default function SigninForm() {
                 </div>
             )}
             <header>
-                <p>Connexion</p>
+                <h1>Connexion</h1>
             </header>
             <form onSubmit={handleSubmit}>                    
                 <div id='card'>
                     <div className='mail-container'>
-                        <p>Email</p>
+                        <h2>Email</h2>
                         <input
                             id="email"
                             name="email"
@@ -109,7 +109,7 @@ export default function SigninForm() {
 
                     <div className='password-container'>
                         <div className='password-header'>
-                            <p>Mot de passe</p>
+                            <h2>Mot de passe</h2>
                             <a href="/login/forgotPassword">Mot de passe oublié ?</a>                             
                         </div>
                         <input

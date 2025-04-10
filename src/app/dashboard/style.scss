@@ -33,7 +33,6 @@
                 @include mixin.flex(column, flex-start, flex-start);
                 @include mixin.font('unbounded', 1.3em, 700);
                 padding: 1em 1.5em;                
-                transition: var(--transition-time) all;
 
                 &:hover{
                     background-color: var(--light-grey-025);

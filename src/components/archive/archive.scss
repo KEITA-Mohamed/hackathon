@@ -29,7 +29,6 @@
             a{
                 @include mixin.flex(column, flex-start, flex-start);
                 padding: 1.3em 2em;
-                transition: var(--transition-time) all;
 
                 &:hover{
                     background-color: var(--light-grey-025);
@@ -57,7 +56,6 @@
         @include mixin.size(100%, fit-content);
         @include mixin.font('unbounded', 1em, 800);
         padding: 1em 2em;        
-        transition: var(--transition-time) all;
 
         &:hover{
             background-color: var(--light-grey-03) !important;
