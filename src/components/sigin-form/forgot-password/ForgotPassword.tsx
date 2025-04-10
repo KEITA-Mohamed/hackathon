@@ -58,7 +58,7 @@ export default function ForgotPassword() {
             </header>
             <form onSubmit={handleSubmit}>
                 <div className='form-container'>
-                    <div>
+                    <div className='field-container'>
                         <h2>Adresse email</h2>
                         <input
                             id="email"

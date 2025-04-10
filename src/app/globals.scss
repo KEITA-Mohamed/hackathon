@@ -16,13 +16,20 @@
   --foreground: #0a0a0a;
 
   --grey: rgb(91, 91, 91);
+
   --light-grey: rgb(150, 150, 150);
   --light-grey-2: rgb(200, 200, 200);
   --light-grey-025: rgb(150, 150, 150, .25);
   --light-grey-03: rgb(150, 150, 150, .3);
   --light-grey-05: rgb(150, 150, 150, .5);
+
   --white-025: rgba(255, 255, 255, .3);
   --black-09: rgba(20, 20, 20, .9);
+
+  --error-background: rgb(255, 199, 199);
+  --error-color: rgb(116, 0, 0);
+  --error-border: 1px solid rgb(185, 116, 116);
+
   --box-shadow: 0px 1.5px 8px 0px rgba(50, 50, 50, .4);
   --transition-time: 200ms;
   --border: 1px solid var(--light-grey);
@@ -31,7 +38,7 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
-    --foreground: #ffffff;
+    --foreground:rgb(240, 240, 240);
   }
 }
 

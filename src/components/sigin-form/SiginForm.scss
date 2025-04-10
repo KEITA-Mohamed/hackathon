@@ -1,82 +1,14 @@
 @use '/src/app/mixin';
 
 .connexion-container {
-    @include mixin.flex(column, flex-start, center);
-    @include mixin.size(50vw, fit-content);
-
-    header, form, footer {
-        @include mixin.flex(column, flex-start, center);
-        @include mixin.size(100%, fit-content);
-        
-        h1, h2, p, a {
-            white-space: nowrap;
-        }
-    }
+    @include mixin.formGlobal;
+    @include mixin.formHeader;
+    @include mixin.formFooter;
     
-    header{
-        transform: translate(0%, 50%);
+    .form-container{
+        @include mixin.formContainer;
+        @include mixin.formFieldContainer;
 
-        h1{
-            @include mixin.font('unbounded', 1.6em, 800);  
-            background-color: var(--background);
-            padding: 1% 4%;            
-            color: var(--light-grey);
-            border-radius: 100px;
-        }
-    }
-
-    footer{
-        margin-top: 2%;
-
-        button{
-            @include mixin.border(1000px, var(--box-shadow), var(--border));
-            @include mixin.font('unbounded', 1.3em, 600);  
-            background-color: var(--light-grey) !important;
-            color: white !important;
-            padding:  1.5% 4% !important;
-            cursor: pointer;
-    
-            &:hover{
-                background-color: var(--black-09) !important;
-            }
-        }
-    }
-    
-    form{        
-        #card{
-            @include mixin.border(20px, var(--box-shadow), var(--border));
-            @include mixin.size(100%, fit-content);
-            padding-top: 3%;
-            
-            input{
-                @include mixin.border(20px, none, var(--border));
-                @include mixin.size(100%, fit-content);
-                @include mixin.font('poppins', 1em, 400);  
-                background-color: white;            
-                border-radius: 100px;
-                padding: 1% 2%;
-                margin-top: 1%;
-                
-                &:hover{
-                    border: 1px solid var(--black-09);
-                }
-            }
-        }
-
-        .mail-container, .password-container {   
-            @include mixin.flex(column, flex-start, flex-start);
-            @include mixin.size(100%, fit-content);
-            padding: 3%;
-    
-            h2{
-                margin-left: 1%;
-            }
-        }
-        
-        .mail-container{
-            border-bottom: 1px solid var(--light-grey)
-        }
-        
         .password-header{
             @include mixin.flex(row, space-between, flex-start);
             @include mixin.size(100%, fit-content);
@@ -90,6 +22,4 @@
             }
         }
     }
-
-    
 }

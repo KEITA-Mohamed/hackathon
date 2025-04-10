@@ -1,0 +1,21 @@
+@use '/src/app/mixin';
+
+.main-container{
+    @include mixin.flex(column, center, center);
+    @include mixin.size(25vw, fit-content);
+    @include mixin.border(25px, var(--box-shadow), var(--error-border));
+    background-color: var(--error-background);
+    color: var(--error-color);
+    padding: 1.5% 1%;
+
+    h1{
+        @include mixin.font('unbounded', 1.7em, 800);  
+    }
+
+    p{
+        @include mixin.font('poppins', 1em, 400);  
+        width: 100%;
+        margin-top: 2%;
+        text-align: center;
+    }
+}

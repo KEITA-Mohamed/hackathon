@@ -1,3 +1,4 @@
+// GLOBAL -------------------------------------------------------------------------------------------
 @mixin size($width: fit-content, $height: fit-content) {
   width: $width;
   height: $height;
@@ -20,4 +21,110 @@
   font-family: $family;    
   font-size: $size;
   font-variation-settings: 'wght' $weight;
+}
+
+// FORM -------------------------------------------------------------------------------------------
+@mixin formGlobal {
+  @include flex(column, flex-start, center);
+  @include size(50vw, fit-content);
+
+  header, form, footer {
+      @include flex(column, flex-start, center);
+      @include size(100%, fit-content);
+      
+      h1, h2, p, a {
+        @include size(fit-content, fit-content);
+          white-space: nowrap;
+      }
+  }
+}
+
+@mixin formHeader {
+  header{
+    transform: translate(0%, 50%);
+
+    h1{
+        @include font('unbounded', 1.6em, 800);  
+        background-color: var(--background);
+        padding: 1% 4%;            
+        color: var(--light-grey);
+        border-radius: 100px;
+    }
+  }
+}
+
+@mixin formFooter{
+  footer{
+    margin-top: 2%;
+
+    button{
+      @include border(1000px, var(--box-shadow), var(--border));
+      @include font('unbounded', 1.3em, 600);  
+      @include size(fit-content, fit-content);
+      background-color: var(--light-grey) !important;
+      color: white !important;
+      padding:  1.5% 4% !important;
+      cursor: pointer;
+    
+      &:hover{
+          background-color: var(--black-09) !important;
+      }
+    }
+  }
+}
+
+@mixin formContainer {
+  @include flex(column, center, center);
+  @include size(100%, fit-content);
+  @include border(20px, var(--box-shadow), var(--border));
+  padding-top: 3%;
+}
+
+@mixin formInput {
+  input{
+    @include size(100%, fit-content);
+    @include border(100px, none, var(--border));
+    @include font('poppins', inherit, 400);                                              
+    background-color: white;            
+    padding: 8px 15px;
+    margin-top: 1%;
+
+    &:hover{
+        border: 1px solid var(--black-09);
+    }
+  }
+}
+
+@mixin formNameContainer {
+  .name-container{
+    @include flex(row, space-between, flex-start);
+    @include size(100%, fit-content);
+    border-bottom: 1px solid var(--light-grey);
+
+    .field-container{
+        border: 0px !important
+    }
+  }
+}
+
+@mixin formFieldContainer {
+  .field-container{
+    @include size(100%, fit-content);
+    padding: 3%;
+    border-bottom: var(--border);
+
+    &:last-of-type{
+        border: none;
+    }
+
+    h2, input{
+        @include size(100%, fit-content);
+    }
+
+    h2{
+      margin-left: 1%;
+    }
+    
+    @include formInput;
+}
 }

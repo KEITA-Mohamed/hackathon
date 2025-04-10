@@ -139,9 +139,9 @@ export default function FormulaireInscription() {
                 </div>
             ) : (
                 <form onSubmit={handleSubmit}>
-                    <div className='form-main-container'>
+                    <div className='form-container'>
                         <div className='name-container'>
-                            <div className='form-field-container'>
+                            <div className='field-container'>
                                 <h2>Prénom</h2>
                                 <input
                                     id="prenom"
@@ -159,7 +159,7 @@ export default function FormulaireInscription() {
                                     </p>
                                 )}
                             </div>
-                            <div className='form-field-container'>
+                            <div className='field-container'>
                                 <h2>Nom</h2>
                                 <input
                                     id="nom"
@@ -179,7 +179,7 @@ export default function FormulaireInscription() {
                             </div>
                         </div>
 
-                        <div className='form-field-container'>
+                        <div className='field-container'>
                             <h2>Email</h2>
                             <input
                                 id="email"
@@ -199,7 +199,7 @@ export default function FormulaireInscription() {
                             )}
                         </div>
 
-                        <div className='form-field-container'>
+                        <div className='field-container'>
                             <h2>Mot de passe</h2>
                             <input
                                 id="password"
@@ -219,7 +219,7 @@ export default function FormulaireInscription() {
                             )}
                         </div>
 
-                        <div className='form-field-container'>
+                        <div className='field-container'>
                             <h2>Confirmer le mot de passe</h2>
                             <input
                                 id="confirmPassword"
@@ -239,7 +239,7 @@ export default function FormulaireInscription() {
                             )}
                         </div>
 
-                        <div className='form-field-container'>
+                        <div className='field-container'>
                             <h2>Rôle</h2>
                             <Select onValueChange={handleRoleChange} value={formData.role}>
                                 <SelectTrigger

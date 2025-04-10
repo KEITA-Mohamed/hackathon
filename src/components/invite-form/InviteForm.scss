@@ -1,0 +1,13 @@
+@use '/src/app/mixin';
+
+.main-container{
+    @include mixin.formGlobal;
+    @include mixin.formHeader;
+    @include mixin.formFooter;
+
+    .form-container{
+        @include mixin.formContainer;
+        @include mixin.formNameContainer;
+        @include mixin.formFieldContainer;
+    }
+}
