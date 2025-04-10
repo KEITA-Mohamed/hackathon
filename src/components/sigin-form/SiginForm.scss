@@ -1,0 +1,25 @@
+@use '/src/app/mixin';
+
+.connexion-container {
+    @include mixin.formGlobal;
+    @include mixin.header;
+    @include mixin.formFooter;
+    
+    .form-container{
+        @include mixin.formContainer;
+        @include mixin.formFieldContainer;
+
+        .password-header{
+            @include mixin.flex(row, space-between, flex-start);
+            @include mixin.size(100%, fit-content);
+    
+            a{
+                color: var(--light-grey);
+    
+                &:hover{
+                    color: var(--black-09);
+                }
+            }
+        }
+    }
+}

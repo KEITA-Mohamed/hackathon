@@ -1,0 +1,18 @@
+@use '/src/app/mixin';
+
+#settings{
+    @include mixin.flex(column, center, center);
+    @include mixin.size(fit-content, fit-content);  
+    @include mixin.border(100%, var(--box-shadow), var(--border));                                     
+    background-color: white;
+    padding: .8%;
+    cursor: pointer;
+
+    img{
+        @include mixin.size(20px, 20px);  
+    }
+
+    &:hover{
+        background-color: var(--background);
+    }
+}

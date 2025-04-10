@@ -1,0 +1,14 @@
+@use '/src/app/mixin';
+
+div{
+    @include mixin.flex(column, center, center);
+    @include mixin.size(100%, 100%);
+
+    h1{
+        @include mixin.font('unbounded', 2em, 800)
+    }
+
+    p{
+        @include mixin.font('poppins', 1em, 400)
+    }
+}

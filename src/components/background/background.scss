@@ -1,0 +1,11 @@
+@use '/src/app/mixin';
+
+#background-container{
+    @include mixin.size(100%, 100%);
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    z-index: -1;
+    transition: var(--transition-time) all;
+    background-color: var(--background);
+}

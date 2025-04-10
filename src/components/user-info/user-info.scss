@@ -1,0 +1,35 @@
+@use '/src/app/mixin';
+
+#user-info-container{
+    @include mixin.flex(row, flex-start, flex-start);
+
+    p{
+        @include mixin.flex(row, flex-start, center);    
+        @include mixin.size(fit-content, 100%);  
+        @include mixin.border(100px, var(--box-shadow), var(--border));                                     
+        overflow: hidden;
+        margin-right: 1.5em;
+    }
+    
+    span{
+        @include mixin.font('poppins');  
+        padding: .4em 1.2em;
+    
+        &:first-of-type{
+            padding-right: .8em;
+            background-color: white;
+        }
+    
+        &:last-of-type{
+            padding-left: .8em;            
+        }
+    }
+    
+    #credit-counter, #user-name{
+        @include mixin.font('unbounded', inherit, 800);  
+        @include mixin.size(fit-content, 100%);  
+        background-color: var(--white-025);
+        color: var(--foreground);
+        border-left: var(--border);
+    }
+}

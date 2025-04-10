@@ -1,0 +1,81 @@
+@use '/src/app/mixin';
+
+#prompt-container{
+    @include mixin.flex(column, space-between, flex-start);
+    @include mixin.size(100%, fit-content);
+    @include mixin.border(30px, var(--box-shadow), var(--border));                                    
+    margin-top: 3em;
+}
+
+#select-container{
+    @include mixin.flex(row, flex-start, center);
+    @include mixin.size(100%, fit-content);
+    @include mixin.border(30px 30px 0px 0px, none, none);                                    
+    padding: 0em;
+    position: relative;
+    z-index: 10000;
+    overflow: hidden;
+
+    button{
+        @include mixin.flex(row, center, flex-start);
+        @include mixin.size(100%, fit-content);    
+        @include mixin.font(inherit, 1em, 700); 
+        @include mixin.border(0px, none, var(--border));                                    
+        background-color: var(--white-025);
+        color: var(--light-grey);
+        cursor: pointer;
+        border-top: 0px;
+        border-left: 0px;
+        padding: 1em 2em;        
+
+        &:hover{
+            background-color: var(--light-grey-05);
+            color: var(--foreground);
+        }
+
+        &:first-of-type{
+            margin-left: 0%;
+            border-left: 0px solid var(--light-grey-05);
+        }
+
+        &:last-of-type{
+            margin-right: 0%;
+            border-right: 0px solid var(--light-grey-05);
+        }
+      }
+}
+
+#input-container{
+    @include mixin.size(100%, fit-content);    
+    padding: 0em;
+    position: relative;
+
+    input{
+        @include mixin.size(100%, fit-content);
+        @include mixin.font('poppins', 1em, 500);
+        @include mixin.border(0px 0px 30px 30px, none, none);                               
+        background-color: white;
+        padding: 1em 2em;       
+    }
+
+    button{
+        @include mixin.font('poppins', 1em, 600);   
+        @include mixin.border(100px, var(--box-shadow), var(--border));              
+        position: absolute;
+        right: 1%;
+        top: 50%;
+        transform: translate(0%, -50%);
+        background-color: var(--light-grey-025);
+        color: var(--light-grey);
+        padding: .5%;
+
+        &:hover{
+            background-color: var(--light-grey);
+        }
+    }
+}
+
+.active-model{
+    background-color: var(--black-09) !important;
+    color: var(--background) !important;
+}

@@ -1,0 +1,8 @@
+@use '/src/app/mixin';
+
+
+div{
+    @include mixin.flex(row, space-between, center);
+    @include mixin.size(20%, fit-content);
+    margin-bottom: 1%;
+}

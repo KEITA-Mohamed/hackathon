@@ -1,0 +1,33 @@
+@use '/src/app/mixin';
+
+#main-container{
+    @include mixin.flex(row, flex-start, flex-start);
+}
+
+section{
+    @include mixin.flex(column, flex-start, center);
+    @include mixin.size(100%, 100%);
+
+    &:first-of-type{
+        @include mixin.size(30%, 100%);
+        margin-right: 2em;
+    }
+
+    &:last-of-type{
+        @include mixin.size(70%, 100%);
+    }
+}
+
+#chat-container{
+    @include mixin.flex(column, space-between, flex-start);
+    @include mixin.size(100%, 100%);
+    position: relative;    
+}
+
+#chat-header{
+    @include mixin.flex(row, space-between, flex-start);
+    @include mixin.size(100%, fit-content);
+    position: absolute;
+    top: 0%;
+    right: 0%;
+}
