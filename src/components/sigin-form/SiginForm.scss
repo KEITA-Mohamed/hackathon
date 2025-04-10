@@ -2,7 +2,7 @@
 
 .connexion-container {
     @include mixin.formGlobal;
-    @include mixin.formHeader;
+    @include mixin.header;
     @include mixin.formFooter;
     
     .form-container{

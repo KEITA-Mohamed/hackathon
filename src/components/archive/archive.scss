@@ -50,6 +50,7 @@
     background-color: var(--white-025);
     color: var(--grey);
     margin-top: 1em;
+    overflow: hidden;
 
     a{
         @include mixin.flex(column, center, center);
@@ -58,8 +59,8 @@
         padding: 1em 2em;        
 
         &:hover{
-            background-color: var(--light-grey-03) !important;
-            color: var(--foreground);
+            background-color: var(--black-09) !important;
+            color: var(--background);
         }
 
         span{

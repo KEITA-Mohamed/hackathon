@@ -1,26 +1,22 @@
 @use '/src/app/mixin';
 
 #main-container{
-    @include mixin.flex(row, flex-start, flex-start);
+    @include mixin.flex(column, center, center);
+    @include mixin.header;
+
+    h1{
+        padding-bottom: 0px !important
+    }
 }
 
 #student-list{
-    @include mixin.flex(column, flex-start, flex-start);
+    @include mixin.flex(column, flex-start, center);
     @include mixin.size(80%, 90%);
     @include mixin.border(25px, var(--box-shadow), var(--border));                                     
-    background-color: var(--white-025);
     overflow: hidden;
 
-    h3{
-        @include mixin.size(100%, fit-content);
-        @include mixin.font('unbounded', 1.4em, 600);
-        background-color: var(--black-09) !important;
-        padding: 1em 1.5em;
-        color: white;        
-        text-align: center;
-    }
-    
     ul{
+        padding-top: 3%;
         @include mixin.size(100%, fit-content);
         
         li{

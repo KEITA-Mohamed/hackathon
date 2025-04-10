@@ -39,14 +39,15 @@
   }
 }
 
-@mixin formHeader {
+@mixin header {
   header{
     transform: translate(0%, 50%);
 
     h1{
         @include font('unbounded', 1.6em, 800);  
+        @include size(fit-content, fit-content);
         background-color: var(--background);
-        padding: 1% 4%;            
+        padding: clamp(10px, 1%, 20px) clamp(40px, 4%, 80px);            
         color: var(--light-grey);
         border-radius: 100px;
     }
