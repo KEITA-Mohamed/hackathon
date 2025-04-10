@@ -1,4 +1,4 @@
-// GLOBAL -------------------------------------------------------------------------------------------
+// PROPERTIES -------------------------------------------------------------------------------------------
 @mixin size($width: fit-content, $height: fit-content) {
   width: $width;
   height: $height;
@@ -23,6 +23,37 @@
   font-variation-settings: 'wght' $weight;
 }
 
+// GLOBAL -------------------------------------------------------------------------------------------
+@mixin header {
+  header{
+    transform: translate(0%, 50%);
+
+    h1{
+        @include font('unbounded', 1.6em, 800);  
+        @include size(fit-content, fit-content);
+        background-color: var(--background);
+        padding: clamp(10px, 1%, 20px) clamp(40px, 4%, 80px);            
+        color: var(--light-grey);
+        border-radius: 100px;
+    }
+  }
+}
+
+@mixin input {
+  input{
+    @include size(100%, fit-content);
+    @include border(100px, none, var(--border));
+    @include font('poppins', inherit, 400);                                              
+    background-color: white;            
+    padding: 8px 15px;
+    margin-top: 1%;
+
+    &:hover{
+        border: 1px solid var(--black-09);
+    }
+  }
+}
+
 // FORM -------------------------------------------------------------------------------------------
 @mixin formGlobal {
   @include flex(column, flex-start, center);
@@ -36,21 +67,6 @@
         @include size(fit-content, fit-content);
           white-space: nowrap;
       }
-  }
-}
-
-@mixin header {
-  header{
-    transform: translate(0%, 50%);
-
-    h1{
-        @include font('unbounded', 1.6em, 800);  
-        @include size(fit-content, fit-content);
-        background-color: var(--background);
-        padding: clamp(10px, 1%, 20px) clamp(40px, 4%, 80px);            
-        color: var(--light-grey);
-        border-radius: 100px;
-    }
   }
 }
 
@@ -81,29 +97,15 @@
   padding-top: 3%;
 }
 
-@mixin formInput {
-  input{
-    @include size(100%, fit-content);
-    @include border(100px, none, var(--border));
-    @include font('poppins', inherit, 400);                                              
-    background-color: white;            
-    padding: 8px 15px;
-    margin-top: 1%;
-
-    &:hover{
-        border: 1px solid var(--black-09);
-    }
-  }
-}
 
 @mixin formNameContainer {
   .name-container{
     @include flex(row, space-between, flex-start);
     @include size(100%, fit-content);
     border-bottom: 1px solid var(--light-grey);
-
+    
     .field-container{
-        border: 0px !important
+      border: 0px !important
     }
   }
 }
@@ -113,19 +115,19 @@
     @include size(100%, fit-content);
     padding: 3%;
     border-bottom: var(--border);
-
+    
     &:last-of-type{
-        border: none;
+      border: none;
     }
-
+    
     h2, input{
-        @include size(100%, fit-content);
+      @include size(100%, fit-content);
     }
-
+    
     h2{
       margin-left: 1%;
     }
     
-    @include formInput;
-}
+    @include input;
+  }
 }

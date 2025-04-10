@@ -54,7 +54,7 @@
         @include mixin.size(100%, fit-content);
         @include mixin.font('poppins', 1em, 500);
         @include mixin.border(0px 0px 30px 30px, none, none);                               
-        background-color: var(--background);
+        background-color: white;
         padding: 1em 2em;       
     }
 
