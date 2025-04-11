@@ -1,13 +1,13 @@
-import { GoogleGenerativeAI } from '@google/generative-ai';
-import { NextRequest, NextResponse } from 'next/server';
-import { saveChatToDb } from '@/app/services/chat.service';
+import {GoogleGenerativeAI} from '@google/generative-ai';
+import {NextRequest, NextResponse} from 'next/server';
+import {saveChatToDb} from '@/app/services/chat.service';
 
 export async function POST(req: NextRequest) {
     try {
-        const { prompt, model, userId, fullConvId } = await req.json();
+        const {prompt, model, convId} = await req.json();
 
         if (!prompt) {
-            return NextResponse.json({ error: 'Le prompt est requis.' }, { status: 400 });
+            return NextResponse.json({error: 'Le prompt est requis.'}, {status: 400});
         }
 
         const apiKey = process.env.GEMINI_API_KEY;
@@ -17,30 +17,24 @@ export async function POST(req: NextRequest) {
 
         const genAI = new GoogleGenerativeAI(apiKey);
 
-
-        const geminiModel = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+        const geminiModel = genAI.getGenerativeModel({model: 'gemini-1.5-flash'});
 
         const result = await geminiModel.generateContent({
-            contents: [{ role: 'user', parts: [{ text: prompt }] }],
+            contents: [{role: 'user', parts: [{text: prompt}]}],
         });
 
-
         const response = await result.response.text();
-
 
         await saveChatToDb({
             prompt,
             answer: response,
             model,
-            userId,
-            fullConvId,
-            taskType: 'LINKEDIN',
-            finishedConv: false,
+            convId
         });
 
-        return NextResponse.json({ response, result  }, { status: 200 });
+        return NextResponse.json({response, result}, {status: 200});
     } catch (error) {
         console.error('Erreur lors de la génération de contenu :', error);
-        return NextResponse.json({ error: 'Échec de la génération de contenu' }, { status: 500 });
+        return NextResponse.json({error: 'Échec de la génération de contenu'}, {status: 500});
     }
 }

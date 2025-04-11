@@ -16,7 +16,17 @@ out/
 dist/
 *.next
 
+# Prisma
+prisma/dev.db
+prisma/dev.db-journal
+prisma/migrations/
+prisma/.env
 
+# MongoDB related
+*.pem
+mongodb.log
+dump/
+data/db/
 
 # dotenv environment variables
 .env
@@ -50,7 +60,9 @@ logs/
 *.bak
 *.tmp
 *.cache
-
+*.swp
+*.swo
+*.swn
 *.pid
 *.seed
 *.lock
@@ -59,5 +71,3 @@ logs/
 # Dependencies & Binaries
 bin/
 obj/
-
-todo.md

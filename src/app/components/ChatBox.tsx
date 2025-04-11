@@ -41,7 +41,7 @@ export default function ChatBox() {
                 prompt: userQuestionInput,
                 model: aiChoice.toUpperCase(),
                 userId: userId,
-                fullConvId: currentConvId,
+                convId: currentConvId,
             }),
         });
 

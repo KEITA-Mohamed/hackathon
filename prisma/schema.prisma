@@ -14,60 +14,32 @@ datasource db {
 }
 
 model User {
-  id              String     @id @default(auto()) @map("_id") @db.ObjectId
-  firstname       String?
-  lastname        String?
-  email           String?    @unique
-  password        String?
-  username        String?
-  role            Role?
-  firstConnexion  Boolean?
-  connectionToken String?
-  note            Int?
-  createdAt       DateTime   @default(now())
-  updatedAt       DateTime   @default(now())
-  credit          Int        @default(100)
-  chat            Chat[]
-  Group           Group[]
-  AutoEval        AutoEval[]
-  Conv            Conv[]
+  id                      String     @id @default(auto()) @map("_id") @db.ObjectId
+  isActive                Boolean    @default(false)
+  role                    Role
+  firstname               String?
+  lastname                String?
+  age                     Int        @default(0)
+  email                   String     @unique
+  emailToken              String?
+  firstConnexion          Boolean?
+  password                String?
+  passwordToken           String?
+  passwordTokenEXPIRATION DateTime?
+  experienceTime          Float      @default(0)
+  etpNumber               Float      @default(0)
+  activityType            String?
+  currentPosition         String?
+  lastDegree              String?
+  studyType               String?
+  studentLevel            String?
+  createdAt               DateTime   @default(now())
+  updatedAt               DateTime   @default(now())
+  credit                  Int?       @default(100)
+  autoEval                AutoEval[]
+  group                   Group[]
+  conv                    Conv[]
 }
-
-//
-// model Chat {
-//   id                      String     @id @default(auto()) @map("_id") @db.ObjectId
-//   user                    User       @relation(fields: [userId], references: [id])
-//   userId                  String     @db.ObjectId
-//   prompt                  String
-//   answer                  String?
-//   model                   IaModel
-//   createdAt               DateTime   @default(now())
-//   id                      String     @id @default(auto()) @map("_id") @db.ObjectId
-//   isActive                Boolean    @default(false)
-//   role                    Role
-//   firstname               String?
-//   lastname                String?
-//   age                     Int        @default(0)
-//   email                   String     @unique
-//   emailToken              String?
-//   firstConnexion          Boolean?
-//   password                String?
-//   passwordToken           String?
-//   passwordTokenEXPIRATION DateTime?
-//   experienceTime          Float      @default(0)
-//   etpNumber               Float      @default(0)
-//   activityType            String?
-//   currentPosition         String?
-//   lastDegree              String?
-//   studyType               String?
-//   studentLevel            String?
-//   createdAt               DateTime   @default(now())
-//   updatedAt               DateTime   @default(now())
-//   credit                  Int        @default(100)
-//   autoEval                AutoEval[]
-//   group                   Group[]
-//   conv                    Conv[]
-// }
 
 model Group {
   id     String  @id @default(auto()) @map("_id") @db.ObjectId
@@ -98,17 +70,15 @@ model Conv {
 
 model Chat {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  conv      Conv     @relation(fields: [convId], references: [id])
-  convId    String   @db.ObjectId
-  prompt    String?
-  answer    String?
+  conv      Conv?    @relation(fields: [convId], references: [id])
+  convId    String?  @db.ObjectId
+  prompt    String
+  answer    String
   model     IaModel?
   createdAt DateTime @default(now())
   comment   String?
   question  String?
   note      Int?
-  User      User?    @relation(fields: [userId], references: [id])
-  userId    String?  @db.ObjectId
 }
 
 enum Role {

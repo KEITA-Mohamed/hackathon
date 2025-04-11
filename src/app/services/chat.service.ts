@@ -1,15 +1,12 @@
 import {prisma} from "@/lib/prisma";
 
 export type ChatCreateInput = {
-    prompt?: string;
-    answer?: string;
-    model?: 'MISTRAL' | 'O1' | 'O4' | 'CLAUDE';
-    userId?: string;
-    fullConvId?: string;
-    taskType?: 'LINKEDIN' | 'GRAPHIC' | 'COMMUNICATION';
-    finishedConv?: boolean;
+    prompt: string;
+    answer: string;
+    model: 'MISTRAL' | 'GEMINI' | 'O1' | 'O4' | 'CLAUDE';
+    convId: string;
 };
 
-export async function saveChatToDb(data: ChatCreateInput) {
+export async function saveChatToDb(data : ChatCreateInput) {
     return prisma.chat.create({data});
 }

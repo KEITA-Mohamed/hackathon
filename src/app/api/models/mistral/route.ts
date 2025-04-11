@@ -1,18 +1,17 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { saveChatToDb } from "@/app/services/chat.service";
-
+import {NextRequest, NextResponse} from 'next/server';
+import {saveChatToDb} from "@/app/services/chat.service";
 
 
 export async function POST(req: NextRequest) {
     try {
-        const { prompt, model, userId, fullConvId } = await req.json();
+        const {prompt, model,  convId} = await req.json();
 
         if (!prompt) {
-            return NextResponse.json({ error: 'Aucun prompt fourni.' }, { status: 400 });
+            return NextResponse.json({error: 'Aucun prompt fourni.'}, {status: 400});
         }
 
         if (!process.env.MISTRAL_API_KEY) {
-            return NextResponse.json({ error: 'Clé API Mistral manquante.' }, { status: 500 });
+            return NextResponse.json({error: 'Clé API Mistral manquante.'}, {status: 500});
         }
 
         const mistralRes = await fetch('https://api.mistral.ai/v1/chat/completions', {
@@ -23,7 +22,7 @@ export async function POST(req: NextRequest) {
             },
             body: JSON.stringify({
                 model: 'mistral-medium',
-                messages: [{ role: 'user', content: prompt }],
+                messages: [{role: 'user', content: prompt}],
             }),
         });
 
@@ -34,16 +33,13 @@ export async function POST(req: NextRequest) {
             prompt,
             answer: response,
             model,
-            userId,
-            fullConvId,
-            taskType: 'LINKEDIN',
-            finishedConv: false,
+            convId
         });
 
-        return NextResponse.json({ response, mistralData }, { status: 200 });
+        return NextResponse.json({response, mistralData}, {status: 200});
 
     } catch (error) {
         console.error('Erreur API Mistral :', error);
-        return NextResponse.json({ error: 'Erreur serveur' }, { status: 500 });
+        return NextResponse.json({error: 'Erreur serveur'}, {status: 500});
     }
 }
