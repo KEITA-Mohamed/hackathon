@@ -3,6 +3,7 @@ import './SiginForm.scss';
 import type React from "react"
 import { useState } from "react"
 import { useRouter } from "next/navigation"
+import Link from 'next/link'
 
 export default function SigninForm() {
     const router = useRouter()
@@ -110,7 +111,7 @@ export default function SigninForm() {
                     <div className='field-container'>
                         <div className='password-header'>
                             <h2>Mot de passe</h2>
-                            <a href="/login/forgotPassword">Mot de passe oublié ?</a>                             
+                            <Link href="/login/forgotPassword">Mot de passe oublié ?</Link>                             
                         </div>
                         <input
                             id="password"

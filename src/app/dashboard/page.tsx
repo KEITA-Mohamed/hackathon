@@ -1,5 +1,6 @@
 import './style.scss'
 import Dashboard from "@/components/dashboard/Dashboard";
+import Link from 'next/link'
 
 export default function History () {
     return (
@@ -13,30 +14,30 @@ export default function History () {
             <section id='student-list'>
                 <ul>
                     <li>
-                        <a href="/history">
+                        <Link href="/history">
                             Nom de l&apos;étudiants
                             <span>
                                 3 conversations - 12 crédits restants 
                             </span>
-                        </a>
+                        </Link>
                     </li>
 
                     <li>
-                        <a href="/history">
+                        <Link href="/history">
                             Nom de l&apos;étudiants
                             <span>
                                 3 conversations - 12 crédits restants 
                             </span>
-                        </a>
+                        </Link>
                     </li>
 
                     <li>
-                        <a href="/history">
+                        <Link href="/history">
                             Nom de l&apos;étudiants
                             <span>
                                 3 conversations - 12 crédits restants 
                             </span>
-                        </a>
+                        </Link>
                     </li>
                 </ul>
             </section>
