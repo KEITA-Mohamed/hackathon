@@ -4,8 +4,8 @@ import { type NextRequest, NextResponse } from "next/server"
 export async function GET(req: NextRequest) {
     try {
        const userId = req.nextUrl.searchParams.get("userId");
-       console.log('---------------------------------', userId);
-            
+    //    return NextResponse.json({ user: 'la'}, { status: 400 });
+
         if (!userId) {
             return NextResponse.json({ errors: { message: "userId manquant" } }, { status: 400 })
         }

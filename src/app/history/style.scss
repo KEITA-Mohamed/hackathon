@@ -28,6 +28,7 @@ section{
     @include mixin.flex(row, space-between, flex-start);
     @include mixin.size(100%, fit-content);
     position: absolute;
+    z-index: 100;
     top: 0%;
     right: 0%;
 }

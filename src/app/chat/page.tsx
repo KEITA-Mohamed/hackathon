@@ -7,13 +7,18 @@ import Input from '../../components/input/input'
 import UserInfo from '../../components/user-info/user-info'
 import Settings from '../../components/settings/settings'
 import Background from '../../components/background/background'
+import { useUser } from "@/hooks/useUser";
 
 export default function Chat () {
     const scrollContainer = useRef(null);
     const [messagesList, setMessagesList]: [ReactNode[], React.Dispatch<React.SetStateAction<any>>] = useState([]);
+    const { user } = useUser();
+    let userId: string;
+
     let messagesContainer: HTMLElement;
     useEffect(()=>{
         messagesContainer = scrollContainer.current!;  
+        userId = user?.id!;
     })
 
     function getMessage(data: {name: string, text: string, user: boolean}) {

@@ -6,7 +6,7 @@
 - Afficher plusieurs conversation simultanément 
 
 
-# Viso
+# Visio
 - Les étudiants doivent créer leurs compte, à priori nécésaire que les étudiants créer leurs compte.
 - Compte admin et jury créer a part.
 - Compte utilisateur individuel mais rattaché a une équipe > équipes entre 4 et 5 personnes, au moment de l'inscription il devras saisir son nom d'équipe.

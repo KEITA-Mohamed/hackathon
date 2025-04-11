@@ -1,6 +1,6 @@
 import './style.scss'
 import Archive from '../../components/archive/archive'
-import Messages from '../../components/user-message/UserMessage'
+import Message from '../../components/message/message'
 import UserInfo from '../../components/user-info/user-info'
 import Settings from '../../components/settings/settings'
 
@@ -15,7 +15,7 @@ export default function History () {
                     <Settings />            
                 </div>
 
-                <Messages /> 
+                <Message key={0} name={"UserNAme"} text={'lorem'} user={true} />            
             </section>
         </div>
     )
