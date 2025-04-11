@@ -5,10 +5,9 @@
         "email": "string",
         "password": "string",
         "username": ["string", "null"],
-        "role": "string",
+        "role": ["student", "jury", "admin"],
         "firstConnexion": "boolean",
         "connectionToken": "string",
-
         "age": "string",
         "experienceTime": "float",
         "etpNumber": "float",
@@ -23,11 +22,7 @@
         },
         "autoEval": [
             {
-                "task": "string",
-                "note": "number"
-            },
-            {
-                "task": "string",
+                "task": ["linkedin", "communication", "graphic"],
                 "note": "number"
             }
         ],
@@ -35,7 +30,7 @@
             {
                 "id": "number",
                 "teamId": "number",
-                "task": "string",
+                "task": ["linkedin", "communication", "graphic"],
                 "comment": "string",
                 "question": "string",
                 "note": "number",
@@ -44,18 +39,7 @@
                         "id": "number",
                         "prompt": "string",                
                         "answer": "string",                
-                        "model": "string",                
-                        "timeStamp": "Date",
-                        "credits": "number",
-                        "comment": "string",
-                        "question": "string",
-                        "note": "number"
-                    },
-                    {   
-                        "id": "number",
-                        "prompt": "string",                
-                        "answer": "string",                
-                        "model": "string",                
+                        "model": ["mistral", "O1", "03", "V0"],                
                         "timeStamp": "Date",
                         "credits": "number",
                         "comment": "string",
@@ -63,39 +47,7 @@
                         "note": "number"
                     }
                 ]
-            },
-            {
-                "id": "number",
-                "teamId": "number",
-                "task": "string",
-                "comment": "string",
-                "question": "string",
-                "grade": "number",
-                "chat":  [
-                    {   
-                        "id": "number",
-                        "prompt": "string",                
-                        "answer": "string",                
-                        "model": "string",                
-                        "timeStamp": "Date",
-                        "credits": "number",
-                        "comment": "string",
-                        "question": "string",
-                        "note": "number"
-                    },
-                    {   
-                        "id": "number",
-                        "prompt": "string",                
-                        "answer": "string",                
-                        "model": "string",                
-                        "timeStamp": "Date",
-                        "credits": "number",
-                        "comment": "string",
-                        "question": "string",
-                        "note": "number"
-                    }
-                ]
-            }
+            }            
         ]
                                              
     }

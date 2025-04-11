@@ -1,6 +1,7 @@
 'use client'
 import './input.scss'
 import { useState, useEffect } from 'react';
+import { PrismaClient } from '@prisma/client'
 
 export default function Input (props: {userQuestion: Function, iaAnswer: Function}) {
     const [userInput, setUserInput] = useState("");
@@ -14,8 +15,7 @@ export default function Input (props: {userQuestion: Function, iaAnswer: Functio
     useEffect(() => {}, []);
 
     const handleClicSendUserInput = async () => {
-        if (!userInput.trim()) return;
-        
+        if (!userInput.trim()) return;        
         setLoading(true);
         setResponse("");
         setUserInput("");
@@ -33,7 +33,7 @@ export default function Input (props: {userQuestion: Function, iaAnswer: Functio
         // todo passer en
         setPromptLeft(promptLeft - 1);
         setLoading(false);
-        sendMessage(currentModel, data.response, false);
+        sendMessage(currentModel, response, false);
     };
 
 
@@ -64,7 +64,7 @@ export default function Input (props: {userQuestion: Function, iaAnswer: Functio
                 { 
                     aiModelsAPI.map((model) => {
                         return (
-                            <button onClick={() => changeModel(model, 0)} className={`model-btn ${currentModel === model ? 'active-model' : ''}`}>{ model }</button>
+                            <button key={model} onClick={() => changeModel(model, 0)} className={`model-btn ${currentModel === model ? 'active-model' : ''}`}>{model}</button>
                         )
                     })
                 }                

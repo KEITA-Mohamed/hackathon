@@ -1,6 +1,6 @@
 'use client'
 import './style.scss'
-import { ReactNode, useState } from 'react';
+import { ReactNode, useState, useRef, useEffect } from 'react';
 import Archive from '../../components/archive/archive'
 import Message from '../../components/message/message'
 import Input from '../../components/input/input'
@@ -9,13 +9,15 @@ import Settings from '../../components/settings/settings'
 import Background from '../../components/background/background'
 
 export default function Chat () {
-    let messagesContainer: any = document.querySelector('#messages-container');
+    const scrollContainer = useRef(null);
     const [messagesList, setMessagesList]: [ReactNode[], React.Dispatch<React.SetStateAction<any>>] = useState([]);
-    const [counter, setCounter]: [number, React.Dispatch<React.SetStateAction<any>>] = useState(0);
+    let messagesContainer: HTMLElement;
+    useEffect(()=>{
+        messagesContainer = scrollContainer.current!;  
+    })
 
     function getMessage(data: {name: string, text: string, user: boolean}) {
-        setCounter(counter + 1);        
-        setMessagesList((prevState: ReactNode[]) => ([...prevState, <Message name={data.name} text={data.text} user={data.user} />]));        
+        setMessagesList((prevState: ReactNode[]) => [...prevState, <Message key={prevState.length} name={data.name} text={data.text} user={data.user} />]);        
         setTimeout(()=>{
             messagesContainer.scrollTo({top: messagesContainer.scrollHeight, left: 0, behavior: "smooth"});      
         })
@@ -30,7 +32,7 @@ export default function Chat () {
                     <UserInfo wichPage="chat"/>
                     <Settings />
                 </div>
-                <div id='messages-container'>
+                <div id='messages-container' ref={scrollContainer}>
                     { messagesList }
                 </div>
                 <Input userQuestion={getMessage} iaAnswer={getMessage} />

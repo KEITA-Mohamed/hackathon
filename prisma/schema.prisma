@@ -37,29 +37,23 @@ model User {
   updatedAt               DateTime  @default(now())
   credit                  Int       @default(100)
   autoEval                AutoEval[]
-  group                   Group[]
+  group                   Group?
   conv                    Conv[]
 }
 
-model Group {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  user      User     @relation(fields: [userId], references: [id])
-  userId    String   @db.ObjectId
+type Group {
+  id        String?  
   name      String?
 }
 
-model AutoEval {
-  id    String   @id @default(auto()) @map("_id") @db.ObjectId
-  user      User     @relation(fields: [userId], references: [id])
-  userId    String   @db.ObjectId
+type AutoEval {
+  id    String? 
   task  Task?
   note  Int?
 }
 
-model Conv {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  user      User     @relation(fields: [userId], references: [id])
-  userId    String   @db.ObjectId
+type Conv {
+  id        String? 
   teamId    String?
   task      Task?
   comment   String?
@@ -68,18 +62,56 @@ model Conv {
   chat      Chat[]
 }
 
-model Chat {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  conv      Conv     @relation(fields: [convId], references: [id])
-  convId    String   @db.ObjectId
+type Chat {
+  id        String?  
   prompt    String?
   answer    String?
   model     IaModel?
-  createdAt DateTime @default(now())
+  timeStamp DateTime @default(now())
   comment   String?
   question  String?
   note      Int?
 }
+
+// model Group {
+//   id        String   @id @default(auto()) @map("_id") @db.ObjectId
+//   user      User     @relation(fields: [userId], references: [id])
+//   userId    String   @db.ObjectId
+//   name      String?
+// }
+
+// model AutoEval {
+//   id    String   @id @default(auto()) @map("_id") @db.ObjectId
+//   user      User     @relation(fields: [userId], references: [id])
+//   userId    String   @db.ObjectId
+//   task  Task?
+//   note  Int?
+// }
+
+// model Conv {
+//   id        String   @id @default(auto()) @map("_id") @db.ObjectId
+//   user      User     @relation(fields: [userId], references: [id])
+//   userId    String   @db.ObjectId
+//   teamId    String?
+//   task      Task?
+//   comment   String?
+//   question  String?
+//   note      Int?
+//   chat      Chat[]
+// }
+
+// model Chat {
+//   id        String   @id @default(auto()) @map("_id") @db.ObjectId
+//   conv      Conv     @relation(fields: [convId], references: [id])
+//   convId    String   @db.ObjectId
+//   prompt    String?
+//   answer    String?
+//   model     IaModel?
+//   createdAt DateTime @default(now())
+//   comment   String?
+//   question  String?
+//   note      Int?
+// }
 
 enum Role {
   STUDENT
