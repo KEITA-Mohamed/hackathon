@@ -67,7 +67,7 @@ type Chat {
   prompt    String?
   answer    String?
   model     IaModel?
-  timeStamp DateTime @default(now())
+  createdAt DateTime @default(now())
   comment   String?
   question  String?
   note      Int?

@@ -33,7 +33,7 @@ export default function Input (props: {userQuestion: Function, iaAnswer: Functio
         // todo passer en
         setPromptLeft(promptLeft - 1);
         setLoading(false);
-        sendMessage(currentModel, response, false);
+        sendMessage(currentModel, data.response, false);
     };
 
 
@@ -73,6 +73,7 @@ export default function Input (props: {userQuestion: Function, iaAnswer: Functio
                 <input 
                     placeholder="Sélectionnez un modèle 👆, puis entrer votre prompt ici." 
                     type="text"
+                    value={userInput}
                     onChange={(e) => setUserInput(e.target.value)}
                     onKeyDown={(e) => {
                         if (e.key === "Enter" && !e.shiftKey) {
