@@ -14,96 +14,56 @@ datasource db {
 }
 
 model User {
-  id                      String    @id @default(auto()) @map("_id") @db.ObjectId
-  isActive                Boolean   @default(false)
+  id                      String     @id @default(auto()) @map("_id") @db.ObjectId
+  isActive                Boolean    @default(false)
   role                    Role
   firstname               String?
   lastname                String?
-  age                     Int       @default(0)
-  email                   String    @unique
+  age                     Int        @default(0)
+  email                   String     @unique
   emailToken              String?
   firstConnexion          Boolean?
   password                String?
   passwordToken           String?
   passwordTokenEXPIRATION DateTime?
-  experienceTime          Float    @default(0)
-  etpNumber               Float    @default(0)
+  experienceTime          Float      @default(0)
+  etpNumber               Float      @default(0)
   activityType            String?
   currentPosition         String?
   lastDegree              String?
   studyType               String?
   studentLevel            String?
-  createdAt               DateTime  @default(now())
-  updatedAt               DateTime  @default(now())
-  credit                  Int       @default(100)
+  createdAt               DateTime   @default(now())
+  updatedAt               DateTime   @default(now())
+  credit                  Int        @default(100)
   autoEval                AutoEval[]
-  group                   Group?
+  group                   Group[]
   conv                    Conv[]
 }
 
-type Group {
-  id        String?  
-  name      String?
-}
-
-type AutoEval {
-  id    String? 
-  task  Task?
-  note  Int?
-}
-
-type Conv {
-  id        String? 
-  teamId    String?
-  task      Task?
-  comment   String?
-  question  String?
-  note      Int?
-  chat      Chat[]
-}
-
-type Chat {
-  id        String?  
-  prompt    String?
-  answer    String?
-  model     IaModel?
-  createdAt DateTime @default(now())
-  comment   String?
-  question  String?
-  note      Int?
-}
-
-// model Group {
-//   id        String   @id @default(auto()) @map("_id") @db.ObjectId
-//   user      User     @relation(fields: [userId], references: [id])
-//   userId    String   @db.ObjectId
-//   name      String?
+// type Group {
+//   id   String?
+//   name String?
+// }
+//
+// type AutoEval {
+//   id   String?
+//   task Task?
+//   note Int?
 // }
 
-// model AutoEval {
-//   id    String   @id @default(auto()) @map("_id") @db.ObjectId
-//   user      User     @relation(fields: [userId], references: [id])
-//   userId    String   @db.ObjectId
-//   task  Task?
-//   note  Int?
+// type Conv {
+//   id       String?
+//   teamId   String?
+//   task     Task?
+//   comment  String?
+//   question String?
+//   note     Int?
+//   chat     Chat[]
 // }
-
-// model Conv {
-//   id        String   @id @default(auto()) @map("_id") @db.ObjectId
-//   user      User     @relation(fields: [userId], references: [id])
-//   userId    String   @db.ObjectId
-//   teamId    String?
-//   task      Task?
-//   comment   String?
-//   question  String?
-//   note      Int?
-//   chat      Chat[]
-// }
-
-// model Chat {
-//   id        String   @id @default(auto()) @map("_id") @db.ObjectId
-//   conv      Conv     @relation(fields: [convId], references: [id])
-//   convId    String   @db.ObjectId
+//
+// type Chat {
+//   id        String?
 //   prompt    String?
 //   answer    String?
 //   model     IaModel?
@@ -112,6 +72,46 @@ type Chat {
 //   question  String?
 //   note      Int?
 // }
+
+model Group {
+  id     String  @id @default(auto()) @map("_id") @db.ObjectId
+  user   User    @relation(fields: [userId], references: [id])
+  userId String  @db.ObjectId
+  name   String?
+}
+
+model AutoEval {
+  id     String @id @default(auto()) @map("_id") @db.ObjectId
+  user   User   @relation(fields: [userId], references: [id])
+  userId String @db.ObjectId
+  task   Task?
+  note   Int?
+}
+
+model Conv {
+  id       String  @id @default(auto()) @map("_id") @db.ObjectId
+  user     User?   @relation(fields: [userId], references: [id])
+  userId   String? @db.ObjectId
+  teamId   String?
+  task     Task?
+  comment  String?
+  question String?
+  note     Int?
+  chat     Chat[]
+}
+
+model Chat {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  conv      Conv?    @relation(fields: [convId], references: [id])
+  convId    String?  @db.ObjectId
+  prompt    String?
+  answer    String?
+  model     IaModel?
+  createdAt DateTime @default(now())
+  comment   String?
+  question  String?
+  note      Int?
+}
 
 enum Role {
   STUDENT

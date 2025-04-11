@@ -8,7 +8,8 @@ export default function Dashboard() {
     const {isAdmin, isTeacher} = useUser();
 
     return (
-        <div> 
+        <div>
+            <Link rel="stylesheet" href="/chat">Chat</Link>
             {
                 isAdmin ? (
                     <h2>Admin</h2>
