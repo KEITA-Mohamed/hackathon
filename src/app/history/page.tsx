@@ -1,6 +1,6 @@
 import './style.scss'
 import Archive from '../../components/archive/archive'
-import Messages from '../../components/messages/messages'
+import Messages from '../../components/user-message/UserMessage'
 import UserInfo from '../../components/user-info/user-info'
 import Settings from '../../components/settings/settings'
 

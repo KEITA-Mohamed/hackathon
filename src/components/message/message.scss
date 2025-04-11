@@ -1,0 +1,7 @@
+@use '/src/app/mixin';
+
+@include mixin.chatMessage;
+
+.user-message{
+    justify-content: flex-end !important;      
+}

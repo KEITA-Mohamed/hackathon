@@ -2,6 +2,7 @@
 
 #main-container{
     @include mixin.flex(row, flex-start, flex-start);
+    padding-top: 0%;
 }
 
 section{
@@ -11,6 +12,7 @@ section{
     &:first-of-type{
         @include mixin.size(30%, 100%);
         margin-right: 2em;
+        padding-top: 2%;
     }
 
     &:last-of-type{
@@ -19,15 +21,25 @@ section{
 }
 
 #chat-container{
-    @include mixin.flex(column, space-between, flex-start);
+    @include mixin.flex(column, flex-end, center);
     @include mixin.size(100%, 100%);
-    position: relative;    
-}
+    position: relative; 
 
-#chat-header{
-    @include mixin.flex(row, space-between, flex-start);
-    @include mixin.size(100%, fit-content);
-    position: absolute;
-    top: 0%;
-    right: 0%;
+    #chat-header{
+        @include mixin.flex(row, space-between, flex-start);
+        @include mixin.size(100%, fit-content);
+        position: absolute;
+        z-index: 1000;
+        top: 4%;
+        right: 0%;
+    }
+
+    #messages-container{
+        @include mixin.flex(column, flex-start, flex-start);
+        @include mixin.size(95%, fit-content);
+        padding: 1% 2%;
+        padding-top: 7em;
+        padding-bottom: 3em;
+        overflow: auto;
+    }
 }

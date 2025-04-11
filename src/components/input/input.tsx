@@ -2,24 +2,24 @@
 import './input.scss'
 import { useState, useEffect } from 'react';
 
-export default function Input () {
+export default function Input (props: {userQuestion: Function, iaAnswer: Function}) {
     const [userInput, setUserInput] = useState("");
     const [response, setResponse] = useState("");
     const [loading, setLoading] = useState(false);
     const [promptLeft, setPromptLeft] = useState(100);
-    // const aiModelsAPI = ["mistral", "03", "04", "deepseek"];
     const aiModelsAPI = ["mistral", "03", "04", "deepseek"];
     const [aiChoiceNumb, setAiChoiceNumb] = useState<number>(0);
+    const [currentModel, setCurrentModel] = useState("mistral");
 
     useEffect(() => {}, []);
 
     const handleClicSendUserInput = async () => {
         if (!userInput.trim()) return;
-        console.log('la');
         
         setLoading(true);
         setResponse("");
         setUserInput("");
+        sendMessage('UserName', userInput.trim(), true);
         const res = await fetch(`/api/${aiModelsAPI[`${aiChoiceNumb}`]}`, {
             method: "POST",
             headers: {
@@ -33,30 +33,41 @@ export default function Input () {
         // todo passer en
         setPromptLeft(promptLeft - 1);
         setLoading(false);
+        sendMessage(currentModel, data.response, false);
     };
 
-    const [model, setModel] = useState("");
 
     function changeModel(wichModel: string, index: number) {
-        setModel(wichModel)  
+        setCurrentModel(wichModel)  
         setAiChoiceNumb(index)      
+    }
+
+    function sendMessage (name: string, text: string, user: boolean) {
+        const data = {
+            name: name,
+            text: text,
+            user: user
+        }
+        user ? props.userQuestion(data) : props.iaAnswer(data); 
     }
 
     return (
         <div id='prompt-container'>
-            {/* Response box */}
-            {response && (
+            {/* {response && (
                 <div className="flex items-start gap-3">
                     <div className="bg-gray-100 text-gray-800 px-4 py-2 rounded-xl shadow-sm ">{response}</div>
                 </div>
-            )}
+            )} */}
 
-            {loading && <div className="text-sm text-gray-500 animate-pulse">Réponse en cours...</div>}
+            {/* {loading && <div className="text-sm text-gray-500 animate-pulse">Réponse en cours...</div>} */}
             <div id='select-container'>
-                <button onClick={() => changeModel('mistral', 0)} className={`model-btn ${model === 'mistral' ? 'active-model' : ''}`}>Mistral</button>
-                <button onClick={() => changeModel('01', 1)} className={`model-btn ${model === '01' ? 'active-model' : ''}`}>01</button>
-                <button onClick={() => changeModel('04', 2)} className={`model-btn ${model === '04' ? 'active-model' : ''}`}>04</button>
-                <button onClick={() => changeModel('V4', 3)} className={`model-btn ${model === 'V4' ? 'active-model' : ''}`}>V0</button>
+                { 
+                    aiModelsAPI.map((model) => {
+                        return (
+                            <button onClick={() => changeModel(model, 0)} className={`model-btn ${currentModel === model ? 'active-model' : ''}`}>{ model }</button>
+                        )
+                    })
+                }                
             </div>
             <div id='input-container'>
                 <input 

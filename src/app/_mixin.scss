@@ -131,3 +131,63 @@
     @include input;
   }
 }
+
+// CHAT MESSAGES -------------------------------------------------------------------------------------------
+@mixin chatMessage{
+  @keyframes appear {
+    0%{
+        opacity: 0;
+    }
+
+    100%{
+        opacity: 1;
+    }
+  }
+
+  .message-container{
+    @include flex(row, flex-start, center);
+    @include size(100%, fit-content);   
+    margin-bottom: 2em;
+
+    &:last-of-type{
+        margin-bottom: 0em;
+    }
+    
+    .message{
+        @include flex(column, flex-start, flex-start);
+        @include size(53%, fit-content);   
+        @include border(25px, var(--box-shadow), var(--border));                                     
+        flex-wrap: wrap;
+        background-color: white;
+        padding: 1.2em 2em;
+        color: var(--foreground);
+        animation: appear 1s 0s forwards ease-in-out;
+    
+        p{
+            font-size: 1.1em;
+        }
+      
+        .message-from{
+            @include font(inherit, 1.3em, 700); 
+            text-transform: capitalize;
+            margin-bottom: .5em;
+        }
+      
+        .message-text{
+            @include font('poppins', 1.2, 350); 
+            padding-left: 2em;
+            border-left: 1px solid var(--light-grey-03);
+        }
+      
+        .message-infos{
+            @include font('poppins', .95em, 300); 
+            margin-top: .9em;
+            color: var(--grey);
+        
+            span{
+                margin-right: 1em;
+            }
+        }
+    }
+  }
+}

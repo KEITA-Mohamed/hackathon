@@ -28,7 +28,7 @@
     #credit-counter, #user-name{
         @include mixin.font('unbounded', inherit, 800);  
         @include mixin.size(fit-content, 100%);  
-        background-color: var(--white-025);
+        background-color: var(--background);
         color: var(--foreground);
         border-left: var(--border);
     }
