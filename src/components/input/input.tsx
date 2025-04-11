@@ -8,8 +8,9 @@ export default function Input(props: { userQuestion: Function, iaAnswer: Functio
     const [loading, setLoading] = useState(false);
     const [promptLeft, setPromptLeft] = useState(100);
     const aiModelsAPI = ["mistral", "gemini", "03", "04", "deepseek"];
-    // const [aiChoiceNumb, setAiChoiceNumb] = useState<number>(0);
+    const [aiChoiceNumb, setAiChoiceNumb] = useState<number>(0);
     const [currentModel, setCurrentModel] = useState("mistral");
+
 
     useEffect(() => {
     }, []);
