@@ -3,7 +3,8 @@
 #chat-list{
     @include mixin.flex(column, flex-start, center);
     @include mixin.size(100%, 100%);
-    @include mixin.border(25px, var(--box-shadow), var(--border));                                     
+    @include mixin.border(25px, var(--box-shadow), var(--border));   
+    min-width: 350px;                                  
 
     h3{
         @include mixin.size(fit-content, fit-content);

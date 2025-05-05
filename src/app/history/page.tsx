@@ -15,7 +15,9 @@ export default function History () {
                     <Settings />            
                 </div>
 
-                <Message key={0} name={"UserNAme"} text={'lorem'} user={true} />            
+                <div id='messages-container'>
+                    <Message key={0} name={"UserNAme"} text={'lorem'} user={true} />            
+                </div>
             </section>
         </div>
     )
