@@ -1,6 +1,6 @@
 'use client'
 import './style.scss'
-import {ReactNode, useState, useRef, useEffect} from 'react';
+import {ReactNode, useState, useRef} from 'react';
 import Archive from '../../components/archive/archive'
 import Message from '../../components/message/message'
 import Input from '../../components/input/input'
@@ -10,21 +10,16 @@ import Background from '../../components/background/background'
 // import { useUser } from "@/hooks/useUser";
 
 export default function Chat() {
-    const scrollContainer = useRef(null);
-    const [messagesList, setMessagesList] = useState<any[]>([]);
+    const scrollContainer = useRef<HTMLDivElement>(null);
+    const [messagesList, setMessagesList] = useState<Array<ReactNode>>([]);
     // const { user } = useUser();
-
-    let messagesContainer: HTMLElement;
-    useEffect(()=>{
-        messagesContainer = scrollContainer.current!;  
-    })
 
     function getMessage(data: { name: string, text: string, user: boolean }) : void {
         setMessagesList((prevState: ReactNode[]) => [...prevState,
             <Message key={prevState.length} name={data.name} text={data.text} user={data.user}/>]);
         setTimeout(() => {
-            messagesContainer.scrollTo({top: messagesContainer.scrollHeight, left: 0, behavior: "smooth"});
-        }, 0)
+            scrollContainer.current!.scrollTo({top: scrollContainer.current!.scrollHeight, left: 0, behavior: "smooth"});
+        }, 100)        
     }
 
     return (

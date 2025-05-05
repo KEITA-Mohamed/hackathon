@@ -1,6 +1,7 @@
 'use client'
 import './input.scss'
 import {useState, useEffect} from 'react';
+import Image from 'next/image'
 
 export default function Input(props: { userQuestion: Function, iaAnswer: Function }) {
     const [userInput, setUserInput] = useState("");
@@ -89,7 +90,7 @@ export default function Input(props: { userQuestion: Function, iaAnswer: Functio
                     disabled={loading || !userInput.trim()}
                     className={`${loading || !userInput.trim() ? "bg-gray-400 cursor-not-allowed" : "bg-blue-500 hover:bg-blue-600"}`}
                 >
-                    {loading ? "..." : <img src="./send.svg" alt=""/>}
+                    {loading ? "..." : <Image src="./send.svg" alt="" width={25} height={25}/>}
                 </button>
             </div>
         </div>
