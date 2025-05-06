@@ -26,7 +26,6 @@ export default function Archive ({ wichPage }: {wichPage: string}) {
 
     function getSearchValue(event: React.ChangeEvent<HTMLInputElement>) {
         setSearchValue(event.target.value);
-        console.log(searchValue);    
     }
 
     return (
