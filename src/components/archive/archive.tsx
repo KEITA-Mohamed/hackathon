@@ -1,32 +1,61 @@
 'use client'
 import './archive.scss'
-import { useState } from 'react';
+import { Dispatch, MutableRefObject, SetStateAction, useRef, useState } from 'react';
 import Link from 'next/link'
 import Image from 'next/image'
 
 export default function Archive ({ wichPage }: {wichPage: string}) { 
-    const [isOpenFilters, setIsOpenFilters] = useState<boolean>();
-    const [isOpenModel, setIsOpenModel] = useState<boolean>();
-    const [isOpenDate, setIsOpenDate] = useState<boolean>();
+    const [isOpenFilters, setIsOpenFilters] = useState<boolean>(false);
+    const [isOpenModel, setIsOpenModel] = useState<boolean>(false);
+    const [isOpenDate, setIsOpenDate] = useState<boolean>(false);
     const [modelValue, setModelValue] = useState<string>('...');
     const [dateValue, setDateValue] = useState<string>('...');
     const [searchValue, setSearchValue] = useState<string>('...');
+    const [ items, setItems] = useState([{title: "Maison", model: 'MISTRAL'}, {title: "Chaussure", model: 'GEMINI'}, {title: "Fourchette", model: 'O3'}]);
+    const listRef= useRef<HTMLLIElement[]>([]); 
 
-    function toggleModelState() {
-        setIsOpenModel(!isOpenModel);
-    } 
-    
-    function toggleDateState() {
-        setIsOpenDate(!isOpenDate);
-    } 
-
-    function openFilters() {
-        setIsOpenFilters(!isOpenFilters);        
+    function openSelect(
+        setSelectState: Dispatch<SetStateAction<boolean>>, 
+        selectState: boolean, 
+        closeSelect: Dispatch<SetStateAction<boolean>>
+    ) {
+        setSelectState(!selectState);
+        closeSelect(false);
     }
 
-    function getSearchValue(event: React.ChangeEvent<HTMLInputElement>) {
+    function openFilters(
+        setFiltersState: Dispatch<SetStateAction<boolean>>, 
+        filterState: boolean, 
+    ) {
+        setFiltersState(!filterState);        
+    }
+
+    function searchbarFilter(event: React.ChangeEvent<HTMLInputElement>) {
         setSearchValue(event.target.value);
-        console.log(searchValue);    
+        const searchValue = event.target.value.toUpperCase();
+        filterChatList(listRef.current, searchValue);  
+    }
+
+    function selectFilter(setState: Dispatch<SetStateAction<string>>, state: string, value: string) {
+        if (value === state) {            
+            setState('...')
+            filterChatList(listRef.current, '');  
+        }
+        else{
+            setState(value);
+            filterChatList(listRef.current, value);  
+        }
+    }
+    
+    function filterChatList(list: HTMLLIElement[], value: string) {
+        list.forEach(li => {
+            if (li.textContent?.toUpperCase().includes(value)) {                
+                li.classList.add('selected');          
+            }
+            else{
+                li.classList.remove('selected');
+            }
+        });  
     }
 
     return (
@@ -34,31 +63,31 @@ export default function Archive ({ wichPage }: {wichPage: string}) {
             <div id='chat-list'>
                 <h3 className='gradient'>Conversations archivés</h3>
                 <div id='filters'>
-                    <h4 onClick={openFilters} className={`${isOpenFilters ? "open-filters-button" : ""}`}>Filtres</h4>
+                    <h4 onClick={()=>{openFilters(setIsOpenFilters, isOpenFilters)}} className={`${isOpenFilters ? "open-filters-button" : ""}`}>Filtres</h4>
                     <div id='filters-container' className={`${isOpenFilters ? "open-filters" : "close-filters"}`}>
-                        <input onInput={getSearchValue} type="text" placeholder='Rechercher une discussion'/>
+                        <input onInput={searchbarFilter} type="text" placeholder='Rechercher une discussion'/>
                         <div id='history-select-container'>
                             <div className='select' id='select-model'>
                                 <h5>Select model</h5>
-                                <p onClick={toggleModelState}>{ modelValue.toLowerCase() } <Image width={25} height={25} className={`${isOpenModel ? "rotate" : ""}`} src="./drop_down.svg" alt="" /></p>
+                                <p onClick={()=>{openSelect(setIsOpenModel, isOpenModel, setIsOpenDate)}}>{ modelValue.toLowerCase() } <Image width={25} height={25} className={`${isOpenModel ? "rotate" : ""}`} src="./drop_down.svg" alt="" /></p>
                                 <ul className={`${isOpenModel ? "open" : "close"}`}                    >
-                                    <li className={`${modelValue == "MISTRAL" ? "active" : ""}`} onClick={()=>{setModelValue('MISTRAL')}}>Mistral</li>
-                                    <li className={`${modelValue == "GEMINI" ? "active" : ""}`} onClick={()=>{setModelValue('GEMINI')}}>Gemini</li>
-                                    <li className={`${modelValue == "O3" ? "active" : ""}`} onClick={()=>{setModelValue('O3')}}>O3</li>
-                                    <li className={`${modelValue == "O4" ? "active" : ""}`} onClick={()=>{setModelValue('O4')}}>O4</li>
-                                    <li className={`${modelValue == "DEEPSEEK" ? "active" : ""}`} onClick={()=>{setModelValue('DEEPSEEK')}}>Deepseek</li>
+                                    <li className={`${modelValue == "MISTRAL" ? "active" : ""}`} onClick={()=>{selectFilter(setModelValue, modelValue, 'MISTRAL')}}>Mistral</li>
+                                    <li className={`${modelValue == "GEMINI" ? "active" : ""}`} onClick={()=>{selectFilter(setModelValue, modelValue, 'GEMINI')}}>Gemini</li>
+                                    <li className={`${modelValue == "O3" ? "active" : ""}`} onClick={()=>{selectFilter(setModelValue, modelValue, 'O3')}}>O3</li>
+                                    <li className={`${modelValue == "O4" ? "active" : ""}`} onClick={()=>{selectFilter(setModelValue, modelValue, 'O4')}}>O4</li>
+                                    <li className={`${modelValue == "DEEPSEEK" ? "active" : ""}`} onClick={()=>{selectFilter(setModelValue, modelValue, 'DEEPSEEK')}}>Deepseek</li>
                                 </ul>
                             </div>
 
                             <div className='select' id='select-date'>
                                 <h5>Select date</h5>
-                                <p onClick={toggleDateState}>{ dateValue.toLowerCase() } <Image width={25} height={25} className={`${isOpenDate ? "rotate" : ""}`} src="./drop_down.svg" alt="" /></p>
+                                <p onClick={()=>{openSelect(setIsOpenDate, isOpenDate, setIsOpenModel)}}>{ dateValue.toLowerCase() } <Image width={25} height={25} className={`${isOpenDate ? "rotate" : ""}`} src="./drop_down.svg" alt="" /></p>
                                 <ul className={`${isOpenDate ? "open" : "close"}`}                    >
-                                    <li className={`${dateValue == "LUNDI" ? "active" : ""}`} onClick={()=>{setDateValue('LUNDI')}}>Lundi</li>
-                                    <li className={`${dateValue == "MARDI" ? "active" : ""}`} onClick={()=>{setDateValue('MARDI')}}>Mardi</li>
-                                    <li className={`${dateValue == "MERCREDI" ? "active" : ""}`} onClick={()=>{setDateValue('MERCREDI')}}>Mercredi</li>
-                                    <li className={`${dateValue == "JEUDI" ? "active" : ""}`} onClick={()=>{setDateValue('JEUDI')}}>Jeudi</li>
-                                    <li className={`${dateValue == "VENDREDI" ? "active" : ""}`} onClick={()=>{setDateValue('VENDREDI')}}>Vendredi</li>
+                                    <li className={`${dateValue == "LUNDI" ? "active" : ""}`} onClick={()=>{selectFilter(setDateValue, dateValue, 'LUNDI')}}>Lundi</li>
+                                    <li className={`${dateValue == "MARDI" ? "active" : ""}`} onClick={()=>{selectFilter(setDateValue, dateValue, 'MARDI')}}>Mardi</li>
+                                    <li className={`${dateValue == "MERCREDI" ? "active" : ""}`} onClick={()=>{selectFilter(setDateValue, dateValue, 'MERCREDI')}}>Mercredi</li>
+                                    <li className={`${dateValue == "JEUDI" ? "active" : ""}`} onClick={()=>{selectFilter(setDateValue, dateValue, 'JEUDI')}}>Jeudi</li>
+                                    <li className={`${dateValue == "VENDREDI" ? "active" : ""}`} onClick={()=>{selectFilter(setDateValue, dateValue, 'VENDREDI')}}>Vendredi</li>
                                 </ul>
                             </div>
                         </div>
@@ -66,18 +95,28 @@ export default function Archive ({ wichPage }: {wichPage: string}) {
                 </div>
 
                 <ul>
-                    <li id='1'>
+                    {                            
+                        items.map( ( item, index ) =>
+                        <li ref={ (element: HTMLLIElement) => listRef.current[index] = element } key={ index } className='chat-list-item selected'>
+                            <Link href="/history">
+                                { item.title }
+                                <span><span className='model-name'>{ item.model.toLowerCase() }</span> - 12 messages - 12 crédits utilisés</span>
+                            </Link>
+                        </li>)  
+                        
+                    }
+                    {/* <li id='1' className='chat-list-item'>
                         <Link href="/history">
                             Conversation du 07/01/25
                             <span>12 messages - 12 crédits utilisés</span>
                         </Link>
                     </li>
-                    <li id='2'>
+                    <li id='2' className='chat-list-item'>
                         <Link href="/history">                        
                             Conversation du 08/01/25
                             <span>19 messages - 19 crédits utilisés</span>
                         </Link>
-                    </li>
+                    </li> */}
                 </ul>
             </div>
 

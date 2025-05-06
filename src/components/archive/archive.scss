@@ -171,9 +171,12 @@
             overflow: hidden;
     
             li{
+                @include mixin.size(100%, fit-content);
                 @include mixin.font('poppins', .8em, 400);
                 padding: .6em 1em;
                 transition: var(--transition-time) all;
+                border-bottom: var(--border);
+                cursor: pointer;
                 
                 &:last-of-type{
                     border-bottom: 0px;
@@ -204,15 +207,20 @@
     
     ul{
         @include mixin.size(100%, 100%);
+        border-top: 1px solid var(--light-grey);
+        margin-top: 1em;
         
-        li{
+        .chat-list-item{
             @include mixin.size(100%, fit-content);
             @include mixin.font('unbounded', .9em, 600);
             border-bottom: var(--border);
+            border-collapse: collapse;
             cursor: pointer;
+            display: none;
             
             a{
                 @include mixin.flex(column, flex-start, flex-start);
+                @include mixin.size(100%, fit-content);
                 padding: 1.3em 1.4em;
 
                 &:hover{
@@ -222,8 +230,16 @@
                 span{
                     @include mixin.font('poppins', .95em, 300);
                     margin-top: .1em;
+                    
+                    .model-name{
+                        text-transform: capitalize;
+                    }
                 }
             }
+        }
+
+        .selected{
+            display: flex;
         }
     }
 }
