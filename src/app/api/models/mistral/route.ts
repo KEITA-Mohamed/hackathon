@@ -4,7 +4,7 @@ import {saveChatToDb} from "@/app/services/chat.service";
 
 export async function POST(req: NextRequest) {
     try {
-        const {prompt, model,  convId} = await req.json();
+        const {prompt, convId} = await req.json();
 
         if (!prompt) {
             return NextResponse.json({error: 'Aucun prompt fourni.'}, {status: 400});
@@ -27,16 +27,25 @@ export async function POST(req: NextRequest) {
         });
 
         const mistralData = await mistralRes.json();
-        const response = mistralData?.choices?.[0]?.message?.content || 'Pas de réponse.';
+
+        const answer = mistralData?.choices?.[0]?.message?.content || 'Pas de réponse.';
+
+        const prompt_tokens : number = mistralData.usage.prompt_tokens
+        const completion_tokens : number = mistralData.usage.completion_tokens
+        const total_tokens: number = mistralData.usage.total_tokens
+        console.log(`TOKENS DE MISTRAL`, prompt_tokens, completion_tokens, total_tokens)
 
         await saveChatToDb({
             prompt,
-            answer: response,
-            model,
-            convId
+            answer,
+            model : "MISTRAL",
+            convId,
+            prompt_tokens,
+            completion_tokens,
+            total_tokens,
         });
 
-        return NextResponse.json({response, mistralData}, {status: 200});
+        return NextResponse.json({ response: answer }, { status: 200 });
 
     } catch (error) {
         console.error('Erreur API Mistral :', error);
