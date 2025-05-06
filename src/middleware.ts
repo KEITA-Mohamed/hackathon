@@ -1,7 +1,7 @@
 import {checkExpirationToken} from "@/lib/jwt";
 import {NextRequest, NextResponse} from "next/server";
 
-type UserRole = "ADMIN" | "TEACHER" | "STUDENT";
+type UserRole = "ADMIN" | "JURY" | "STUDENT";
 
 export async function middleware(req: NextRequest): Promise<NextResponse>  {
     console.log("Middleware exécuté sur :", req.nextUrl.pathname);
@@ -36,7 +36,7 @@ export async function middleware(req: NextRequest): Promise<NextResponse>  {
         //     return NextResponse.redirect(new URL("/dashboard", req.url));
         // }
 
-        if (path.startsWith("/dashboard") && !["ADMIN", "TEACHER"].includes(userRole)) {
+        if (path.startsWith("/dashboard") && !["ADMIN", "JURY"].includes(userRole)) {
 
             return NextResponse.redirect(new URL("/accessDenied", req.url));
         }
@@ -46,7 +46,7 @@ export async function middleware(req: NextRequest): Promise<NextResponse>  {
             if (userRole === "ADMIN") {
                 return NextResponse.redirect(new URL("/dashboard", req.url));
 
-            } else if (userRole === "TEACHER") {
+            } else if (userRole === "JURY") {
                 return NextResponse.redirect(new URL("/dashboard", req.url));
 
             } else if (userRole === "STUDENT") {

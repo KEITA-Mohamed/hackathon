@@ -5,18 +5,15 @@ import {ReactNode, useState, useRef} from 'react';
 import Archive from '../../components/archive/archive';
 import Message from '../../components/message/message';
 import Input from '../../components/input/input';
-// import UserInfo from '../../components/user-info/user-info';
+import UserInfo from '../../components/user-info/user-info';
 import Settings from '../../components/settings/settings';
 import Background from '../../components/background/background';
 // import {aiModelUserChoice} from '@/signals/aiModelUserChoice';
 import { useSignals} from '@preact/signals-react/runtime';
-import {currentModel} from "@/signals/chatSignals";
+// import {currentModel} from "@/signals/chatSignals";
 
 export default function Chat() {
-
     useSignals()
-
-
     const scrollContainer = useRef<HTMLDivElement>(null);
     const [messagesList, setMessagesList] = useState<ReactNode[]>([]);
 
@@ -39,12 +36,11 @@ export default function Chat() {
 
     return (
         <div id="main-container">
-            <h1>{currentModel.value}</h1>
             <Background />
             <Archive wichPage="chat" />
             <section id="chat-container">
                 <div id="chat-header">
-                    {/*<UserInfo wichPage="chat" />*/}
+                    <UserInfo wichPage="chat" />
                     <Settings />
                 </div>
                 <div id="messages-container" ref={scrollContainer}>
