@@ -1,43 +1,55 @@
-'use client'
-import './style.scss'
+'use client';
+
+import './style.scss';
 import {ReactNode, useState, useRef} from 'react';
-import Archive from '../../components/archive/archive'
-import Message from '../../components/message/message'
-import Input from '../../components/input/input'
-import UserInfo from '../../components/user-info/user-info'
-import Settings from '../../components/settings/settings'
-import Background from '../../components/background/background'
-// import { useUser } from "@/hooks/useUser";
+import Archive from '../../components/archive/archive';
+import Message from '../../components/message/message';
+import Input from '../../components/input/input';
+import UserInfo from '../../components/user-info/user-info';
+import Settings from '../../components/settings/settings';
+import Background from '../../components/background/background';
+// import {aiModelUserChoice} from '@/signals/aiModelUserChoice';
+import { useSignals} from '@preact/signals-react/runtime';
+// import {currentModel} from "@/signals/chatSignals";
 
 export default function Chat() {
+    useSignals()
     const scrollContainer = useRef<HTMLDivElement>(null);
-    const [messagesList, setMessagesList] = useState<Array<ReactNode>>([]);
-    // const { user } = useUser();
+    const [messagesList, setMessagesList] = useState<ReactNode[]>([]);
 
-    function getMessage(data: { name: string, text: string, user: boolean }) : void {
-        setMessagesList((prevState: ReactNode[]) => [...prevState,
-            <Message key={prevState.length} name={data.name} text={data.text} user={data.user}/>]);
+
+    function getMessage(data: { name: string; text: string; user: boolean }): void {
+        setMessagesList((prevState) => [
+            ...prevState,
+            <Message key={prevState.length} name={data.name} text={data.text} user={data.user} />,
+        ]);
+
         setTimeout(() => {
-            scrollContainer.current!.scrollTo({top: scrollContainer.current!.scrollHeight, left: 0, behavior: "smooth"});
-        }, 100)        
+            if (scrollContainer.current) {
+                scrollContainer.current.scrollTo({
+                    top: scrollContainer.current.scrollHeight,
+                    behavior: 'smooth',
+                });
+            }
+        }, 100);
     }
 
     return (
         <div id="main-container">
-            <Background/>
-            <Archive wichPage='chat'/>
-            <section id='chat-container'>
-                <div id='chat-header'>
-                    <UserInfo wichPage="chat"/>
-                    <Settings/>
+            <Background />
+            <Archive wichPage="chat" />
+            <section id="chat-container">
+                <div id="chat-header">
+                    <UserInfo wichPage="chat" />
+                    <Settings />
                 </div>
-                <div id='messages-container' ref={scrollContainer}>
+                <div id="messages-container" ref={scrollContainer}>
                     {messagesList}
                 </div>
-                <Input userQuestion={getMessage} iaAnswer={getMessage}/>
+                <Input userQuestion={getMessage} iaAnswer={getMessage} />
             </section>
+
+
         </div>
-
-
-    )
+    );
 }
