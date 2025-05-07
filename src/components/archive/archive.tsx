@@ -11,7 +11,7 @@ export default function Archive ({ wichPage }: {wichPage: string}) {
     const [modelValue, setModelValue] = useState<string>('...');
     const [dateValue, setDateValue] = useState<string>('...');
     const [searchValue, setSearchValue] = useState<string>('...');
-    const [ items, setItems] = useState([{title: "Maison", model: 'MISTRAL'}, {title: "Chaussure", model: 'GEMINI'}, {title: "Fourchette", model: 'O3'}]);
+    const [ items, setItems] = useState([{title: "Maison", model: 'MISTRAL'}, {title: "Appartement", model: 'MISTRAL'}, {title: "Chaussure", model: 'GEMINI'}, {title: "Fourchette", model: 'O3'}]);
     const listRef= useRef<HTMLLIElement[]>([]); 
 
     function openSelect(
@@ -30,9 +30,8 @@ export default function Archive ({ wichPage }: {wichPage: string}) {
         setFiltersState(!filterState);        
     }
 
-    function searchbarFilter(event: React.ChangeEvent<HTMLInputElement>) {
-        setSearchValue(event.target.value);
-        const searchValue = event.target.value.toUpperCase();
+    function searchbarFilter(setFilter: Dispatch<SetStateAction<string>>, searchValue: string, event: React.ChangeEvent<HTMLInputElement>) {
+        setFilter(event.target.value.toUpperCase());
         filterChatList(listRef.current, searchValue);  
     }
 
@@ -43,13 +42,18 @@ export default function Archive ({ wichPage }: {wichPage: string}) {
         }
         else{
             setState(value);
-            filterChatList(listRef.current, value);  
+            filterChatList(listRef.current, state);  
         }
     }
     
     function filterChatList(list: HTMLLIElement[], value: string) {
+        console.log("value", value);
+        console.log("searchValue", searchValue);
+        console.log("modelValue", modelValue);
+        console.log("dateValue", dateValue);
+
         list.forEach(li => {
-            if (li.textContent?.toUpperCase().includes(value)) {                
+            if (li.textContent?.toUpperCase().includes(searchValue) || li.textContent?.toUpperCase().includes(modelValue) || li.textContent?.toUpperCase().includes(dateValue)) {                
                 li.classList.add('selected');          
             }
             else{
@@ -65,7 +69,7 @@ export default function Archive ({ wichPage }: {wichPage: string}) {
                 <div id='filters'>
                     <h4 onClick={()=>{openFilters(setIsOpenFilters, isOpenFilters)}} className={`${isOpenFilters ? "open-filters-button" : ""}`}>Filtres</h4>
                     <div id='filters-container' className={`${isOpenFilters ? "open-filters" : "close-filters"}`}>
-                        <input onInput={searchbarFilter} type="text" placeholder='Rechercher une discussion'/>
+                        <input onInput={(event)=>{searchbarFilter(setSearchValue, searchValue, event)}} type="text" placeholder='Rechercher une discussion'/>
                         <div id='history-select-container'>
                             <div className='select' id='select-model'>
                                 <h5>Select model</h5>
