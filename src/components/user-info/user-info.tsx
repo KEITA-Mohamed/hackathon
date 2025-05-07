@@ -1,3 +1,5 @@
+// "use client"
+//
 // import './user-info.scss';
 // import { useEffect, useState } from 'react';
 //

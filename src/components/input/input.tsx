@@ -7,40 +7,54 @@ import {
     response,
     loading,
     promptLeft,
+    messagesList,
 } from '@/signals/chatSignals';
+import Message from '@/components/message/message';
 
-export default function Input(props: { userQuestion: Function; iaAnswer: Function }) {
+export default function Input() {
     useSignals();
 
     const handleClicSendUserInput = async () => {
-        if (!userInput.value.trim()) return;
+        const question = userInput.value.trim();
+        if (!question) return;
 
         loading.value = true;
         response.value = '';
-        const question = userInput.value.trim();
         userInput.value = '';
 
-        sendMessage('UserName', question, true);
 
-        const res = await fetch(`/api/models/${currentModel.value}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ prompt: question }),
-        });
+        messagesList.value = [
+            ...messagesList.value,
+            <Message key={messagesList.value.length} name="Moi" text={question} user={true} />,
+        ];
 
-        const data = await res.json();
-        response.value = data.response;
-        promptLeft.value -= 1;
-        loading.value = false;
-        sendMessage(currentModel.value, data.response, false);
+        try {
+            const res = await fetch(`/api/models/${currentModel.value}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ prompt: question }),
+            });
+
+            const data = await res.json();
+
+            response.value = data.response;
+            promptLeft.value -= 1;
+
+            messagesList.value = [
+                ...messagesList.value,
+                <Message
+                    key={messagesList.value.length}
+                    name={currentModel.value}
+                    text={data.response}
+                    user={false}
+                />,
+            ];
+        } catch (error) {
+            console.error('Erreur requête IA :', error);
+        } finally {
+            loading.value = false;
+        }
     };
-
-    function sendMessage(name: string, text: string, user: boolean) {
-        const data = { name, text, user };
-        user ? props.userQuestion(data) : props.iaAnswer(data);
-    }
 
     return (
         <div id="prompt-container">

@@ -1,33 +1,20 @@
 'use client';
 
 import './style.scss';
-import {ReactNode, useState, useRef} from 'react';
+import {useRef, useEffect} from 'react';
 import Archive from '../../components/archive/archive';
-import Message from '../../components/message/message';
 import Input from '../../components/input/input';
-// import UserInfo from '../../components/user-info/user-info';
 import Settings from '../../components/settings/settings';
 import Background from '../../components/background/background';
-// import {aiModelUserChoice} from '@/signals/aiModelUserChoice';
-import { useSignals} from '@preact/signals-react/runtime';
-import {currentModel} from "@/signals/chatSignals";
+import {useSignals} from '@preact/signals-react/runtime';
+import {messagesList, currentModel} from '@/signals/chatSignals';
 
 export default function Chat() {
-
-    useSignals()
-
-
+    useSignals();
     const scrollContainer = useRef<HTMLDivElement>(null);
-    const [messagesList, setMessagesList] = useState<ReactNode[]>([]);
 
-
-    function getMessage(data: { name: string; text: string; user: boolean }): void {
-        setMessagesList((prevState) => [
-            ...prevState,
-            <Message key={prevState.length} name={data.name} text={data.text} user={data.user} />,
-        ]);
-
-        setTimeout(() => {
+    useEffect(() => {
+        const timeout = setTimeout(() => {
             if (scrollContainer.current) {
                 scrollContainer.current.scrollTo({
                     top: scrollContainer.current.scrollHeight,
@@ -35,11 +22,12 @@ export default function Chat() {
                 });
             }
         }, 100);
-    }
+
+        return () => clearTimeout(timeout);
+    }, [messagesList.value]);
 
     return (
         <div id="main-container">
-            <h1>{currentModel.value}</h1>
             <Background />
             <Archive wichPage="chat" />
             <section id="chat-container">
@@ -48,12 +36,11 @@ export default function Chat() {
                     <Settings />
                 </div>
                 <div id="messages-container" ref={scrollContainer}>
-                    {messagesList}
+                    {messagesList.value}
                 </div>
-                <Input userQuestion={getMessage} iaAnswer={getMessage} />
+                <h1>{currentModel.value}</h1>
+                <Input />
             </section>
-
-
         </div>
     );
 }
