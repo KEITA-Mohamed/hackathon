@@ -52,16 +52,12 @@ export default function Archive ({ wichPage }: {wichPage: string}) {
         list.forEach(li => {  
             if (li.classList.contains('selected')) {                
                 if (li.dataset['search']?.includes(value)) {                                
-                    li.classList.add('selected');          
+                    li.classList.remove('hide');          
                 }
                 else{
-                    li.classList.remove('selected');
-                }
-    
-                if(value === ''){
-                    li.classList.add('selected');          
-                }                
-            }   
+                    li.classList.add('hide');
+                }                                
+            }                      
         });  
     }
     

@@ -241,6 +241,10 @@
         .selected{
             display: flex;
         }
+
+        .hide{
+            display: none !important;
+        }
         
     }
 }
