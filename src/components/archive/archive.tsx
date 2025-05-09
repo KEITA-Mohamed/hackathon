@@ -18,7 +18,7 @@ import { Signal } from '@preact/signals-react';
 export default function Archive ({ wichPage }: {wichPage: string}) { 
     useSignals();    
     const listRef= useRef<HTMLLIElement[]>([]); 
-
+    
     function openFilters( filterState: Signal<boolean> ) {
         filterState.value = !filterState.value;                
     }
@@ -48,9 +48,7 @@ export default function Archive ({ wichPage }: {wichPage: string}) {
         }
     }
 
-    function searchChatList(list: HTMLLIElement[], value: string) {    
-        console.log(value);
-              
+    function searchChatList(list: HTMLLIElement[], value: string) {                  
         list.forEach(li => {  
             if (li.classList.contains('selected')) {                
                 if (li.dataset['search']?.includes(value)) {                                
@@ -67,21 +65,54 @@ export default function Archive ({ wichPage }: {wichPage: string}) {
         });  
     }
     
-    function filterChatList(list: HTMLLIElement[], field: string, value: string) {          
-        list.forEach(li => {     
-            
-            if (li.dataset[field]?.includes(value)) {                                
-                li.classList.add('selected');          
-            }
-            else{
-                li.classList.remove('selected');
-            }
+    function filterChatList(list: HTMLLIElement[], field: string, value: string) {           
+        list.forEach(li => {                                
+            const count: number = 0;	
+            const filters = [model, date];
+            const filtersName = ["model", "date"];
+            const last_filter_value = filters[filters.length - 1];  
+            const last_filter = filtersName[filtersName.length - 1];  
+            getFilter(li, field, count, filters, filtersName, last_filter, last_filter_value);
+        });
 
-            if(value === ''){
-                li.classList.add('selected');          
-            }                
-        });  
-    }
+        function getFilter(elmnt: HTMLElement, field: string, count: number, filters: Signal[], filtersName: string[], last_filter: string, last_filter_value: Signal<string>) {						
+            if (count < filters.length) {	
+                if(filters[count].value !== "..." && filters[count].value == elmnt.dataset[filtersName[count]].toUpperCase()){						
+                    elmnt.classList.add('selected');	                    
+                    next();								
+                }  
+                                  
+                if(filters[count].value !== "..." && filters[count].value !== elmnt.dataset[field].toUpperCase()) {
+                    elmnt.classList.remove('selected');	
+                    if (filtersName[count] === last_filter) {					
+                        if(elmnt.dataset[last_filter] == last_filter_value.value.toUpperCase()){
+                            elmnt.classList.add('selected');
+                        }
+                        else{
+                            elmnt.classList.remove('selected');	
+                        }
+                    }
+                    return;						
+                }
+                                
+                if(filters[count].value === '...'){	 
+                    elmnt.classList.add('selected');	                                       
+                    // next();					
+                }	
+                return count;
+            }
+            
+            function next() {
+                if (filtersName[count] === last_filter) {					
+                    return;
+                }
+                else{
+                    count++;
+                    getFilter(elmnt, field, count, filters, filtersName, last_filter, last_filter_value);
+                }
+            }
+        }
+    }    
 
     return (
         <section>
