@@ -20,6 +20,9 @@ export default function Dashboard() {
             <Link href="/invite" className="text-foreground hover:text-primary transition-colors">
                 Invité un membre
             </Link>
+            <Link href="/import" className="text-foreground hover:text-primary transition-colors">
+                Import CSV
+            </Link>
         </div>
     );
 }
