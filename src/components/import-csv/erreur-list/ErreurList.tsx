@@ -39,6 +39,7 @@ export default function ErreurList({
                     <Button
                         variant="outline"
                         size="sm"
+                        className="bg-gray-700 text-neutral-50"
                         onClick={() => {
 
                             const errorData = inviteStatuses
@@ -77,10 +78,10 @@ export default function ErreurList({
                                     key={index}
                                     className="flex items-start gap-2 p-2 border-b last:border-b-0 hover:bg-muted/50"
                                 >
-                                    <AlertCircle className="h-4 w-4 text-destructive shrink-0 mt-0.5" />
+                                    <AlertCircle className="bg-red-100 text-red-800 hover:bg-red-100 h-4 w-4 text-destructive shrink-0 mt-0.5" />
                                     <div className="flex flex-col">
-                                        <strong className="text-destructive">{status.email}</strong>
-                                        <span className="text-muted-foreground text-xs">
+                                        <strong className="text-destructive text-gray-800">{status.email}</strong>
+                                        <span className="text-muted-foreground text-xs text-red-800">
                                             {status.message || "Erreur inconnue"}
                                         </span>
                                     </div>

@@ -10,7 +10,7 @@ import { Progress } from "@/components/ui/progress";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import ErreurList from "@/components/import-csv/erreur-list/ErreurList";
 import ListFromCsv from "@/components/import-csv/list/ListFromCsv";
-import { createHandleInvite } from "@/lib/handle-invite";
+import { useInviteUsers } from "@/hooks/useInviteUsers"
 
 interface CsvViewerProps {
     data: string[][]
@@ -18,11 +18,6 @@ interface CsvViewerProps {
     fileName: string
 }
 
-type InviteStatus = {
-    email: string
-    status: "pending" | "success" | "error"
-    message?: string
-}
 
 export default function CsvViewer({ data, headers, fileName }: CsvViewerProps) {
     const [sortConfig, setSortConfig] = useState<{
@@ -31,11 +26,13 @@ export default function CsvViewer({ data, headers, fileName }: CsvViewerProps) {
     } | null>(null)
 
     const [searchTerm, setSearchTerm] = useState("")
-    const [isLoading, setIsLoading] = useState(false)
-    const [progress, setProgress] = useState(0)
-    const [inviteStatuses, setInviteStatuses] = useState<InviteStatus[]>([])
-    const [showResults, setShowResults] = useState(false)
     const [isErrorListOpen, setIsErrorListOpen] = useState(true)
+
+    const { isLoading, progress, inviteStatuses, showResults, sendInvitations } = useInviteUsers()
+
+    const handleInvite = async () => {
+        await sendInvitations(data)
+    }
 
     // Trier les données en fonction de la configuration de tri actuelle
     const sortedData = useMemo(() => {
@@ -77,14 +74,7 @@ export default function CsvViewer({ data, headers, fileName }: CsvViewerProps) {
         setSortConfig({ key, direction })
     }
 
-    const handleInvite = createHandleInvite({
-        isLoading,
-        setIsLoading,
-        setProgress,
-        setInviteStatuses,
-        setShowResults,
-        filteredData,
-    });
+
 
 
 
@@ -97,7 +87,7 @@ export default function CsvViewer({ data, headers, fileName }: CsvViewerProps) {
             <CardHeader>
                 <CardTitle className="flex items-center justify-between">
                     <span>Données CSV: {fileName}</span>
-                    <Badge variant="outline">{filteredData.length} lignes</Badge>
+                    <Badge variant="outline" className="bg-gray-700 text-neutral-50">{filteredData.length} lignes</Badge>
                 </CardTitle>
                 <CardDescription>
                     Cliquez sur les en-têtes de colonne pour trier. Utilisez la barre de recherche pour filtrer les données.
@@ -123,7 +113,7 @@ export default function CsvViewer({ data, headers, fileName }: CsvViewerProps) {
                             </Button>
                         )}
                     </div>
-                    <Button variant="default" onClick={handleInvite} disabled={isLoading || filteredData.length === 0}>
+                    <Button variant="default" className="bg-gray-700 text-neutral-50" onClick={handleInvite} disabled={isLoading || filteredData.length === 0}>
                         {isLoading ? (
                             <>
                                 <Mail className="mr-2 h-4 w-4 animate-pulse" />

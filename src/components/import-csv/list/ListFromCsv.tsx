@@ -61,7 +61,7 @@ export default function ListFromCsv({
                                                 Succès
                                             </Badge>
                                         ) : inviteStatuses[rowIndex]?.status === "error" ? (
-                                            <Badge variant="destructive">
+                                            <Badge variant="destructive" className="bg-red-100 text-red-800 hover:bg-red-100">
                                                 <AlertCircle className="h-3 w-3 mr-1" />
                                                 Échec
                                             </Badge>
