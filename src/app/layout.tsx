@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.scss";
 import Background from '../components/background/background'
+import { Toaster } from "@/components/ui/sonner"
 
 
 export const metadata: Metadata = {
@@ -14,6 +15,7 @@ export default function RootLayout({children,}: Readonly<{ children: React.React
         <body cz-shortcut-listen="true">
             <Background/>
             {children}
+            <Toaster />
         </body>
         </html>
     );

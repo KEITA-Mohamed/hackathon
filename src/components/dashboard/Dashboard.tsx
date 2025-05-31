@@ -15,11 +15,16 @@ export default function Dashboard() {
                 ) : isTeacher ? (
                     <h2>Prof</h2>
                 ) : null 
-            }
+            }           
             <div id='dahsboard-nav'>
-                <Link rel="stylesheet" href="/chat">Chat</Link>
+                <Link rel="stylesheet" href="/chat">
+                    Chat
+                </Link>
                 <Link href="/invite" className="text-foreground hover:text-primary transition-colors">
                     Inviter un membre
+                </Link>
+                <Link href="/import" className="text-foreground hover:text-primary transition-colors">
+                    Import CSV
                 </Link>
                 <Link href="/task" className="text-foreground hover:text-primary transition-colors">
                     Ajouter une tache
