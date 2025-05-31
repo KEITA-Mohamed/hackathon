@@ -30,3 +30,12 @@
 - Les tokens (suivis, décompté, ...)
 - CSV
  -Responsive
+
+- Ajouter une tache
+- Select sur invit-signup
+- Active chat + titre en haut
+
+
+- Dashboard
+    - Liste des tâches
+    - 

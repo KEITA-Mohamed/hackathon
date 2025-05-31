@@ -2,7 +2,13 @@
 
 
 #dashboard-header{
-    @include mixin.flex(row, space-between, center);
-    @include mixin.size(20%, fit-content);
-    margin-bottom: 1%;
+    @include mixin.flex(column, space-between, center);
+    @include mixin.size(80%, fit-content);
+    margin-bottom: 0%;
+
+    #dahsboard-nav{
+        @include mixin.flex(row, space-between, center);
+        @include mixin.size(80%, fit-content);
+        margin-top: 2%;
+    }
 }

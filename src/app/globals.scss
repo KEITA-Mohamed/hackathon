@@ -19,7 +19,7 @@
 
   --light-grey: rgb(150, 150, 150);
   --light-grey-2: rgb(200, 200, 200);
-  --light-grey-025: rgb(150, 150, 150, .25);
+  --light-grey-02: rgb(150, 150, 150, .2);
   --light-grey-03: rgb(150, 150, 150, .3);
   --light-grey-05: rgb(150, 150, 150, .5);
 
@@ -35,6 +35,7 @@
   --box-shadow-light: 0px 1.5px 8px 0px rgba(50, 50, 50, .25);
   --transition-time: 200ms;
   --border: 1px solid var(--light-grey);
+  --border-light: 1px solid var(--light-grey-2);
 }
 
 //@media (prefers-color-scheme: dark) {
@@ -84,4 +85,8 @@ input{
 
 input, button, a{
   transition: var(--transition-time) all;
+}
+
+button{
+  outline: none;
 }

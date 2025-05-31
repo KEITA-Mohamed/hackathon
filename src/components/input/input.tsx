@@ -1,6 +1,7 @@
 'use client';
 import './input.scss';
 import { useSignals } from '@preact/signals-react/runtime';
+import Image from 'next/image';
 import {
     currentModel,
     userInput,
@@ -77,7 +78,7 @@ export default function Input(props: { userQuestion: Function; iaAnswer: Functio
                             : 'bg-blue-500 hover:bg-blue-600'
                     }`}
                 >
-                    {loading.value ? '...' : <img src="./send.svg" alt="" />}
+                    {loading.value ? '...' : <Image width={20} height={20} src="./send.svg" alt="" />}
                 </button>
             </div>
         </div>

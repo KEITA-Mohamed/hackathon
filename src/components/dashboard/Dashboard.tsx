@@ -9,7 +9,6 @@ export default function Dashboard() {
 
     return (
         <div id='dashboard-header'>
-            <Link rel="stylesheet" href="/chat">Chat</Link>
             {
                 isAdmin ? (
                     <h2>Admin</h2>
@@ -17,9 +16,15 @@ export default function Dashboard() {
                     <h2>Prof</h2>
                 ) : null 
             }
-            <Link href="/invite" className="text-foreground hover:text-primary transition-colors">
-                Invité un membre
-            </Link>
+            <div id='dahsboard-nav'>
+                <Link rel="stylesheet" href="/chat">Chat</Link>
+                <Link href="/invite" className="text-foreground hover:text-primary transition-colors">
+                    Inviter un membre
+                </Link>
+                <Link href="/task" className="text-foreground hover:text-primary transition-colors">
+                    Ajouter une tache
+                </Link>
+            </div>
         </div>
     );
 }

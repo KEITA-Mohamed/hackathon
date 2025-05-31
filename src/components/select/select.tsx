@@ -8,7 +8,7 @@ import {
     model,  
     date
 } from '@/signals/filtersSignals';
-import { signal, Signal } from '@preact/signals-react';
+import { Signal } from '@preact/signals-react';
 import filterItems from '../../services/filter.service';
 import { MutableRefObject, useState } from 'react';
 
@@ -39,14 +39,14 @@ export default function Select (props: {name: string, filter: Signal<string>, fi
     }
 
     return (
-            <div className='select'>
-                <h5>Select { props.name }</h5>
-                <p onClick={()=>{ setIsOpen(!isOpen) }}>{ props.filter.value.toLowerCase() } <Image width={25} height={25} className={`${isOpen ? "rotate" : ""}`} src="./drop_down.svg" alt="" /></p>
-                <ul className={`${isOpen ? "open" : "close"}`}>
-                    {                        
-                        props.filterList.value.map(element => <li className={`${props.filter.value == element.value ? "active" : ""}`} onClick={()=>{selectFilter(props.filter, props.filterName, element.value)}} key={element.name}>{ element.name }</li> )
-                    }                    
-                </ul>
-            </div>
+        <div className='select'>
+            <h5>{ props.name }</h5>
+            <p onClick={()=>{ setIsOpen(!isOpen) }}>{ props.filter.value.toLowerCase() } <Image width={25} height={25} className={`${isOpen ? "rotate" : ""}`} src="./drop_down.svg" alt="" /></p>
+            <ul className={`${isOpen ? "open" : "close"}`}>
+                {                        
+                    props.filterList.value.map(element => <li className={`${props.filter.value == element.value ? "active" : ""}`} onClick={()=>{selectFilter(props.filter, props.filterName, element.value)}} key={element.name}>{ element.name }</li> )
+                }                    
+            </ul>
+        </div>
     )
 }

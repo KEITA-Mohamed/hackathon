@@ -1,0 +1,24 @@
+@use '/src/app/mixin';
+
+.connexion-container {
+    @include mixin.formGlobal;
+    @include mixin.header;
+    @include mixin.formFooter;
+    
+    .form-container{
+        @include mixin.formContainer;
+        @include mixin.formNameContainer;
+        @include mixin.formFieldContainer;
+    }
+
+    #password-error{
+        @include mixin.font('poppins');                                              
+        margin-top: 1%;
+        color: var(--light-grey);
+    }
+
+    textarea{
+        border-radius: 15px !important;
+        resize: none;
+    }
+}

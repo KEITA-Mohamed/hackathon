@@ -49,7 +49,7 @@
         background-color: white;
         
         // &:hover{
-        //     background-color: var(--light-grey-025)
+        //     background-color: var(--light-grey-02)
         // }
     }
 
@@ -146,7 +146,7 @@
             cursor: pointer;
 
             // &:hover{
-            //     background-color: var(--light-grey-025)
+            //     background-color: var(--light-grey-02)
             // }
 
             img{
@@ -183,7 +183,7 @@
                 }
 
                 &:hover{
-                    background-color: var(--light-grey-025)
+                    background-color: var(--light-grey-02)
                 }
             }
 
@@ -207,13 +207,14 @@
     
     ul{
         @include mixin.size(100%, 100%);
-        border-top: 1px solid var(--light-grey);
+        border-top: var(--border-light);
         margin-top: 1em;
         
         .chat-list-item{
             @include mixin.size(100%, fit-content);
             @include mixin.font('unbounded', .9em, 600);
-            border-bottom: var(--border);
+            transition: var(--transition-time) all;
+            border-bottom: var(--border-light);
             border-collapse: collapse;
             cursor: pointer;
             display: none;
@@ -221,14 +222,14 @@
             a{
                 @include mixin.flex(column, flex-start, flex-start);
                 @include mixin.size(100%, fit-content);
-                padding: 1.3em 1.4em;
+                padding: .8em 1.4em;
 
                 &:hover{
-                    background-color: var(--light-grey-025);
+                    background-color: var(--light-grey-02);
                 }
     
-                span{
-                    @include mixin.font('poppins', .95em, 300);
+                .chat-info{
+                    @include mixin.font('poppins', .8em, 300);
                     margin-top: .1em;
                     
                     .model-name{
@@ -236,6 +237,10 @@
                     }
                 }
             }
+        }
+
+        .active a{
+            background-color: var(--light-grey-2) !important;
         }
 
         .selected{

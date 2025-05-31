@@ -2,11 +2,10 @@
 import './InviteForm.scss';
 import type React from "react"
 import { useState } from "react"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Loader2 } from "lucide-react"
 import {useUser} from "@/hooks/useUser";
-
+import Image from 'next/image';
 
 export default function InviteForm() {
 
@@ -22,7 +21,8 @@ export default function InviteForm() {
     const [errors, setErrors] = useState<Record<string, string>>({})
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [submitSuccess, setSubmitSuccess] = useState(false)
-
+    const [isOpen, setIsOpen] = useState(false);
+    const [role, setRole] = useState('...');
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target
@@ -215,24 +215,16 @@ export default function InviteForm() {
                             )}
                         </div>
 
-                        <div className='field-container'>
+                        <div className='field-container select'>
                             {isAdmin ? (
                                 <>
-                                <h2>Rôle</h2>
-                                <Select onValueChange={handleRoleChange} value={formData.role}>
-                                    <SelectTrigger
-                                        id="role"
-                                        aria-invalid={!!errors.role}
-                                        aria-describedby={errors.role ? "role-error" : undefined}
-                                    >
-                                        <SelectValue placeholder="Sélectionnez un rôle" />
-                                    </SelectTrigger>
-                                    <SelectContent>
-                                        <SelectItem value="ADMIN">ADMIN</SelectItem>
-                                        <SelectItem value="TEACHER">TEACHER</SelectItem>
-                                        <SelectItem value="STUDENT">STUDENT</SelectItem>
-                                    </SelectContent>
-                                </Select>
+                                    <h2>Rôle</h2>
+                                    <p onClick={()=>{ setIsOpen(!isOpen); handleRoleChange(role.toUpperCase()) }}>{ role }<Image width={25} height={25} className={`${isOpen ? "rotate" : ""}`} src="./drop_down.svg" alt="" /></p>
+                                    <ul className={`${isOpen ? "open" : "close"}`}>
+                                        <li className={`${role == "Admin" ? "active" : ""}`} onClick={()=>{setRole('Admin')}}>Admin</li>
+                                        <li className={`${role == "Teacher" ? "active" : ""}`} onClick={()=>{setRole('Teacher')}}>Teacher</li>                
+                                        <li className={`${role == "Student" ? "active" : ""}`} onClick={()=>{setRole('Student')}}>Student</li>
+                                    </ul>                               
                                 </>
                             ) :isTeacher ? (
                                 <input

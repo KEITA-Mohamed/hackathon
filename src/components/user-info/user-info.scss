@@ -12,7 +12,7 @@
     }
     
     span{
-        @include mixin.font('poppins');  
+        @include mixin.font('poppins', .8em);  
         padding: .4em 1.2em;
     
         &:first-of-type{
@@ -26,10 +26,10 @@
     }
     
     #credit-counter, #user-name{
-        @include mixin.font('unbounded', inherit, 800);  
+        @include mixin.font('unbounded', .8em, 800);  
         @include mixin.size(fit-content, 100%);  
         background-color: var(--background);
         color: var(--foreground);
-        border-left: var(--border);
+        border-left: var(--border-light);
     }
 }

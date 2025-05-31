@@ -7,11 +7,11 @@ import {
     isOpenFilters,
     modelFilters,
     dateFilters,
-    filtersValues,
     model,
     date,
     search,
-    items
+    items,
+    activeChat
 } from '@/signals/filtersSignals';
 import { Signal } from '@preact/signals-react';
 import searchItems from '../../services/search.service';
@@ -20,7 +20,6 @@ import Select from '../select/select';
 export default function Archive ({ wichPage }: {wichPage: string}) { 
     useSignals();    
     const listRef= useRef<HTMLLIElement[]>([]);    
-
     function openFilters( filterState: Signal<boolean> ) {
         filterState.value = !filterState.value;                
     }
@@ -33,14 +32,14 @@ export default function Archive ({ wichPage }: {wichPage: string}) {
     return (
         <section>
             <div id='chat-list'>
-                <h3 className='gradient'>Conversations archivés</h3>
+                <h3 className='gradient'>Chat</h3>
                 <div id='filters'>
-                    <h4 onClick={()=>{openFilters(isOpenFilters)}} className={`${isOpenFilters.value ? "open-filters-button" : ""}`}>Filtres</h4>
+                    <h4 onClick={()=>{openFilters(isOpenFilters)}} className={`${isOpenFilters.value ? "open-filters-button" : ""}`}>Rechercher un chat</h4>
                     <div id='filters-container' className={`${isOpenFilters.value ? "open-filters" : "close-filters"}`}>
-                        <input onInput={(event)=>{searchbarFilter(search, event as React.ChangeEvent<HTMLInputElement>)}} type="text" placeholder='Rechercher une discussion'/>
+                        <input onInput={(event)=>{searchbarFilter(search, event as React.ChangeEvent<HTMLInputElement>)}} type="text" placeholder='...'/>
                         <div id='history-select-container'>
-                            <Select name='model' filter={ model } filterName='model' filterList={ modelFilters } itemsList={ listRef }/>
-                            <Select name='date' filter={ date } filterName='date' filterList={ dateFilters } itemsList={ listRef }/>                          
+                            <Select name='Model' filter={ model } filterName='model' filterList={ modelFilters } itemsList={ listRef }/>
+                            <Select name='Date' filter={ date } filterName='date' filterList={ dateFilters } itemsList={ listRef }/>                          
                         </div>
                     </div>
                 </div>
@@ -48,10 +47,10 @@ export default function Archive ({ wichPage }: {wichPage: string}) {
                 <ul>
                     {                            
                         items.value.map( ( item, index ) =>
-                        <li ref={ (element: HTMLLIElement) => listRef.current[index] = element } key={ index } className='chat-list-item selected' data-model={item.model} data-date={item.date.toUpperCase()} data-search={item.title.toUpperCase() + ", " + item.model}>
-                            <Link href="/history">
+                        <li onClick={()=>{activeChat.value = index}} ref={ (element: HTMLLIElement) => listRef.current[index] = element } key={ index } className={`chat-list-item selected ${activeChat.value === index ? "active" : ""}`} data-model={item.model} data-date={item.date.toUpperCase()} data-search={item.title.toUpperCase() + ", " + item.model}>
+                            <Link href="/chat">
                                 { item.title }
-                                <span><span className='model-name'>{ item.model.toLowerCase() }</span>- {item.date.toLowerCase()} - 12 messages - 12 crédits utilisés</span>
+                                <span className='chat-info'><span className='model-name'>{ item.model.toLowerCase() }</span> - {item.date.toLowerCase()} - 12 messages - 12 crédits utilisés</span>
                             </Link>
                         </li>)  
                         
