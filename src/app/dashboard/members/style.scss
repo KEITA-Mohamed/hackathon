@@ -4,8 +4,23 @@
     @include mixin.flex(column, center, center);
     @include mixin.header;
 
+    header{
+        position: relative;
+        z-index: 1000;
+    }
+
     h1{
         padding-bottom: 0px !important
+    }
+}
+
+#member-lists-container{
+    @include mixin.flex(row, center, center);
+    @include mixin.size(100%, 100%);
+
+    .member-list{
+        @include mixin.flex(column, center, center);
+        @include mixin.size(100%, 100%); 
     }
 }
 

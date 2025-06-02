@@ -7,8 +7,9 @@
     overflow: hidden;
 
     ul{
-        padding-top: 3%;
         @include mixin.size(100%, fit-content);
+        padding-top: 3%;
+        overflow: auto;
         
         h2{
             @include mixin.font('unbounded', 1.2em, 700);
