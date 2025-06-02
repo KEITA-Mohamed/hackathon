@@ -1,8 +1,9 @@
 "use client"
 
+import "./CSVViewer.scss";
 import { useState, useMemo } from "react";
 import { Search, X, Mail, CheckCircle} from "lucide-react";
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
+import { CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -86,72 +87,68 @@ export default function CsvViewer({ data, headers, fileName }: CsvViewerProps) {
         filteredData,
     });
 
-
-
     // Statistiques des résultats
     const successCount = inviteStatuses.filter((status) => status.status === "success").length
     const errorCount = inviteStatuses.filter((status) => status.status === "error").length
 
     return (
-        <Card className="w-full">
-            <CardHeader>
-                <CardTitle className="flex items-center justify-between">
+        <div className="csv-container">
+            <header>
+                <h1 className="">
                     <span>Données CSV: {fileName}</span>
                     <Badge variant="outline">{filteredData.length} lignes</Badge>
-                </CardTitle>
-                <CardDescription>
+                </h1>
+                <p>
                     Cliquez sur les en-têtes de colonne pour trier. Utilisez la barre de recherche pour filtrer les données.
-                </CardDescription>
-                <div className="flex items-center gap-2 mt-2">
-                    <div className="relative flex-1">
-                        <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
+                </p>
+                <div className="">
+                    <div className="">
+                        <Search className="" />
                         <Input
                             placeholder="Rechercher..."
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
-                            className="pl-8"
+                            className=""
                         />
                         {searchTerm && (
-                            <Button
-                                variant="ghost"
-                                size="icon"
-                                className="absolute right-0 top-0 h-full"
+                            <button
+                                className=""
                                 onClick={() => setSearchTerm("")}
                             >
-                                <X className="h-4 w-4" />
+                                <X className="" />
                                 <span className="sr-only">Effacer la recherche</span>
-                            </Button>
+                            </button>
                         )}
                     </div>
-                    <Button variant="default" onClick={handleInvite} disabled={isLoading || filteredData.length === 0}>
+                    <button onClick={handleInvite} disabled={isLoading || filteredData.length === 0}>
                         {isLoading ? (
                             <>
-                                <Mail className="mr-2 h-4 w-4 animate-pulse" />
+                                <Mail className="" />
                                 Envoi en cours...
                             </>
                         ) : (
                             <>
-                                <Mail className="mr-2 h-4 w-4" />
+                                <Mail className="" />
                                 Envoyer Invitations
                             </>
                         )}
-                    </Button>
+                    </button>
                 </div>
 
                 {isLoading && (
-                    <div className="mt-4">
-                        <div className="flex justify-between mb-1 text-sm">
+                    <div className="">
+                        <div className="">
                             <span>Progression</span>
                             <span>{progress}%</span>
                         </div>
-                        <Progress value={progress} className="h-2" />
+                        <Progress value={progress} className="" />
                     </div>
                 )}
 
                 {showResults && (
-                    <div className="mt-4 space-y-2">
+                    <div className="">
                         <Alert variant={errorCount > 0 ? "destructive" : "default"}>
-                            <CheckCircle className="h-4 w-4" />
+                            <CheckCircle className="" />
                             <AlertTitle>Résultat de l&apos;envoi des invitations</AlertTitle>
                             <AlertDescription>
                                 {successCount} invitations envoyées avec succès, {errorCount} échecs sur {inviteStatuses.length}{" "}
@@ -169,10 +166,10 @@ export default function CsvViewer({ data, headers, fileName }: CsvViewerProps) {
                         )}
                     </div>
                 )}
-            </CardHeader>
+            </header>
             <CardContent>
                 <ListFromCsv headers={headers} requestSort={requestSort} showResults={showResults} filteredData={filteredData} inviteStatuses={inviteStatuses} />
             </CardContent>
-        </Card>
+        </div>
     )
 }

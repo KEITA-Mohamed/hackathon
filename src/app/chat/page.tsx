@@ -37,10 +37,10 @@ export default function Chat() {
     return (
         <div id="main-container">
             <Background />
-            <Archive wichPage="chat" />
+            <Archive />
             <section id="chat-container">
                 <div id="chat-header">
-                    <UserInfo wichPage="chat" />
+                    <UserInfo />
                     <Settings />
                 </div>
                 <div id="messages-container" ref={scrollContainer}>

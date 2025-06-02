@@ -1,46 +1,27 @@
 import './style.scss'
-import Dashboard from "@/components/dashboard/Dashboard";
-import Link from 'next/link'
+import DashboardHeader from "@/components/dashboard-header/DashboardHeader";
+import GradesList from "@/components/grades-list/GradesList";
 
-export default function History () {
+export default function Dashboard () { 
     return (
         <div id="main-container">
-            <Dashboard />
-            <header>
-                <h1>Inscription
-                </h1>
-            </header>
+            <DashboardHeader />
 
-            <section id='student-list'>
-                <ul>
-                    <li>
-                        <Link href="/history">
-                            Nom de l&apos;étudiants
-                            <span>
-                                3 conversations - 12 crédits restants 
-                            </span>
-                        </Link>
-                    </li>
+            <div id='grades-lists-container'>
+                <div className='grades-list'>
+                    <header>
+                        <h1>Tâche 1</h1>
+                    </header>
+                    <GradesList />
+                </div>
 
-                    <li>
-                        <Link href="/history">
-                            Nom de l&apos;étudiants
-                            <span>
-                                3 conversations - 12 crédits restants 
-                            </span>
-                        </Link>
-                    </li>
-
-                    <li>
-                        <Link href="/history">
-                            Nom de l&apos;étudiants
-                            <span>
-                                3 conversations - 12 crédits restants 
-                            </span>
-                        </Link>
-                    </li>
-                </ul>
-            </section>
+                <div className='grades-list'>
+                    <header>
+                        <h1>Tâche 2</h1>
+                    </header>
+                    <GradesList />
+                </div>
+            </div>
         </div>
     )
 }

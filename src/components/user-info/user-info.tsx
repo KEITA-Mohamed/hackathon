@@ -1,7 +1,7 @@
 import './user-info.scss';
 // import { useEffect, useState } from 'react';
 
-export default function UserInfo(modelName: string) {
+export default function UserInfo() {
     // const [leftCreditValue, setLeftCreditValue] = useState<number | null>(null);
 
     // useEffect(() => {

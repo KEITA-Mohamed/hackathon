@@ -1,0 +1,11 @@
+@use '/src/app/mixin';
+
+#main-container{
+    @include mixin.flex(column, center, center);
+    @include mixin.header;
+
+    h1{
+        padding-bottom: 0px !important
+    }
+}
+

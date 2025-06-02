@@ -134,134 +134,136 @@ export default function InviteForm() {
 
     return (
         <div className='main-container'>
-            <header>
-                <h1>Inviter un utilisateur</h1>
-                {/* <p>Remplissez le formulaire pour inviter un nouvel utilisateur.</p> */}
-            </header>
+            <div id='invite-container'>
+                <header>
+                    <h1>Inviter un utilisateur</h1>
+                    {/* <p>Remplissez le formulaire pour inviter un nouvel utilisateur.</p> */}
+                </header>
 
-            {submitSuccess ? (
-                <div>
-                    <Alert className="bg-green-50 border-green-200">
-                        <AlertDescription className="text-green-800">L&apos;invitation a été envoyée avec succès!</AlertDescription>
-                    </Alert>
-                    <div className="mt-4">
-                        <button onClick={() => setSubmitSuccess(false)} className="w-full">
-                            Envoyer une autre invitation
-                        </button>
+                {submitSuccess ? (
+                    <div>
+                        <Alert className="bg-green-50 border-green-200">
+                            <AlertDescription className="text-green-800">L&apos;invitation a été envoyée avec succès!</AlertDescription>
+                        </Alert>
+                        <div className="mt-4">
+                            <button onClick={() => setSubmitSuccess(false)} className="w-full">
+                                Envoyer une autre invitation
+                            </button>
+                        </div>
                     </div>
-                </div>
-            ) : (
-                <form onSubmit={handleSubmit}>
-                    <div className="form-container">
-                        {errors.form && (
-                            <Alert variant="destructive">
-                                <AlertDescription>{errors.form}</AlertDescription>
-                            </Alert>
-                        )}
+                ) : (
+                    <form onSubmit={handleSubmit}>
+                        <div className="form-container">
+                            {errors.form && (
+                                <Alert variant="destructive">
+                                    <AlertDescription>{errors.form}</AlertDescription>
+                                </Alert>
+                            )}
 
-                        <div className='name-container'>
+                            <div className='name-container'>
+                                <div className='field-container'>
+                                    <h2>Prénom</h2>
+                                    <input
+                                        id="firstName"
+                                        name="firstName"
+                                        placeholder="Entrez le prénom"
+                                        value={formData.firstName}
+                                        onChange={handleChange}
+                                        aria-invalid={!!errors.firstName}
+                                        aria-describedby={errors.firstName ? "firstName-error" : undefined}
+                                    />
+                                    {errors.firstName && (
+                                        <p id="firstName-error" className="text-sm text-destructive mt-1">
+                                            {errors.firstName}
+                                        </p>
+                                    )}
+                                </div>
+                                <div className='field-container'>
+                                    <h2>Nom</h2>
+                                    <input
+                                        id="lastName"
+                                        name="lastName"
+                                        placeholder="Entrez le nom"
+                                        value={formData.lastName}
+                                        onChange={handleChange}
+                                        aria-invalid={!!errors.lastName}
+                                        aria-describedby={errors.lastName ? "lastName-error" : undefined}
+                                    />
+                                    {errors.lastName && (
+                                        <p id="lastName-error">
+                                            {errors.lastName}
+                                        </p>
+                                    )}
+                                </div>
+                            </div>
+
                             <div className='field-container'>
-                                <h2>Prénom</h2>
+                                <h2>Email</h2>
                                 <input
-                                    id="firstName"
-                                    name="firstName"
-                                    placeholder="Entrez le prénom"
-                                    value={formData.firstName}
+                                    id="email"
+                                    name="email"
+                                    type="email"
+                                    placeholder="exemple@email.com"
+                                    value={formData.email}
                                     onChange={handleChange}
-                                    aria-invalid={!!errors.firstName}
-                                    aria-describedby={errors.firstName ? "firstName-error" : undefined}
+                                    aria-invalid={!!errors.email}
+                                    aria-describedby={errors.email ? "email-error" : undefined}
                                 />
-                                {errors.firstName && (
-                                    <p id="firstName-error" className="text-sm text-destructive mt-1">
-                                        {errors.firstName}
+                                {errors.email && (
+                                    <p id="email-error">
+                                        {errors.email}
                                     </p>
                                 )}
                             </div>
-                            <div className='field-container'>
-                                <h2>Nom</h2>
-                                <input
-                                    id="lastName"
-                                    name="lastName"
-                                    placeholder="Entrez le nom"
-                                    value={formData.lastName}
-                                    onChange={handleChange}
-                                    aria-invalid={!!errors.lastName}
-                                    aria-describedby={errors.lastName ? "lastName-error" : undefined}
-                                />
-                                {errors.lastName && (
-                                    <p id="lastName-error">
-                                        {errors.lastName}
+
+                            <div className='field-container select'>
+                                {isAdmin ? (
+                                    <>
+                                        <h2>Rôle</h2>
+                                        <p onClick={()=>{ setIsOpen(!isOpen); handleRoleChange(role.toUpperCase()) }}>{ role }<Image width={25} height={25} className={`${isOpen ? "rotate" : ""}`} src="./drop_down.svg" alt="" /></p>
+                                        <ul className={`${isOpen ? "open" : "close"}`}>
+                                            <li className={`${role == "Admin" ? "active" : ""}`} onClick={()=>{setRole('Admin')}}>Admin</li>
+                                            <li className={`${role == "Teacher" ? "active" : ""}`} onClick={()=>{setRole('Teacher')}}>Teacher</li>                
+                                            <li className={`${role == "Student" ? "active" : ""}`} onClick={()=>{setRole('Student')}}>Student</li>
+                                        </ul>                               
+                                    </>
+                                ) :isTeacher ? (
+                                    <input
+                                        type="hidden"
+                                        name="role"
+                                        value="STUDENT"
+                                        readOnly
+
+                                        ref={(input) => {
+                                            if (input && formData.role !== "STUDENT") {
+                                                setFormData(prev => ({ ...prev, role: "STUDENT" }));
+                                            }
+                                        }}
+                                    />
+                                ) : null}
+                                {errors.role && (
+                                    <p id="role-error">
+                                        {errors.role}
                                     </p>
                                 )}
                             </div>
                         </div>
 
-                        <div className='field-container'>
-                            <h2>Email</h2>
-                            <input
-                                id="email"
-                                name="email"
-                                type="email"
-                                placeholder="exemple@email.com"
-                                value={formData.email}
-                                onChange={handleChange}
-                                aria-invalid={!!errors.email}
-                                aria-describedby={errors.email ? "email-error" : undefined}
-                            />
-                            {errors.email && (
-                                <p id="email-error">
-                                    {errors.email}
-                                </p>
-                            )}
-                        </div>
-
-                        <div className='field-container select'>
-                            {isAdmin ? (
-                                <>
-                                    <h2>Rôle</h2>
-                                    <p onClick={()=>{ setIsOpen(!isOpen); handleRoleChange(role.toUpperCase()) }}>{ role }<Image width={25} height={25} className={`${isOpen ? "rotate" : ""}`} src="./drop_down.svg" alt="" /></p>
-                                    <ul className={`${isOpen ? "open" : "close"}`}>
-                                        <li className={`${role == "Admin" ? "active" : ""}`} onClick={()=>{setRole('Admin')}}>Admin</li>
-                                        <li className={`${role == "Teacher" ? "active" : ""}`} onClick={()=>{setRole('Teacher')}}>Teacher</li>                
-                                        <li className={`${role == "Student" ? "active" : ""}`} onClick={()=>{setRole('Student')}}>Student</li>
-                                    </ul>                               
-                                </>
-                            ) :isTeacher ? (
-                                <input
-                                    type="hidden"
-                                    name="role"
-                                    value="STUDENT"
-                                    readOnly
-
-                                    ref={(input) => {
-                                        if (input && formData.role !== "STUDENT") {
-                                            setFormData(prev => ({ ...prev, role: "STUDENT" }));
-                                        }
-                                    }}
-                                />
-                            ) : null}
-                            {errors.role && (
-                                <p id="role-error">
-                                    {errors.role}
-                                </p>
-                            )}
-                        </div>
-                    </div>
-
-                    <footer>
-                        <button type="submit" className="w-full" disabled={isSubmitting}>
-                            {isSubmitting ? (
-                                <>
-                                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                                    Envoi en cours...
-                                </>
-                            ) : (
-                                "Inviter"
-                            )}
-                        </button>
-                    </footer>
-                </form>
-            )}
+                        <footer>
+                            <button type="submit" className="w-full" disabled={isSubmitting}>
+                                {isSubmitting ? (
+                                    <>
+                                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                                        Envoi en cours...
+                                    </>
+                                ) : (
+                                    "Inviter"
+                                )}
+                            </button>
+                        </footer>
+                    </form>
+                )}
+            </div>            
         </div>
-    )
-}
+    )   
+}   

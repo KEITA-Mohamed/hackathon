@@ -37,5 +37,21 @@
 
 
 - Dashboard
-    - Liste des tâches
-    - 
+    - Evaluation
+        - Liste 
+    - Tâches
+        - Liste des tâches > éditer + supprimer 
+        - Ajouter une tâche        
+    - Membres
+        - Liste
+            - Etudiants
+            - Enseignats
+            - Jury
+        - Ajouter
+            - Invite
+            - Import
+        
+
+
+Revenu micro-entrepreneur Etape 3
+- Type d'activité ? Esque BNC prestation non commercial -> d'autant plus prestation de service

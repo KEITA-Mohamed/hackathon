@@ -48,38 +48,40 @@ export default function ImportCSV() {
     }
 
     return (
-        <div className="main-container">
-            <header>
-                <h1>Importer un fichier CSV</h1>
-            </header>
-            <div className="load-container">               
+        <div className='main-container'>
+            <div className="upload-container">
+                <header className='main-container-header'>
+                    <h1>Importer un fichier CSV</h1>
+                </header>
+                <div className="load-container">               
 
-                <input type="file" id="csv-upload" accept=".csv" onChange={handleFileUpload} className="hidden" />
+                    <input type="file" id="csv-upload" accept=".csv" onChange={handleFileUpload} className="hidden" />
 
-                <Button className='csv-button' asChild>
-                    <label htmlFor="csv-upload" className="cursor-pointer">
-                        <FileUp className="" />
-                        Sélectionner un fichier
-                    </label>
-                </Button>
-                
-                <p className="">Glissez-déposez ou cliquez pour télécharger</p>
-                
+                    <Button className='csv-button' asChild>
+                        <label htmlFor="csv-upload" className="cursor-pointer">
+                            <FileUp className="" />
+                            Sélectionner un fichier
+                        </label>
+                    </Button>
+
+                    <p className="">Glissez-déposez ou cliquez pour télécharger</p>
+
+                </div>
+
+                {error && (
+                    <Alert variant="destructive" className="">
+                        <AlertCircle className="" />
+                        <AlertDescription>{error}</AlertDescription>
+                    </Alert>
+                )}
             </div>
-
-            {error && (
-                <Alert variant="destructive" className="">
-                    <AlertCircle className="" />
-                    <AlertDescription>{error}</AlertDescription>
-                </Alert>
-            )}
 
             {csvData.length > 0 && (
                 <div className="">
                     <CsvViewer data={csvData} headers={headers} fileName={fileName} />
                 </div>
             )}
-            {/* <CsvViewer data={csvData} headers={headers} fileName={fileName} /> */}
+            <CsvViewer data={csvData} headers={headers} fileName={fileName} />
         </div>
     )
 }

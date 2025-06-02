@@ -1,0 +1,8 @@
+@use '/src/app/mixin';
+
+.csv-container{
+    @include mixin.size(fit-content, fit-content);
+    @include mixin.flex(column, center, center);
+    @include mixin.border(20px, var(--box-shadow), var(--border));  
+    padding: 2em;  
+}

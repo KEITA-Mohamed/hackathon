@@ -51,7 +51,7 @@
 }
 
 body {
-  @include mixin.flex(column, center, center);
+  // @include mixin.flex(column, center, center);
   @include mixin.size(100vw, 100vh);
   background: #ffffff;
   color: var(--foreground);

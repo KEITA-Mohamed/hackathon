@@ -1,0 +1,40 @@
+@use '/src/app/mixin';
+
+#student-list{
+    @include mixin.flex(column, flex-start, center);
+    @include mixin.size(95%, 100%);
+    @include mixin.border(25px, var(--box-shadow), var(--border));                                     
+    overflow: hidden;
+
+    ul{
+        padding-top: 3%;
+        @include mixin.size(100%, fit-content);
+        
+        h2{
+            @include mixin.font('unbounded', 1.2em, 700);
+            padding: 1em 1.5em;    
+            background-color: var(--light-grey-2);            
+        }
+
+        li{
+            @include mixin.size(100%, fit-content);
+            background-color: var(--background);
+            border-bottom: var(--border);
+            cursor: pointer;
+            
+            a{
+                @include mixin.flex(column, flex-start, flex-start);
+                @include mixin.font('unbounded', 1em, 700);
+                padding: 1em 1.5em;                
+
+                &:hover{
+                    background-color: var(--light-grey-02);
+                }
+    
+                span{
+                    @include mixin.font('poppins', .8em, 300);                   
+                }
+            }
+        }
+    }
+}

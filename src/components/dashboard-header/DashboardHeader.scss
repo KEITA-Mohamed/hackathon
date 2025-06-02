@@ -1,0 +1,57 @@
+@use '/src/app/mixin';
+
+
+#dashboard-header{
+    @include mixin.flex(column, space-between, center);
+    @include mixin.size(80%, fit-content);
+    margin-bottom: 0%;
+
+    #dashboard-user-infos{
+        @include mixin.flex(row, space-between, center);
+
+        .dashboard-user-container{
+            @include mixin.border(100px, var(--box-shadow), var(--border));
+            @include mixin.flex(row, space-between, center);
+            overflow: hidden;
+            margin: 0em 1em;
+
+            &:first-of-type{
+                margin-left: 0px;
+            }
+            
+            span{
+                &:first-of-type{
+                    background-color: white;
+                    border-right: var(--border);
+                }
+                padding: .5em 1em;
+            }
+        }
+    }
+
+    #dahsboard-nav{
+        @include mixin.flex(row, space-between, center);
+        @include mixin.size(fit-content, fit-content);
+        @include mixin.border(100px, var(--box-shadow), var(--border));
+        margin-top: 2%;
+        overflow: hidden;
+
+        a{
+            padding: .5em 2em;
+            border-right: var(--border);
+
+            &:last-of-type{
+                border-right: none;
+            }
+
+            &:hover{
+                background-color: var(--light-grey-2);
+            }
+        }
+
+        .active{
+            background-color: var(--black-09) !important;
+            color: white !important;
+        }
+    }
+}

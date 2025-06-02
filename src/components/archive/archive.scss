@@ -28,7 +28,7 @@
     @include mixin.flex(column, flex-start, center);
     @include mixin.size(100%, 100%);
     @include mixin.border(25px, var(--box-shadow), var(--border));   
-    min-width: 350px;                                  
+    min-width: 350px;
 
     h3{
         @include mixin.size(fit-content, fit-content);
@@ -111,8 +111,6 @@
             display: flex !important;
         }
     }
-
-
 
     .select{
         @include mixin.flex(column, flex-start, flex-start);
@@ -207,7 +205,10 @@
     
     ul{
         @include mixin.size(100%, 100%);
+        overflow: auto;
+        background-color: white;
         border-top: var(--border-light);
+        border-bottom: 1px solid var(--light-grey-2);
         margin-top: 1em;
         
         .chat-list-item{
@@ -256,18 +257,19 @@
 
 #current-chat{
     @include mixin.flex(column, center, center);
-    @include mixin.size(100%, fit-content);
-    @include mixin.border(100px, var(--box-shadow), var(--border));                                     
-    background-color: var(--white-025);
-    color: var(--grey);
+    @include mixin.size(94%, fit-content);
+    @include mixin.border(10px, var(--box-shadow-medium), var(--border));       
+    background-color: white;
+    color: black;
     margin-top: 1em;
+    margin-bottom: 1em;
     overflow: hidden;
 
     a{
         @include mixin.flex(column, center, center);
         @include mixin.size(100%, fit-content);
-        @include mixin.font('unbounded', 1em, 800);
-        padding: 1em 2em;        
+        @include mixin.font('unbounded', .9em, 800);
+        padding: .9em 2em;        
 
         &:hover{
             background-color: var(--black-09) !important;
