@@ -1,13 +1,14 @@
 'use client';
 
 import './style.scss';
-import {useRef, useEffect} from 'react';
+import { useRef, useEffect } from 'react';
 import Archive from '../../components/archive/archive';
 import Input from '../../components/input/input';
 import Settings from '../../components/settings/settings';
 import Background from '../../components/background/background';
-import {useSignals} from '@preact/signals-react/runtime';
-import {messagesList, currentModel} from '@/signals/chatSignals';
+import { useSignals } from '@preact/signals-react/runtime';
+import { modelMessages, currentModel } from '@/signals/chatSignals';
+import UserInfo from "@/components/user-info/user-info";
 
 export default function Chat() {
     useSignals();
@@ -24,7 +25,7 @@ export default function Chat() {
         }, 100);
 
         return () => clearTimeout(timeout);
-    }, [messagesList.value]);
+    }, [modelMessages.value]);
 
     return (
         <div id="main-container">
@@ -32,13 +33,12 @@ export default function Chat() {
             <Archive wichPage="chat" />
             <section id="chat-container">
                 <div id="chat-header">
-                    {/*<UserInfo wichPage="chat" />*/}
+                    <UserInfo />
                     <Settings />
                 </div>
                 <div id="messages-container" ref={scrollContainer}>
-                    {messagesList.value}
+                    {modelMessages.value[currentModel.value]}
                 </div>
-                <h1>{currentModel.value}</h1>
                 <Input />
             </section>
         </div>

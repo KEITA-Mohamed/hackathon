@@ -75,4 +75,3 @@ export async function GET(req: NextRequest) {
         return NextResponse.json({ errors: { message: "Failed to find user by ID" } }, { status: 500 })
     }
 }
-
