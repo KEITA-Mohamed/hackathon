@@ -1,7 +1,6 @@
 import './style.scss'
 import Archive from '../../components/archive/archive'
 import Message from '../../components/message/message'
-import UserInfo from '../../components/user-info/user-info'
 import Settings from '../../components/settings/settings'
 
 export default function History () {
@@ -11,8 +10,7 @@ export default function History () {
             
             <section id='chat-container'>                
                 <div id='chat-header'>
-                    <UserInfo wichPage="history"/>    
-                    <Settings />            
+                    <Settings />
                 </div>
 
                 <div id='messages-container'>

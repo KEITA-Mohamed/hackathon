@@ -1,14 +1,12 @@
 import prisma from "@/lib/prisma/prisma";
 import * as bcrypt from "bcrypt";
-import {NextRequest, NextResponse} from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-
-export async function POST(request: NextRequest){
-
-
+export async function POST(request: NextRequest) {
     try {
-        const { prenom, nom, email, password, confirmPassword, role} = await request.json();
+        const body = await request.json();
 
+        const { prenom, nom, email, password, confirmPassword, role } = body;
 
         if (!prenom || !nom || !email || !password || !confirmPassword || !role) {
             return NextResponse.json(
@@ -24,10 +22,7 @@ export async function POST(request: NextRequest){
             );
         }
 
-
-        const existingUser = await prisma.user.findUnique({
-            where: { email },
-        });
+        const existingUser = await prisma.user.findUnique({ where: { email } });
 
         if (existingUser) {
             return NextResponse.json(
@@ -36,24 +31,20 @@ export async function POST(request: NextRequest){
             );
         }
 
-
         const hashedPassword = await bcrypt.hash(password, 10);
 
+        const newUser = await prisma.user.create({
+            data: {
+                firstname: prenom,
+                lastname: nom,
+                email,
+                password: hashedPassword,
+                role,
+                isActive: true
+            }
+        });
 
-
-            const newUser = await prisma.user.create({
-                data: {
-                    firstname: prenom,
-                    lastname: nom,
-                    email,
-                    password: hashedPassword,
-                    role,
-                    isActive: true
-
-                },
-            });
-            return NextResponse.json(newUser, { status: 201 });
-
+        return NextResponse.json(newUser, { status: 201 });
     } catch (error) {
         console.error("Erreur lors de la création de l'utilisateur:", error);
         return NextResponse.json(
@@ -61,5 +52,4 @@ export async function POST(request: NextRequest){
             { status: 500 }
         );
     }
-
 }
