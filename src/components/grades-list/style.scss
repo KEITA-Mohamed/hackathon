@@ -18,7 +18,7 @@
             
             a{
                 @include mixin.flex(column, flex-start, flex-start);
-                @include mixin.font('unbounded', 1em, 700);
+                @include mixin.font('poppins', 1.1em, 600);
                 padding: 1em 1.5em;                
 
                 &:hover{

@@ -24,6 +24,10 @@
                     background-color: white;
                     border-right: var(--border);
                 }
+
+                &:last-of-type{
+                    @include mixin.font('poppins', 1em, 400);                   
+                }
                 padding: .5em 1em;
             }
         }

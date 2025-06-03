@@ -9,17 +9,10 @@ export default function Dashboard () {
             <div id='task-lists-container'>
                 <div className='task-list'>
                     <header>
-                        <h1>Tâche 1</h1>
+                        <h1>Tâches</h1>
                     </header>
                     <TaskList />
-                </div>
-
-                <div className='task-list'>
-                    <header>
-                        <h1>Tâche 2</h1>
-                    </header>
-                    <TaskList />
-                </div>
+                </div>                
             </div>
         </div>
     )

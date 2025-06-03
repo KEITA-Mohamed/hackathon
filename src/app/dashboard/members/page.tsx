@@ -16,21 +16,21 @@ export default function Dashboard () {
 
                 <div className='member-list'>
                     <header>
-                        <h1>Teacher</h1>
+                        <h1>Professeurs</h1>
                     </header>
                     <MembersList />
                 </div>
 
                 <div className='member-list'>
                     <header>
-                        <h1>Jury</h1>
+                        <h1>Jurys</h1>
                     </header>
                     <MembersList />
                 </div>
 
                 <div className='member-list'>
                     <header>
-                        <h1>Student</h1>
+                        <h1>Étudiants</h1>
                     </header>
                     <MembersList />
                 </div>

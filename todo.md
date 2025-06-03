@@ -55,3 +55,7 @@
 
 Revenu micro-entrepreneur Etape 3
 - Type d'activité ? Esque BNC prestation non commercial -> d'autant plus prestation de service
+
+- Repartition des groupes
+- Champs tache pour le hackaton
+- ForgotPassword

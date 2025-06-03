@@ -23,6 +23,11 @@ export default function TaskList () {
                     </Link>
                 </li>
             </ul>
+            <button>
+                <Link href="/task">
+                    Ajouter une tâche                        
+                </Link>                
+            </button>
         </section>                
     )
 }

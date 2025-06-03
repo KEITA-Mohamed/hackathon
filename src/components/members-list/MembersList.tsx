@@ -8,87 +8,132 @@ export default function MembersList () {
                 <div className='shadow'></div>
                 <li>
                     <Link href="/history">
-                        Membres                        
+                        Nom Prénom  
+                        <span>
+                            Infos de l&apos;utilisateur
+                        </span>                      
                     </Link>
                 </li>
 
                 <li>
                     <Link href="/history">
-                        Membres                        
+                        Nom Prénom
+                        <span>
+                            Infos de l&apos;utilisateur
+                        </span>                          
                     </Link>
                 </li>
 
                 <li>
                     <Link href="/history">
-                        Membres                        
+                        Nom Prénom
+                        <span>
+                            Infos de l&apos;utilisateur
+                        </span>                          
                     </Link>
                 </li>
                 <li>
                     <Link href="/history">
-                        Membres                        
-                    </Link>
-                </li>
-
-                <li>
-                    <Link href="/history">
-                        Membres                        
-                    </Link>
-                </li>
-
-                <li>
-                    <Link href="/history">
-                        Membres                        
-                    </Link>
-                </li>
-                <li>
-                    <Link href="/history">
-                        Membres                        
+                        Nom Prénom
+                        <span>
+                            Infos de l&apos;utilisateur
+                        </span>                          
                     </Link>
                 </li>
 
                 <li>
                     <Link href="/history">
-                        Membres                        
+                        Nom Prénom
+                        <span>
+                            Infos de l&apos;utilisateur
+                        </span>                          
                     </Link>
                 </li>
 
                 <li>
                     <Link href="/history">
-                        Membres                        
+                        Nom Prénom
+                        <span>
+                            Infos de l&apos;utilisateur
+                        </span>                          
                     </Link>
                 </li>
                 <li>
                     <Link href="/history">
-                        Membres                        
-                    </Link>
-                </li>
-
-                <li>
-                    <Link href="/history">
-                        Membres                        
-                    </Link>
-                </li>
-
-                <li>
-                    <Link href="/history">
-                        Membres                        
-                    </Link>
-                </li>
-                <li>
-                    <Link href="/history">
-                        Membres                        
+                        Nom Prénom
+                        <span>
+                            Infos de l&apos;utilisateur
+                        </span>                          
                     </Link>
                 </li>
 
                 <li>
                     <Link href="/history">
-                        Membres                        
+                        Nom Prénom
+                        <span>
+                            Infos de l&apos;utilisateur
+                        </span>                          
                     </Link>
                 </li>
 
                 <li>
                     <Link href="/history">
-                        Membres                        
+                        Nom Prénom
+                        <span>
+                            Infos de l&apos;utilisateur
+                        </span>                          
+                    </Link>
+                </li>
+                <li>
+                    <Link href="/history">
+                        Nom Prénom
+                        <span>
+                            Infos de l&apos;utilisateur
+                        </span>                          
+                    </Link>
+                </li>
+
+                <li>
+                    <Link href="/history">
+                        Nom Prénom
+                        <span>
+                            Infos de l&apos;utilisateur
+                        </span>                          
+                    </Link>
+                </li>
+
+                <li>
+                    <Link href="/history">
+                        Nom Prénom
+                        <span>
+                            Infos de l&apos;utilisateur
+                        </span>                          
+                    </Link>
+                </li>
+                <li>
+                    <Link href="/history">
+                        Nom Prénom
+                        <span>
+                            Infos de l&apos;utilisateur
+                        </span>                          
+                    </Link>
+                </li>
+
+                <li>
+                    <Link href="/history">
+                        Nom Prénom
+                        <span>
+                            Infos de l&apos;utilisateur
+                        </span>                          
+                    </Link>
+                </li>
+
+                <li>
+                    <Link href="/history">
+                        Nom Prénom
+                        <span>
+                            Infos de l&apos;utilisateur
+                        </span>                          
                     </Link>
                 </li>
             </ul>

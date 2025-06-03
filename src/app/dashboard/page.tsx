@@ -1,6 +1,6 @@
 import './style.scss'
 import DashboardHeader from "@/components/dashboard-header/DashboardHeader";
-import GradesList from "@/components/grades-list/GradesList";
+import HackatonList from "@/components/hackaton-list/HackatonList";
 
 export default function Dashboard () { 
     return (
@@ -10,16 +10,9 @@ export default function Dashboard () {
             <div id='grades-lists-container'>
                 <div className='grades-list'>
                     <header>
-                        <h1>Tâche 1</h1>
+                        <h1>Infos</h1>
                     </header>
-                    <GradesList />
-                </div>
-
-                <div className='grades-list'>
-                    <header>
-                        <h1>Tâche 2</h1>
-                    </header>
-                    <GradesList />
+                    <HackatonList />
                 </div>
             </div>
         </div>

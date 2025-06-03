@@ -1,8 +1,10 @@
 @use '/src/app/mixin';
 
 #main-container{
-    @include mixin.flex(column, center, center);
+    @include mixin.flex(column, flex-start, center);
+    @include mixin.size(100%, 100%);
     @include mixin.header;
+    overflow: hidden;
 
     header{
         position: relative;
@@ -17,6 +19,8 @@
 #member-lists-container{
     @include mixin.flex(row, center, center);
     @include mixin.size(100%, 100%);
+    overflow: hidden;
+    padding-bottom: 1em;
 
     .member-list{
         @include mixin.flex(column, center, center);

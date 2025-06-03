@@ -12,10 +12,10 @@ export default function Dashboard() {
             <div id='dashboard-user-infos'>
                 <div className='dashboard-user-container' id='name-container'>
                     <span>
-                        UserName
+                        Utilisateur
                     </span>
                     <span>
-                        Nom
+                        Prénom Nom
                     </span>
                 </div>
 
@@ -35,7 +35,10 @@ export default function Dashboard() {
                 </div>
             </div>              
             <div id='dahsboard-nav'>                
-                <Link onClick={ () => { currentTab.value = "Évaluations" }} href="/dashboard" className={`${currentTab.value === 'Évaluations' ? "active" : ""}`}>
+                <Link onClick={ () => { currentTab.value = "Hackaton" }} href="/dashboard" className={`${currentTab.value === 'Hackaton' ? "active" : ""}`}>
+                    Hackaton
+                </Link>
+                <Link onClick={ () => { currentTab.value = "Évaluations" }} href="/dashboard/grades" className={`${currentTab.value === 'Évaluations' ? "active" : ""}`}>
                     Évaluations
                 </Link>
                 <Link onClick={ () => { currentTab.value = "Membres" }} href="/dashboard/members" className={`${currentTab.value === 'Membres' ? "active" : ""}`}>
@@ -43,9 +46,6 @@ export default function Dashboard() {
                 </Link>
                 <Link onClick={ () => { currentTab.value = "Tâches" }} href="/dashboard/tasks" className={`${currentTab.value === 'Tâches' ? "active" : ""}`}>
                     Tâches
-                </Link>
-                <Link onClick={ () => { currentTab.value = "Hackaton" }} href="/dashboard/tasks" className={`${currentTab.value === 'Hackaton' ? "active" : ""}`}>
-                    Hackaton
                 </Link>
             </div>
         </div>

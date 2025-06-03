@@ -2,13 +2,13 @@
 
 #task-list{
     @include mixin.flex(column, flex-start, center);
-    @include mixin.size(95%, 90%);
     @include mixin.border(25px, var(--box-shadow), var(--border));                                     
+    @include mixin.size(65%, 90%);
     overflow: hidden;
 
     ul{
+        @include mixin.size(100%, 100%);
         padding-top: 3%;
-        @include mixin.size(100%, fit-content);
         
         li{
             @include mixin.size(100%, fit-content);
@@ -18,7 +18,7 @@
             
             a{
                 @include mixin.flex(column, flex-start, flex-start);
-                @include mixin.font('unbounded', 1em, 700);
+                @include mixin.font('poppins', 1.1em, 600);
                 padding: 1em 1.5em;                
 
                 &:hover{
@@ -29,6 +29,19 @@
                     @include mixin.font('poppins', .8em, 300);                   
                 }
             }
+        }
+    }
+
+    button{
+        @include mixin.size(100%, fit-content);
+        @include mixin.font('unbounded', 1em, 700);                   
+        background-color: var(--light-grey-02);
+        border-top: var(--border-light);
+        padding: 1em 0em;
+        cursor: pointer;
+
+        a{
+            width: 100% !important; 
         }
     }
 }
