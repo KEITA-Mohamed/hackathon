@@ -1,11 +1,12 @@
 import './style.scss'
 import DashboardHeader from "@/components/dashboard-header/DashboardHeader";
 import MembersList from "@/components/members-list/MembersList";
+import Link from 'next/link';
 
 export default function Dashboard () { 
     return (
         <div id="main-container">
-            <DashboardHeader />
+            <DashboardHeader />            
             <div id='member-lists-container'>
                 <div className='member-list'>
                     <header>
@@ -34,7 +35,11 @@ export default function Dashboard () {
                     </header>
                     <MembersList />
                 </div>
-            </div>           
+            </div> 
+            <div id='add-container'>
+                <Link href="/invite">Inviter un utilisateur</Link>
+                <Link href="/import">Inviter plusieurs utilisateurs</Link>          
+            </div>
         </div>
     )
 }

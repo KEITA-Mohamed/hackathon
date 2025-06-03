@@ -15,6 +15,9 @@ export default function HackatonList () {
                 </li>  
                 <li>
                     Nombres d'étudiants inscrits : <span>45</span>                      
+                </li> 
+                <li>
+                    Modèles disponibles : <span>ChatGPT, Mistral, Gemini</span>                      
                 </li>                
             </ul>
         </section>                

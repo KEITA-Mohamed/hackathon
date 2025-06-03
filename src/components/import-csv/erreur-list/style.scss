@@ -1,0 +1,41 @@
+@use '/src/app/mixin';
+
+.error-header{
+    @include mixin.size(100%, 100%);
+    @include mixin.flex(row, space-between, flex-end);
+    margin: 1em 0em .5em 0em;
+
+    .export-button{
+        @include mixin.font('poppins', 1em, 600); 
+        @include mixin.border(10px, var(--box-shadow), var(--border));  
+        padding: .3em .6em;
+        background-color: white;
+        cursor: pointer;
+
+        &:hover{
+            background-color: var(--light-grey-2);
+        }
+    }
+}
+
+.error-list-container{
+    @include mixin.size(100%, 100%);
+    @include mixin.flex(column, flex-start, center);
+    @include mixin.border(10px, var(--box-shadow), var(--border)); 
+    max-height: 200px;
+    overflow: auto;
+
+    .error-item{
+        @include mixin.flex(row, flex-start, center);
+        @include mixin.size(100%, fit-content);
+        border-bottom: var(--error-border);
+        padding: .5em 1em;
+        color: var(--error-color);
+        background-color: var(--error-background);
+
+        div{
+            @include mixin.font('poppins', .9em, 400); 
+            margin-left: .5em;
+        }
+    }
+}

@@ -41,11 +41,11 @@ export default function Dashboard() {
                 <Link onClick={ () => { currentTab.value = "Évaluations" }} href="/dashboard/grades" className={`${currentTab.value === 'Évaluations' ? "active" : ""}`}>
                     Évaluations
                 </Link>
-                <Link onClick={ () => { currentTab.value = "Membres" }} href="/dashboard/members" className={`${currentTab.value === 'Membres' ? "active" : ""}`}>
-                    Membres
-                </Link>
                 <Link onClick={ () => { currentTab.value = "Tâches" }} href="/dashboard/tasks" className={`${currentTab.value === 'Tâches' ? "active" : ""}`}>
                     Tâches
+                </Link>
+                <Link onClick={ () => { currentTab.value = "Membres" }} href="/dashboard/members" className={`${currentTab.value === 'Membres' ? "active" : ""}`}>
+                    Membres
                 </Link>
             </div>
         </div>

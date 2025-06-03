@@ -95,45 +95,34 @@ export default function CsvViewer({ data, headers, fileName }: CsvViewerProps) {
         <div className="csv-container">
             <header>
                 <h1 className="">
-                    <span>Données CSV: {fileName}</span>
-                    <Badge variant="outline">{filteredData.length} lignes</Badge>
+                    <p>
+                        File: <span>{fileName}</span>
+                    </p>
+                    <p>
+                        {filteredData.length} lignes
+                    </p>
                 </h1>
-                <p>
+                {/* <p>
                     Cliquez sur les en-têtes de colonne pour trier. Utilisez la barre de recherche pour filtrer les données.
-                </p>
-                <div className="">
-                    <div className="">
-                        <Search className="" />
-                        <Input
-                            placeholder="Rechercher..."
-                            value={searchTerm}
-                            onChange={(e) => setSearchTerm(e.target.value)}
-                            className=""
-                        />
-                        {searchTerm && (
-                            <button
-                                className=""
-                                onClick={() => setSearchTerm("")}
-                            >
-                                <X className="" />
-                                <span className="sr-only">Effacer la recherche</span>
-                            </button>
-                        )}
-                    </div>
-                    <button onClick={handleInvite} disabled={isLoading || filteredData.length === 0}>
-                        {isLoading ? (
-                            <>
-                                <Mail className="" />
-                                Envoi en cours...
-                            </>
-                        ) : (
-                            <>
-                                <Mail className="" />
-                                Envoyer Invitations
-                            </>
-                        )}
-                    </button>
-                </div>
+                </p> */}
+                <div className="input-container">
+                    {/* <Search className="" /> */}
+                    <Input
+                        placeholder="Rechercher..."
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                        className=""
+                    />
+                    {searchTerm && (
+                        <button
+                            className="clear-search"
+                            onClick={() => setSearchTerm("")}
+                        >
+                            <X className="" />
+                            <span className="sr-only">Effacer la recherche</span>
+                        </button>
+                    )}
+                </div>                    
 
                 {isLoading && (
                     <div className="">
@@ -141,35 +130,45 @@ export default function CsvViewer({ data, headers, fileName }: CsvViewerProps) {
                             <span>Progression</span>
                             <span>{progress}%</span>
                         </div>
-                        <Progress value={progress} className="" />
+                        <Progress value={progress} className="bg-red" />
                     </div>
-                )}
-
-                {showResults && (
-                    <div className="">
-                        <Alert variant={errorCount > 0 ? "destructive" : "default"}>
-                            <CheckCircle className="" />
-                            <AlertTitle>Résultat de l&apos;envoi des invitations</AlertTitle>
-                            <AlertDescription>
-                                {successCount} invitations envoyées avec succès, {errorCount} échecs sur {inviteStatuses.length}{" "}
-                                tentatives.
-                            </AlertDescription>
-                        </Alert>
-
-                        {errorCount > 0 && (
-                            <ErreurList
-                                isErrorListOpen={isErrorListOpen}
-                                setIsErrorListOpen={setIsErrorListOpen}
-                                errorCount={errorCount}
-                                inviteStatuses={inviteStatuses}
-                                 />
-                        )}
-                    </div>
-                )}
+                )}                
             </header>
-            <CardContent>
-                <ListFromCsv headers={headers} requestSort={requestSort} showResults={showResults} filteredData={filteredData} inviteStatuses={inviteStatuses} />
-            </CardContent>
+            <ListFromCsv headers={headers} requestSort={requestSort} showResults={showResults} filteredData={filteredData} inviteStatuses={inviteStatuses} />   
+            {showResults && (
+                <div className="result-container">
+                    <Alert className="result-alert" variant={errorCount > 0 ? "destructive" : "default"}>
+                        <CheckCircle className="" />
+                        <AlertTitle>Résultat de l&apos;envoi des invitations</AlertTitle>
+                        <AlertDescription>
+                            {successCount} invitations envoyées avec succès, {errorCount} échecs sur {inviteStatuses.length}{" "}
+                            tentatives.
+                        </AlertDescription>
+                    </Alert>
+
+                    {errorCount > 0 && (
+                        <ErreurList
+                            isErrorListOpen={isErrorListOpen}
+                            setIsErrorListOpen={setIsErrorListOpen}
+                            errorCount={errorCount}
+                            inviteStatuses={inviteStatuses}
+                            />
+                    )}
+                </div>
+            )}         
+            <button className="send-invite" onClick={handleInvite} disabled={isLoading || filteredData.length === 0}>
+                {isLoading ? (
+                    <>
+                        {/* <Mail className="" /> */}
+                        Envoi en cours...
+                    </>
+                ) : (
+                    <>
+                        {/* <Mail className="" /> */}
+                        Envoyer les invitations
+                    </>
+                )}
+            </button>
         </div>
     )
 }

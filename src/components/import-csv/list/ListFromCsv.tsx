@@ -1,3 +1,4 @@
+import './style.scss';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { AlertCircle, ArrowUpDown, CheckCircle } from 'lucide-react';
@@ -27,7 +28,7 @@ export default function ListFromCsv({
                                  inviteStatuses
                              }: ListProps) {
     return (
-        <div className="rounded-md border overflow-auto max-h-[400px]">
+        <div className="table">
             <Table>
                 <TableHeader>
                     <TableRow>
@@ -36,10 +37,10 @@ export default function ListFromCsv({
                                 <Button
                                     variant="ghost"
                                     onClick={() => requestSort(index)}
-                                    className="flex items-center gap-1 p-0 h-auto font-medium"
+                                    className=""
                                 >
                                     {header}
-                                    <ArrowUpDown className="h-4 w-4" />
+                                    <ArrowUpDown className="" />
                                 </Button>
                             </TableHead>
                         ))}
@@ -56,17 +57,17 @@ export default function ListFromCsv({
                                 {showResults && (
                                     <TableCell>
                                         {inviteStatuses[rowIndex]?.status === "success" ? (
-                                            <Badge variant="outline" className="bg-green-100 text-green-800 hover:bg-green-100">
-                                                <CheckCircle className="h-3 w-3 mr-1" />
+                                            <span className="status succes-status">
+                                                <CheckCircle className="" />
                                                 Succès
-                                            </Badge>
+                                            </span>
                                         ) : inviteStatuses[rowIndex]?.status === "error" ? (
-                                            <Badge variant="destructive">
-                                                <AlertCircle className="h-3 w-3 mr-1" />
+                                            <span className="status error-status">
+                                                <AlertCircle className="" />
                                                 Échec
-                                            </Badge>
+                                            </span>
                                         ) : (
-                                            <Badge variant="outline">En attente</Badge>
+                                            <span className="status progress-status">En attente</span>
                                         )}
                                     </TableCell>
                                 )}
@@ -74,7 +75,7 @@ export default function ListFromCsv({
                         ))
                     ) : (
                         <TableRow>
-                            <TableCell colSpan={headers.length + (showResults ? 1 : 0)} className="h-24 text-center">
+                            <TableCell colSpan={headers.length + (showResults ? 1 : 0)} className="">
                                 Aucun résultat trouvé.
                             </TableCell>
                         </TableRow>

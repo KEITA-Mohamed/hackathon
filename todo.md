@@ -59,3 +59,12 @@ Revenu micro-entrepreneur Etape 3
 - Repartition des groupes
 - Champs tache pour le hackaton
 - ForgotPassword
+
+# A faire
+- Reformulation du besoin
+- Revoir le dictionnaire des donnés
+- Revoir le Json des données
+- Développer choix techniques
+- Planification > calcul vélocité
+- Modélisation > arbre de données
+- Maquette de groupe

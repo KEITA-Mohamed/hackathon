@@ -1,3 +1,4 @@
+import './style.scss';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { Button } from "@/components/ui/button";
 import { AlertCircle, ChevronDown, ChevronUp, Download } from 'lucide-react';
@@ -23,21 +24,21 @@ export default function ErreurList({
                                        inviteStatuses,
                                    }: ErreurListProps) {
     return (
-        <Collapsible open={isErrorListOpen} onOpenChange={setIsErrorListOpen} className="mt-2">
-            <div className="flex items-center justify-between">
+        <Collapsible open={isErrorListOpen} onOpenChange={setIsErrorListOpen} className="">
+            <div className="error-header">
                 <CollapsibleTrigger asChild>
-                    <Button variant="ghost" size="sm" className="flex items-center p-0 h-auto">
-                        <h4 className="text-sm font-medium">Détails des erreurs ({errorCount}):</h4>
+                    <Button variant="ghost" size="sm" className="">
+                        <h4 className="">Détails des erreurs ({errorCount}):</h4>
                         {isErrorListOpen ? (
-                            <ChevronUp className="h-4 w-4 ml-1" />
+                            <ChevronUp className="" />
                         ) : (
-                            <ChevronDown className="h-4 w-4 ml-1" />
+                            <ChevronDown className="" />
                         )}
                     </Button>
                 </CollapsibleTrigger>
-                <div className="flex gap-2">
+                <div className="">
                     <Button
-                        variant="outline"
+                        className='export-button'
                         size="sm"
                         onClick={() => {
 
@@ -60,33 +61,30 @@ export default function ErreurList({
                             document.body.removeChild(link)
                         }}
                     >
-                        <Download className="h-4 w-4 mr-2" />
+                        <Download className="" />
                         Exporter
                     </Button>
                 </div>
             </div>
 
             <CollapsibleContent>
-
-                <div className="mt-2 border rounded-md">
-                    <div className="max-h-[150px] overflow-y-auto">
+                <div className="error-list-container">
                         {inviteStatuses
                             .filter((status) => status.status === "error")
                             .map((status, index) => (
                                 <div
                                     key={index}
-                                    className="flex items-start gap-2 p-2 border-b last:border-b-0 hover:bg-muted/50"
+                                    className="error-item"
                                 >
-                                    <AlertCircle className="h-4 w-4 text-destructive shrink-0 mt-0.5" />
-                                    <div className="flex flex-col">
-                                        <strong className="text-destructive">{status.email}</strong>
-                                        <span className="text-muted-foreground text-xs">
+                                    <AlertCircle className="" />
+                                    <div className="">
+                                        <strong className="">{status.email}</strong>
+                                        <span className="">
                                             {status.message || "Erreur inconnue"}
                                         </span>
                                     </div>
                                 </div>
                             ))}
-                    </div>
                 </div>
             </CollapsibleContent>
         </Collapsible>

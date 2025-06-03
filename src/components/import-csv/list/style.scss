@@ -1,0 +1,74 @@
+@use '/src/app/mixin';
+
+.table{
+    @include mixin.size(100%, 100%);
+    @include mixin.flex(column, flex-start, center);
+    @include mixin.border(20px, var(--box-shadow), var(--border)); 
+    margin-top: 1.5em;
+    overflow: hidden;
+
+    th{
+        button{
+            @include mixin.size(100%, fit-content);
+            cursor: pointer;
+        }
+    }
+
+    td{
+        @include mixin.font('poppins', 1em, 400);
+    }
+
+    tr{
+        border-bottom: var(--border-light);  
+        background-color: white;     
+    }
+
+    thead{
+        background-color: var(--light-grey-2);
+        border-bottom: var(--border);
+        position: sticky;
+        top: 0;
+        
+        tr{
+            background-color: unset;
+        }
+        
+        th{
+            border: none;
+
+            button{
+                @include mixin.font('unbounded', 1.2em, 500);
+            }
+        }
+    }
+
+    .status{
+        @include mixin.size(fit-content, fit-content);
+        @include mixin.flex(row, flex-start, center);
+        @include mixin.border(8px, var(--box-shadow-light), var(--border)); 
+        padding: .2em .5em;
+        color: black;
+
+        svg{
+            margin-right: .3em;
+        }
+
+        &.error-status{
+            @include mixin.border(8px, var(--box-shadow-light), var(--error-border)); 
+            background-color: var(--error-background);
+            color: var(--error-color);
+        }
+
+        &.sucess-status{
+            @include mixin.border(8px, var(--box-shadow-light), var(--sucess-border)); 
+            background-color: var(--sucess-background);
+            color: var(--sucess-color);
+        }
+
+        &.progress-status{
+            @include mixin.border(8px, var(--box-shadow-light), var(--progress-border)); 
+            background-color: var(--progress-background);
+            color: var(--progress-color);
+        }
+    }
+}

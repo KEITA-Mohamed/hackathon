@@ -25,10 +25,19 @@
 
   --white-025: rgba(255, 255, 255, .3);
   --black-09: rgba(20, 20, 20, .9);
+  // --black-09: rgba(211, 20, 20, 0.9);
 
   --error-background: rgb(255, 199, 199);
   --error-color: rgb(116, 0, 0);
   --error-border: 1px solid rgb(185, 116, 116);
+
+  --sucess-background: rgb(199, 255, 202);
+  --sucess-color: rgb(0, 116, 12);
+  --sucess-border: 1px solid rgb(116, 185, 129);
+
+  --progress-background: rgb(255, 250, 199);
+  --progress-color: rgb(116, 99, 0);
+  --progress-border: 1px solid rgb(185, 168, 116);
 
   --box-shadow: 0px 1.5px 8px 0px rgba(50, 50, 50, .4);
   --box-shadow-medium: 0px 1.5px 8px 0px rgba(50, 50, 50, .35);
