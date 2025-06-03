@@ -14,6 +14,7 @@
     position: relative;
     z-index: 10000;
     overflow: hidden;
+    margin-bottom: 0px;
 
     button{
         @include mixin.flex(row, center, flex-start);

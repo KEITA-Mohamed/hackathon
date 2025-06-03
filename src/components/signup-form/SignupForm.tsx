@@ -247,7 +247,7 @@ export default function FormulaireInscription() {
                                 </SelectTrigger>
                                 <SelectContent>
                                     <SelectItem value="ADMIN">Admin</SelectItem>
-                                    <SelectItem value="TEACHER">Teacher</SelectItem>
+                                    <SelectItem value="JURY">Jury</SelectItem>
                                     <SelectItem value="STUDENT">Student</SelectItem>
                                 </SelectContent>
                             </Select>

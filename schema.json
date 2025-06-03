@@ -1,55 +1,90 @@
 {
-    "appUser":{
-        "firstname": "string",
-        "lastname": "string" ,
-        "email": "string",
-        "password": "string",
-        "username": ["string", "null"],
-        "role": ["student", "jury", "admin"],
-        "firstConnexion": "boolean",
-        "connectionToken": "string",
-        "age": "string",
-        "experienceTime": "float",
-        "etpNumber": "float",
-        "activityType": "string",
-        "currentPosition": "string",
-        "lastDegree": "string",
-        "studyType": "string",
-        "studentLevel": ["L1", "L2", "L3", "M1", "M2", "D1", "D2", "D3"],
-        "group": {
-            "id": "number",
-            "name": "string"
-        },
-        "autoEval": [
-            {
-                "task": ["linkedin", "communication", "graphic"],
-                "note": "number"
-            }
+  "appUser": {
+    "firstname": "string",
+    "lastname": "string",
+    "email": "string",
+    "password": "string",
+    "username": [
+      "string",
+      "null"
+    ],
+    "role": [
+      "student",
+      "jury",
+      "admin"
+    ],
+    "firstConnexion": "boolean",
+    "createdAt": "Date",
+    "updatedAt": "Date",
+    "connectionToken": "string",
+    "age": "string",
+    "experienceTime": "float",
+    "etpNumber": "float",
+    "activityType": "string",
+    "currentPosition": "string",
+    "lastDegree": "string",
+    "studyType": "string",
+    "globalTokens": {
+      "mistral": "number",
+      "gemini": "number",
+      "chatGpt": "number"
+    },
+    "studentLevel": [
+      "L1",
+      "L2",
+      "L3",
+      "M1",
+      "M2",
+      "D1",
+      "D2",
+      "D3"
+    ],
+    "group": {
+      "id": "number",
+      "name": "string"
+    },
+    "autoEval": [
+      {
+        "task": [
+          "linkedin",
+          "communication",
+          "graphic"
         ],
-        "conv": [
-            {
-                "id": "number",
-                "teamId": "number",
-                "task": ["linkedin", "communication", "graphic"],
-                "comment": "string",
-                "question": "string",
-                "note": "number",
-                "chat":  [
-                    {   
-                        "id": "number",
-                        "prompt": "string",                
-                        "answer": "string",                
-                        "model": ["mistral", "O1", "03", "V0"],                
-                        "timeStamp": "Date",
-                        "credits": "number",
-                        "comment": "string",
-                        "question": "string",
-                        "note": "number"
-                    }
-                ]
-            }            
+        "note": "number"
+      }
+    ],
+    "conv": [
+      {
+        "id": "number",
+        "createdAt": "Date",
+        "teamId": "number",
+        "task": [
+          "linkedin",
+          "communication",
+          "graphic"
+        ],
+        "comment": "string",
+        "question": "string",
+        "note": "number",
+        "chat": [
+          {
+            "id": "number",
+            "prompt": "string",
+            "answer": "string",
+            "model": {
+              "model": "name",
+              "promptTokens": "number",
+              "completionTokens": "number",
+              "totalTokens": "number"
+            },
+            "createdAt": "Date",
+            "credits": "number",
+            "comment": "string",
+            "question": "string",
+            "note": "number"
+          }
         ]
-                                             
-    }
+      }
+    ]
+  }
 }
-

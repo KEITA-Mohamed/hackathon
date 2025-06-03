@@ -1,7 +1,7 @@
 @use '/src/app/mixin';
 
 
-div{
+#dashboard-header{
     @include mixin.flex(row, space-between, center);
     @include mixin.size(20%, fit-content);
     margin-bottom: 1%;

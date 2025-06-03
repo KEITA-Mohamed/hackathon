@@ -1,9 +1,34 @@
 @use '/src/app/mixin';
+@keyframes appear {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+
+@keyframes disappear {
+    0%{
+        opacity: 1;
+        display: flex;
+    }
+
+    100%{
+        display: flex;
+        opacity: 0;
+    }
+
+    110%{
+        display: none;
+    }
+}
 
 #chat-list{
     @include mixin.flex(column, flex-start, center);
     @include mixin.size(100%, 100%);
-    @include mixin.border(25px, var(--box-shadow), var(--border));                                     
+    @include mixin.border(25px, var(--box-shadow), var(--border));   
+    min-width: 350px;                                  
 
     h3{
         @include mixin.size(fit-content, fit-content);
@@ -15,20 +40,188 @@
         border-radius: 100px;
         transform: translate(0%, -50%);
     }
+
+    input{
+        @include mixin.size(100%, fit-content);
+        @include mixin.font('poppins', .8em, 400);
+        @include mixin.border(100px, var(--box-shadow-light), var(--border));   
+        padding: .7em 1.3em;       
+        background-color: white;
+        
+        // &:hover{
+        //     background-color: var(--light-grey-025)
+        // }
+    }
+
+    #filters{
+        @include mixin.flex(column, flex-start, center);
+        @include mixin.size(100%, fit-content);  
+        margin-top: -1%;
+        
+        h4{
+            @include mixin.font('unbounded', .9em, 700);
+            @include mixin.size(94%, fit-content); 
+            @include mixin.border(10px, var(--box-shadow-medium), var(--border));   
+            position: relative;
+            z-index: 10;
+            background-color: white;
+            color: var(--black-09);
+            text-align: center;
+            padding: .5em 2em;
+            border-bottom: var(--border);
+            border-top: var(--border);
+            transition: var(--transition-time) all;
+            // box-shadow: 0px 0px 10px 1px rgba(50, 50, 50, .4);
+            cursor: pointer;
+
+            &:hover{
+                background-color: var(--black-09);
+                color: white;
+            }
+        }
+
+        .open-filters-button{
+            @include mixin.border(10px 10px 0px 0px, var(--box-shadow-light), var(--border));   
+            background-color: var(--black-09);
+            color: white;
+        }
+        
+        #filters-container{
+            @include mixin.flex(column, flex-start, flex-start);
+            @include mixin.size(94%, 0%);
+            @include mixin.border(0px 0px 10px 10px, var(--box-shadow-light), var(--border));   
+            position: relative;
+            z-index: 9;
+            padding: 1em 1em;
+            transition: var(--transition-time) all;    
+            border-top: 0px;
+            display: none;
+            background-color: white;
+            
+            #history-select-container{
+                @include mixin.flex(row, flex-start, flex-start);
+                @include mixin.size(100%, fit-content);
+                position: relative;  
+                padding: 1em 0em 0em 0em;      
+            }
+        }
+
+        .open-filters{
+            height: 100% !important;
+            display: flex !important;
+        }
+    }
+
+
+
+    .select{
+        @include mixin.flex(column, flex-start, flex-start);
+        @include mixin.size(100%, fit-content);
+        position: relative;
+        padding: 0em .5em;
+
+        &:first-of-type{
+            padding-left: 0em
+        }
+
+        &:last-of-type{
+            padding-right: 0em
+        }
+
+        h5{
+            @include mixin.font('unbounded', .7em, 500);
+            margin-bottom: .4em
+        }
+
+        p{
+            @include mixin.flex(relative, space-between, center);
+            @include mixin.size(100%, fit-content);
+            @include mixin.font('poppins', .8em, 400);
+            @include mixin.border(10px, var(--box-shadow-light), var(--border));  
+            background-color: white;
+            padding: .5em 1em;
+            position: relative;
+            text-transform: capitalize;
+            transition: var(--transition-time) all;
+            cursor: pointer;
+
+            // &:hover{
+            //     background-color: var(--light-grey-025)
+            // }
+
+            img{
+                transition: var(--transition-time) all;
+            }
+
+            .rotate{
+                transform: rotate(180deg);
+            }
+        }
+
+        ul{
+            @include mixin.size(calc(100% - .5em), fit-content);
+            @include mixin.border(13px, var(--box-shadow-light), var(--border));  
+            @include mixin.flex(column, flex-start, flex-start);
+            position: absolute;
+            transform: translate(0%, 102%);
+            background-color: white;
+            display: none;
+            bottom: 0;
+            left: 0%;
+            overflow: hidden;
+    
+            li{
+                @include mixin.size(100%, fit-content);
+                @include mixin.font('poppins', .8em, 400);
+                padding: .6em 1em;
+                transition: var(--transition-time) all;
+                border-bottom: var(--border);
+                cursor: pointer;
+                
+                &:last-of-type{
+                    border-bottom: 0px;
+                }
+
+                &:hover{
+                    background-color: var(--light-grey-025)
+                }
+            }
+
+            .active{
+                background-color: var(--black-09) !important;
+                color: white !important;
+            }
+        }
+
+        &:last-of-type{
+            ul{
+                left: unset;
+                right: 0%;
+            }
+        }
+
+        .open{
+            display: flex;
+        }
+    }
     
     ul{
-        @include mixin.size(100%, fit-content);
-        margin-top: -3%;
+        @include mixin.size(100%, 100%);
+        border-top: 1px solid var(--light-grey);
+        margin-top: 1em;
         
-        li{
+        .chat-list-item{
             @include mixin.size(100%, fit-content);
             @include mixin.font('unbounded', .9em, 600);
             border-bottom: var(--border);
+            border-collapse: collapse;
             cursor: pointer;
+            display: none;
             
             a{
                 @include mixin.flex(column, flex-start, flex-start);
-                padding: 1.3em 2em;
+                @include mixin.size(100%, fit-content);
+                padding: 1.3em 1.4em;
 
                 &:hover{
                     background-color: var(--light-grey-025);
@@ -37,9 +230,22 @@
                 span{
                     @include mixin.font('poppins', .95em, 300);
                     margin-top: .1em;
+                    
+                    .model-name{
+                        text-transform: capitalize;
+                    }
                 }
             }
         }
+
+        .selected{
+            display: flex;
+        }
+
+        .hide{
+            display: none !important;
+        }
+        
     }
 }
 

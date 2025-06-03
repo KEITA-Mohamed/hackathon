@@ -19,7 +19,7 @@ section{
 }
 
 #chat-container{
-    @include mixin.flex(column, space-between, flex-start);
+    @include mixin.flex(column, flex-end, flex-start);
     @include mixin.size(100%, 100%);
     position: relative;    
 }
@@ -31,4 +31,13 @@ section{
     z-index: 100;
     top: 0%;
     right: 0%;
+}
+
+#messages-container{
+    @include mixin.flex(column, flex-start, flex-start);
+    @include mixin.size(95%, fit-content);
+    padding: 1% 2%;
+    padding-top: 7em;
+    padding-bottom: 3em;
+    overflow: auto;
 }

@@ -25,3 +25,8 @@
 - Le jury ''a accés qu'au résultat final et non pas a la succésion de prompt.
 - **Permettre de sélectionner un prompt a envoyer au jury**   
 - Le groupe se répartis les taches.é
+
+- Séléction des prompts a envoyé
+- Les tokens (suivis, décompté, ...)
+- CSV
+ -Responsive
