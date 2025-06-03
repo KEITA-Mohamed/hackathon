@@ -15,7 +15,7 @@ export async function GET(req: NextRequest) {
             select: { id: true },
         })
 
-        return NextResponse.json({ exists: !!user }, { status: 200 })
+        return NextResponse.json({ exists: !!user, id: user?.id }, { status: 200 })
     } catch (error) {
         console.error("Erreur lors de la vérification de l'utilisateur:", error)
         return NextResponse.json({ errors: { message: "Erreur interne du serveur" } }, { status: 500 })

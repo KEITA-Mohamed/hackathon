@@ -2,271 +2,83 @@
 
 import { useState } from "react"
 import { toast } from "sonner"
+import type { InviteStatus, InvitationResults } from "@/types/invitation"
+import { InvitationHelpers } from "@/lib/invitation-helpers"
+import { useInvitationSender } from "./useInvitationSender"
+import { useInvitationCleanup } from "./useInvitationCleanup"
 
 /**
- * Type représentant le statut d'une invitation
- */
-export type InviteStatus = {
-    email: string
-    status: "pending" | "success" | "error"
-    message?: string
-}
-
-/**
- * Type représentant les données d'un utilisateur à inviter
- */
-export type UserData = {
-    lastName: string
-    firstName: string
-    email: string
-    role: string
-}
-
-/**
- * Type pour les résultats d'invitation
- */
-export type InvitationResults = {
-    successCount: number
-    errorCount: number
-    totalEmails: number
-    statuses: InviteStatus[]
-}
-
-/**
- * Hook pour gérer l'envoi d'invitations en masse aux utilisateurs
- *
- * @returns Un objet contenant les états et fonctions pour gérer les invitations
+ * Hook principal pour gérer l'envoi d'invitations en masse
+ * Version simplifiée et mieux organisée
  */
 export function useInviteUsers() {
-    // États pour gérer le processus d'invitation
-    const [isLoading, setIsLoading] = useState(false)
-    const [progress, setProgress] = useState(0)
+    // États principaux
     const [inviteStatuses, setInviteStatuses] = useState<InviteStatus[]>([])
     const [showResults, setShowResults] = useState(false)
     const [results, setResults] = useState<InvitationResults | null>(null)
 
-
-    /**
-     * Vérifie si un utilisateur existe dans la base de données
-     *
-     * @param email - L'email de l'utilisateur à vérifier
-     * @returns Un booléen indiquant si l'utilisateur existe
-     */
-    const checkUserExists = async (email: string): Promise<boolean> => {
-        try {
-            const response = await fetch(`/api/users/check?email=${encodeURIComponent(email)}`, {
-                method: "GET",
-                headers: { "Content-Type": "application/json" },
-            })
-
-            if (!response.ok) return false
-
-            const data = await response.json()
-            return data.exists === true
-        } catch (error) {
-            console.error("Erreur lors de la vérification de l'utilisateur:", error)
-            return false
-        }
-    }
-
-    /**
-     * Convertit les données brutes du tableau en objets utilisateur
-     *
-     * @param rawData - Les données brutes du tableau [lastName, firstName, email, role][]
-     * @returns Un tableau d'objets utilisateur
-     */
-    const formatUserData = (rawData: string[][]): UserData[] => {
-        return rawData.map((row) => ({
-            lastName: row[0],
-            firstName: row[1],
-            email: row[2],
-            role: row[3]
-        }))
-    }
+    // Hooks spécialisés
+    const invitationSender = useInvitationSender()
+    const invitationCleanup = useInvitationCleanup()
 
     /**
      * Fonction principale pour envoyer des invitations en masse
-     *
-     * @param rawData - Les données brutes du tableau [lastName, firstName, email, role][]
-     * @returns Une promesse avec les résultats des invitations
      */
     const sendInvitations = async (rawData: string[][]) => {
-        if (isLoading || rawData.length === 0) {
+        if (invitationSender.isLoading || rawData.length === 0) {
             return { successCount: 0, errorCount: 0, totalEmails: 0, statuses: [] }
         }
 
-
-        setIsLoading(true)
-        setProgress(0)
-        setShowResults(false)
-
+        // Préparation
         const totalEmails = rawData.length
-        const userData = formatUserData(rawData)
+        const userData = InvitationHelpers.formatUserData(rawData)
+        const initialStatuses = InvitationHelpers.createInitialStatuses(userData)
 
-
-        const initialStatuses: InviteStatus[] = userData.map((user) => ({
-            email: user.email,
-            status: "pending",
-        }))
         setInviteStatuses(initialStatuses)
+        setShowResults(false)
 
         toast.info("Envoi des invitations en cours", {
             description: `Envoi de ${totalEmails} invitations...`,
         })
 
-
-        let processed = 0
-
-
-        const invitePromises = userData.map((user, index) => {
-            return (async () => {
-                try {
-                    const { lastName, firstName, email, role } = user
-
-                    // Effectuer la requête
-                    const response = await fetch("/api/users/invite", {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({
-                            lastName,
-                            firstName,
-                            email,
-                            role,
-                        }),
-                    })
-
-                    let responseData
-                    try {
-                        responseData = await response.json()
-                    } catch (e) {
-                        console.error(e)
-                        responseData = { message: "Format de réponse invalide" }
-                    }
-
-
-                    processed++
-                    const newProgress = Math.round((processed / totalEmails) * 100)
-                    setProgress(newProgress)
-
-                    if (response.status === 201) {
-                        return {
-                            index,
-                            email,
-                            inviteStatus: "success" as const,
-                            message: responseData.message || "Invitation envoyée avec succès",
-                        }
-                    } else {
-                        const errorMessage =
-                            responseData.errors?.message || responseData.message || `Erreur ${response.status}: Échec de l'envoi`
-
-                        console.error(`Erreur pour ${email}:`, {
-                            status: response.status,
-                            responseData,
-                            errorMessage,
-                        })
-
-                        return {
-                            index,
-                            email,
-                            inviteStatus: "error" as const,
-                            message: errorMessage,
-                        }
-                    }
-                } catch (error) {
-                    const email = user.email
-                    console.error(`Exception pour ${email}:`, error)
-
-                    processed++
-                    const newProgress = Math.round((processed / totalEmails) * 100)
-                    setProgress(newProgress)
-
-                    return {
-                        index,
-                        email,
-                        inviteStatus: "error" as const,
-                        message: error instanceof Error ? error.message : "Erreur inconnue",
-                    }
-                }
-            })()
-        })
-
-
-        const promiseResults = await Promise.allSettled(invitePromises)
-
-        // Traiter les résultats
-        const newStatuses: InviteStatus[] = [...initialStatuses]
-
-        // Première passe - traiter tous les résultats
+        // Envoi des invitations
+        const promiseResults = await invitationSender.sendBatchInvitations(userData)
+        // Traitement des résultats
+        const newStatuses = [...initialStatuses]
         promiseResults.forEach((result, resultIndex) => {
             if (result.status === "fulfilled") {
-                const { index, email, inviteStatus, message } = result.value
+                const { index, email, firstName, lastName, role, inviteStatus, message } = result.value
                 newStatuses[index] = {
                     email,
+                    firstName,
+                    lastName,
+                    role,
                     status: inviteStatus,
                     message,
                 }
             } else {
-                // Ce cas ne devrait pas se produire car nous gérons les erreurs dans les promesses
-                // Mais par sécurité, nous le traitons quand même
-                const index = resultIndex
-                newStatuses[index] = {
-                    email: userData[index].email,
+                // Gestion des erreurs de promesse
+                newStatuses[resultIndex] = {
+                    ...userData[resultIndex],
                     status: "error",
                     message: "Erreur inattendue lors du traitement",
                 }
             }
         })
 
-        // Mettre à jour les statuts pour montrer les résultats initiaux
         setInviteStatuses([...newStatuses])
 
-
-        toast.info("Vérification des résultats...", {
-            description: "Confirmation des statuts des utilisateurs",
-        })
-
-        const errorStatuses = newStatuses.filter((status) => status.status === "error")
-        let correctedCount = 0
-
-        for (let i = 0; i < errorStatuses.length; i++) {
-            const status = errorStatuses[i]
-            const email = status.email
-
-
-            const exists = await checkUserExists(email)
-
-            if (exists) {
-
-                const index = newStatuses.findIndex((s) => s.email === email)
-                if (index !== -1) {
-                    newStatuses[index] = {
-                        email,
-                        status: "error",
-                        message: "Utilisateur créé, mais l'envoi d'email a échoué",
-                    }
-                    correctedCount++
-                }
-            }
-
-
-            const verificationProgress = Math.round(((i + 1) / errorStatuses.length) * 100)
-            setProgress(verificationProgress)
+        // Nettoyage des erreurs
+        const errorStatuses = InvitationHelpers.filterByStatus(newStatuses, "error")
+        if (errorStatuses.length > 0) {
+            await invitationCleanup.cleanupFailedInvitations(errorStatuses, () => {})
         }
 
-        // Mettre à jour tous les statuts après la vérification
-        setInviteStatuses([...newStatuses])
+        // Calcul des résultats finaux
+        const successCount = InvitationHelpers.filterByStatus(newStatuses, "success").length
+        const errorCount = InvitationHelpers.filterByStatus(newStatuses, "error").length
 
-
-        const successCount = newStatuses.filter((s) => s.status === "success").length
-        const errorCount = newStatuses.filter((s) => s.status === "error").length
-
-
-        if (correctedCount > 0) {
-            toast.info("Statuts corrigés", {
-                description: `${correctedCount} utilisateurs ont été créés mais l'envoi d'email a échoué`,
-            })
-        }
-
+        // Notifications finales
         if (errorCount > 0) {
             toast.error("Envoi des invitations terminé", {
                 description: `${successCount} succès, ${errorCount} échecs sur ${totalEmails} invitations`,
@@ -277,34 +89,130 @@ export function useInviteUsers() {
             })
         }
 
-
-        setIsLoading(false)
-        setShowResults(true)
-
-
+        // Mise à jour des états finaux
         const finalResults = {
             successCount,
             errorCount,
             totalEmails,
             statuses: newStatuses,
         }
-        setResults(finalResults)
 
+        setResults(finalResults)
+        setShowResults(true)
 
         return finalResults
     }
 
+    /**
+     * Fonction pour renvoyer les invitations échouées
+     */
+    const retryFailedInvitations = async () => {
+        if (invitationSender.isLoading || !results || results.errorCount === 0) {
+            return { successCount: 0, errorCount: 0, totalEmails: 0, statuses: [] }
+        }
+
+        const failedInvitations = InvitationHelpers.filterByStatus(inviteStatuses, "error")
+        const totalRetries = failedInvitations.length
+
+        if (totalRetries === 0) {
+            toast.info("Aucune invitation à renvoyer")
+            return { successCount: 0, errorCount: 0, totalEmails: 0, statuses: [] }
+        }
+
+        toast.info("Renvoi des invitations échouées", {
+            description: `Renvoi de ${totalRetries} invitations...`,
+        })
+
+        // Conversion des statuses échouées en UserData pour le renvoi
+        const retryUserData = failedInvitations.map((status) => ({
+            lastName: status.lastName,
+            firstName: status.firstName,
+            email: status.email,
+            role: status.role,
+        }))
+
+        // Renvoi des invitations
+        /*const retryResults = await invitationSender.sendBatchInvitations(retryUserData, (progress) => {
+            // Progrès géré dans le sender
+        })*/
+
+        const retryResults = await invitationSender.sendBatchInvitations(retryUserData)
+
+        // Mise à jour des statuts avec les nouveaux résultats
+        const updatedStatuses = [...inviteStatuses]
+        retryResults.forEach((result) => {
+            if (result.status === "fulfilled") {
+                const { email, firstName, lastName, role, inviteStatus, message } = result.value
+                const statusIndex = updatedStatuses.findIndex((status) => status.email === email)
+
+                if (statusIndex !== -1) {
+                    updatedStatuses[statusIndex] = {
+                        email,
+                        firstName,
+                        lastName,
+                        role,
+                        status: inviteStatus,
+                        message,
+                    }
+                }
+            }
+        })
+
+        setInviteStatuses(updatedStatuses)
+
+        // Nettoyage final
+        const stillFailedStatuses = InvitationHelpers.filterByStatus(updatedStatuses, "error")
+        if (stillFailedStatuses.length > 0) {
+            await invitationCleanup.cleanupFailedInvitations(stillFailedStatuses, () => {})
+        }
+
+        // Calcul des résultats du retry
+        const retriedSuccessCount = retryResults.filter(
+            (result) => result.status === "fulfilled" && result.value.inviteStatus === "success",
+        ).length
+
+        // Mise à jour des résultats globaux
+        const newSuccessCount = InvitationHelpers.filterByStatus(updatedStatuses, "success").length
+        const newErrorCount = InvitationHelpers.filterByStatus(updatedStatuses, "error").length
+
+        const updatedResults = {
+            successCount: newSuccessCount,
+            errorCount: newErrorCount,
+            totalEmails: results.totalEmails,
+            statuses: updatedStatuses,
+        }
+        setResults(updatedResults)
+
+        // Notification finale
+        if (retriedSuccessCount > 0) {
+            toast.success("Renvoi terminé", {
+                description: `${retriedSuccessCount} invitations renvoyées avec succès sur ${totalRetries} tentatives`,
+            })
+        } else {
+            toast.error("Renvoi terminé", {
+                description: `Aucune invitation n'a pu être renvoyée avec succès`,
+            })
+        }
+
+        return {
+            successCount: retriedSuccessCount,
+            errorCount: totalRetries - retriedSuccessCount,
+            totalEmails: totalRetries,
+            statuses: updatedStatuses.filter((status) => failedInvitations.some((failed) => failed.email === status.email)),
+        }
+    }
 
     return {
-
-        isLoading,
-        progress,
+        // États
+        isLoading: invitationSender.isLoading || invitationCleanup.isCleaningUp,
+        progress: invitationSender.progress,
         inviteStatuses,
         showResults,
         results,
 
+        // Actions
         sendInvitations,
-
+        retryFailedInvitations,
         setInviteStatuses,
         setShowResults,
     }

@@ -28,10 +28,33 @@ export default function CsvViewer({ data, headers, fileName }: CsvViewerProps) {
     const [searchTerm, setSearchTerm] = useState("")
     const [isErrorListOpen, setIsErrorListOpen] = useState(true)
 
-    const { isLoading, progress, inviteStatuses, showResults, sendInvitations } = useInviteUsers()
+    const { isLoading, progress, inviteStatuses, showResults, sendInvitations, retryFailedInvitations } = useInviteUsers()
 
     const handleInvite = async () => {
         await sendInvitations(data)
+    }
+
+    const handleRetryFailedInvitations = async () => {
+
+        await retryFailedInvitations();
+    }
+
+    const handleExport = async (): Promise<void> => {
+
+        const errorData = inviteStatuses
+            .filter((status) => status.status === "error")
+            .map((status) => `${status.email},${status.message}`)
+            .join("\n")
+
+        const csvContent = "Email,Message d'erreur\n" + errorData
+        const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" })
+        const url = URL.createObjectURL(blob)
+        const link = document.createElement("a")
+        link.setAttribute("href", url)
+        link.setAttribute("download", `erreurs_invitations_${new Date().toISOString().slice(0, 10)}.csv`,)
+        document.body.appendChild(link)
+        link.click()
+        document.body.removeChild(link)
     }
 
     // Trier les données en fonction de la configuration de tri actuelle
@@ -155,6 +178,8 @@ export default function CsvViewer({ data, headers, fileName }: CsvViewerProps) {
                                 setIsErrorListOpen={setIsErrorListOpen}
                                 errorCount={errorCount}
                                 inviteStatuses={inviteStatuses}
+                                handleRetryFailedInvitations={handleRetryFailedInvitations}
+                                handleExport={handleExport}
                                  />
                         )}
                     </div>
