@@ -17,13 +17,6 @@ export default function Dashboard () {
 
                 <div className='member-list'>
                     <header>
-                        <h1>Professeurs</h1>
-                    </header>
-                    <MembersList />
-                </div>
-
-                <div className='member-list'>
-                    <header>
                         <h1>Jurys</h1>
                     </header>
                     <MembersList />
