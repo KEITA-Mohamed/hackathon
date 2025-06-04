@@ -13,16 +13,13 @@ type InviteStatus = {
 interface ErreurListProps {
     isErrorListOpen: boolean;
     setIsErrorListOpen: (open: boolean) => void;
+    handleRetryFailedInvitations: () => void;
+    handleExport: () => void;
     errorCount: number;
     inviteStatuses: InviteStatus[];
 }
 
-export default function ErreurList({
-                                       isErrorListOpen,
-                                       setIsErrorListOpen,
-                                       errorCount,
-                                       inviteStatuses,
-                                   }: ErreurListProps) {
+export default function ErreurList({isErrorListOpen, setIsErrorListOpen, errorCount, inviteStatuses, handleRetryFailedInvitations, handleExport}: ErreurListProps) {
     return (
         <Collapsible open={isErrorListOpen} onOpenChange={setIsErrorListOpen} className="">
             <div className="error-header">
@@ -40,29 +37,14 @@ export default function ErreurList({
                     <Button
                         className='export-button'
                         size="sm"
-                        onClick={() => {
-
-                            const errorData = inviteStatuses
-                                .filter((status) => status.status === "error")
-                                .map((status) => `${status.email},${status.message}`)
-                                .join("\n")
-
-                            const csvContent = "Email,Message d'erreur\n" + errorData
-                            const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" })
-                            const url = URL.createObjectURL(blob)
-                            const link = document.createElement("a")
-                            link.setAttribute("href", url)
-                            link.setAttribute(
-                                "download",
-                                `erreurs_invitations_${new Date().toISOString().slice(0, 10)}.csv`,
-                            )
-                            document.body.appendChild(link)
-                            link.click()
-                            document.body.removeChild(link)
-                        }}
+                        className="bg-gray-700 text-neutral-50"
+                        onClick={handleExport}
                     >
                         <Download className="" />
                         Exporter
+                    </Button>
+                    <Button onClick={handleRetryFailedInvitations} variant="outline" size="sm" className="bg-gray-700 text-neutral-50">
+                        Réessayer
                     </Button>
                 </div>
             </div>

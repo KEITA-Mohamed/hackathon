@@ -11,7 +11,7 @@ import { Progress } from "@/components/ui/progress";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import ErreurList from "@/components/import-csv/erreur-list/ErreurList";
 import ListFromCsv from "@/components/import-csv/list/ListFromCsv";
-import { createHandleInvite } from "@/lib/handle-invite";
+import { useInviteUsers } from "@/hooks/useInviteUsers"
 
 interface CsvViewerProps {
     data: string[][]
@@ -19,11 +19,6 @@ interface CsvViewerProps {
     fileName: string
 }
 
-type InviteStatus = {
-    email: string
-    status: "pending" | "success" | "error"
-    message?: string
-}
 
 export default function CsvViewer({ data, headers, fileName }: CsvViewerProps) {
     const [sortConfig, setSortConfig] = useState<{
@@ -32,11 +27,36 @@ export default function CsvViewer({ data, headers, fileName }: CsvViewerProps) {
     } | null>(null)
 
     const [searchTerm, setSearchTerm] = useState("")
-    const [isLoading, setIsLoading] = useState(false)
-    const [progress, setProgress] = useState(0)
-    const [inviteStatuses, setInviteStatuses] = useState<InviteStatus[]>([])
-    const [showResults, setShowResults] = useState(false)
     const [isErrorListOpen, setIsErrorListOpen] = useState(true)
+
+    const { isLoading, progress, inviteStatuses, showResults, sendInvitations, retryFailedInvitations } = useInviteUsers()
+
+    const handleInvite = async () => {
+        await sendInvitations(data)
+    }
+
+    const handleRetryFailedInvitations = async () => {
+
+        await retryFailedInvitations();
+    }
+
+    const handleExport = async (): Promise<void> => {
+
+        const errorData = inviteStatuses
+            .filter((status) => status.status === "error")
+            .map((status) => `${status.email},${status.message}`)
+            .join("\n")
+
+        const csvContent = "Email,Message d'erreur\n" + errorData
+        const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" })
+        const url = URL.createObjectURL(blob)
+        const link = document.createElement("a")
+        link.setAttribute("href", url)
+        link.setAttribute("download", `erreurs_invitations_${new Date().toISOString().slice(0, 10)}.csv`,)
+        document.body.appendChild(link)
+        link.click()
+        document.body.removeChild(link)
+    }
 
     // Trier les données en fonction de la configuration de tri actuelle
     const sortedData = useMemo(() => {
