@@ -136,12 +136,12 @@ export default function CsvViewer({ data, headers, fileName }: CsvViewerProps) {
                 </div>                    
 
                 {isLoading && (
-                    <div className="">
-                        <div className="">
-                            <span>Progression</span>
+                    <div className="progress-container">
+                        <Progress value={progress} className="progress" />
+                        <div className="progress-counter-container">
+                            {/* <span>Progression</span> */}
                             <span>{progress}%</span>
                         </div>
-                        <Progress value={progress} className="bg-red" />
                     </div>
                 )}                
             </header>
@@ -151,7 +151,7 @@ export default function CsvViewer({ data, headers, fileName }: CsvViewerProps) {
                     <Alert className="result-alert" variant={errorCount > 0 ? "destructive" : "default"}>
                         <CheckCircle className="" />
                         <AlertTitle>Résultat de l&apos;envoi des invitations</AlertTitle>
-                        <AlertDescription>
+                        <AlertDescription className="">
                             {successCount} invitations envoyées avec succès, {errorCount} échecs sur {inviteStatuses.length}{" "}
                             tentatives.
                         </AlertDescription>

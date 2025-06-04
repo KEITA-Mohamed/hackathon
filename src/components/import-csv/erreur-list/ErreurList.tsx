@@ -33,17 +33,16 @@ export default function ErreurList({isErrorListOpen, setIsErrorListOpen, errorCo
                         )}
                     </Button>
                 </CollapsibleTrigger>
-                <div className="">
+                <div className="error-button-container">
                     <Button
-                        className='export-button'
+                        className='error-button'
                         size="sm"
-                        className="bg-gray-700 text-neutral-50"
                         onClick={handleExport}
                     >
                         <Download className="" />
                         Exporter
                     </Button>
-                    <Button onClick={handleRetryFailedInvitations} variant="outline" size="sm" className="bg-gray-700 text-neutral-50">
+                    <Button onClick={handleRetryFailedInvitations} variant="outline" size="sm" className='error-button'>
                         Réessayer
                     </Button>
                 </div>

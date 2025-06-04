@@ -5,10 +5,15 @@
     @include mixin.flex(row, space-between, flex-end);
     margin: 1em 0em .5em 0em;
 
-    .export-button{
+    .error-button-container{
+        @include mixin.flex(row, flex-start, center);
+    }
+
+    .error-button{
         @include mixin.font('poppins', 1em, 600); 
         @include mixin.border(10px, var(--box-shadow), var(--border));  
         padding: .3em .6em;
+        margin-left: .7em;
         background-color: white;
         cursor: pointer;
 
@@ -36,6 +41,10 @@
         div{
             @include mixin.font('poppins', .9em, 400); 
             margin-left: .5em;
+
+            strong{
+                margin-right: 1.5em;
+            }
         }
     }
 }

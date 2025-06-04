@@ -55,9 +55,9 @@ export default function ListFromCsv({
                                     <TableCell key={cellIndex}>{cell}</TableCell>
                                 ))}
                                 {showResults && (
-                                    <TableCell>
+                                    <TableCell className='status-container'>
                                         {inviteStatuses[rowIndex]?.status === "success" ? (
-                                            <span className="status succes-status">
+                                            <span className="status success-status">
                                                 <CheckCircle className="" />
                                                 Succès
                                             </span>
