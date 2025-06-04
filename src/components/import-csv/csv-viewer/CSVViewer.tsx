@@ -2,11 +2,11 @@
 
 import "./CSVViewer.scss";
 import { useState, useMemo } from "react";
-import { Search, X, Mail, CheckCircle} from "lucide-react";
-import { CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import { CheckCircle} from "lucide-react";
+// import { CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
+// import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
+// import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import ErreurList from "@/components/import-csv/erreur-list/ErreurList";
@@ -98,15 +98,6 @@ export default function CsvViewer({ data, headers, fileName }: CsvViewerProps) {
         setSortConfig({ key, direction })
     }
 
-    const handleInvite = createHandleInvite({
-        isLoading,
-        setIsLoading,
-        setProgress,
-        setInviteStatuses,
-        setShowResults,
-        filteredData,
-    });
-
     // Statistiques des résultats
     const successCount = inviteStatuses.filter((status) => status.status === "success").length
     const errorCount = inviteStatuses.filter((status) => status.status === "error").length
@@ -172,6 +163,8 @@ export default function CsvViewer({ data, headers, fileName }: CsvViewerProps) {
                             setIsErrorListOpen={setIsErrorListOpen}
                             errorCount={errorCount}
                             inviteStatuses={inviteStatuses}
+                            handleRetryFailedInvitations={handleRetryFailedInvitations}
+                            handleExport={handleExport}
                             />
                     )}
                 </div>
