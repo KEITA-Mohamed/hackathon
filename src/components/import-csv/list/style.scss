@@ -6,16 +6,19 @@
     @include mixin.border(20px, var(--box-shadow), var(--border)); 
     margin-top: 1.5em;
     overflow: hidden;
+    background-color: white;
 
     th{
         button{
+            @include mixin.flex(row, center, center);
             @include mixin.size(100%, fit-content);
-            cursor: pointer;
+            cursor: pointer;            
         }
     }
 
     td{
         @include mixin.font('poppins', 1em, 400);
+        text-align: center;
     }
 
     tr{

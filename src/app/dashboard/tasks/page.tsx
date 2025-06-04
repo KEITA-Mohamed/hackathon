@@ -20,6 +20,29 @@ export default function Dashboard () {
                     </button>
                 </div>                
             </div>
+
+            {/* <div className='modal'>
+                <div className='modal-background'></div>
+                <div className='modal-content'>
+                    <header>
+                        <h1>Test</h1>
+                    </header>
+
+                    <form action="">
+                        <div className='content-container'>
+                            <div className='field-container'>
+    
+                            </div>
+                        </div>
+
+                        <footer>
+                            <button>
+                                Valider
+                            </button>
+                        </footer>
+                    </form>
+                </div>
+            </div> */}
         </div>
     )
 }
