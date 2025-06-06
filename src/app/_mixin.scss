@@ -40,13 +40,14 @@
 }
 
 @mixin input {
-  input{
+  input, textarea{
     @include size(100%, fit-content);
     @include border(100px, none, var(--border));
     @include font('poppins', inherit, 400);                                              
     background-color: white;            
     padding: 8px 15px;
     margin-top: 1%;
+    outline: none;
 
     &:hover{
         border: 1px solid var(--black-09);
@@ -129,6 +130,98 @@
     }
     
     @include input;
+  }
+}
+
+@mixin select {
+  .select{
+    @include flex(column, flex-start, flex-start);
+    @include size(100%, fit-content);
+    position: relative;
+    padding: 0em .5em;
+
+    &:first-of-type{
+        padding-left: 0em
+    }
+
+    &:last-of-type{
+        padding-right: 0em
+    }
+
+    h5{
+        @include font('unbounded', .7em, 500);
+        margin-bottom: .4em
+    }
+
+    p{
+        @include flex(relative, space-between, center);
+        @include size(100%, fit-content);
+        @include font('poppins', .8em, 400);
+        @include border(10px, var(--box-shadow-light), var(--border));  
+        background-color: white;
+        padding: .5em 1em;
+        position: relative;
+        text-transform: capitalize;
+        transition: var(--transition-time) all;
+        cursor: pointer;
+
+        &:hover{
+            border: 1px solid var(--black-09);
+        }
+
+        img{
+            transition: var(--transition-time) all;
+        }
+
+        .rotate{
+            transform: rotate(180deg);
+        }
+    }
+
+    ul{
+        @include size(calc(100% - .5em), fit-content);
+        @include border(13px, var(--box-shadow-light), var(--border));  
+        @include flex(column, flex-start, flex-start);
+        position: absolute;
+        transform: translate(0%, 102%);
+        background-color: white;
+        display: none;
+        bottom: 0;
+        left: 0%;
+        overflow: hidden;
+
+        li{
+            @include size(100%, fit-content);
+            @include font('poppins', .8em, 400);
+            padding: .6em 1em;
+            transition: var(--transition-time) all;
+            border-bottom: var(--border);
+            cursor: pointer;
+            
+            &:last-of-type{
+                border-bottom: 0px;
+            }
+
+            &:hover{
+                background-color: var(--light-grey-02)
+            }
+        }
+
+        .active{
+            background-color: var(--black-09) !important;
+            color: white !important;
+        }
+    }
+
+    &:last-of-type{
+        ul{
+            left: unset;
+            right: 0%;
+        }
+    }
+  }
+  .open{
+      display: flex !important;
   }
 }
 

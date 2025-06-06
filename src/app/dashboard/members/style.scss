@@ -1,0 +1,48 @@
+@use '/src/app/mixin';
+
+#main-container{
+    @include mixin.flex(column, flex-start, center);
+    @include mixin.size(100%, 100%);
+    @include mixin.header;
+    overflow: hidden;
+
+    header{
+        position: relative;
+        z-index: 1000;
+    }
+
+    h1{
+        padding-bottom: 0px !important
+    }
+}
+
+#member-lists-container{
+    @include mixin.flex(row, center, center);
+    @include mixin.size(100%, 100%);
+    overflow: hidden;
+    padding-bottom: 1em;
+
+    .member-list{
+        @include mixin.flex(column, center, center);
+        @include mixin.size(100%, 100%); 
+    }
+}
+
+#add-container{
+    @include mixin.flex(row, center, center);
+    @include mixin.size(100%, fit-content);
+
+    a{
+        @include mixin.border(100px, var(--box-shadow), var(--border));
+        background-color: white;
+        padding: 1em 2em;
+        margin: 1em 1em 0em 1em;
+        @include mixin.font('unbounded', .9em, 450);
+
+        &:hover{
+            background-color: var(--black-09);
+            color: white;
+        }
+    }
+}
+

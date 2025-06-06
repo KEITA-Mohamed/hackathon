@@ -1,0 +1,106 @@
+@use '/src/app/mixin';
+
+.csv-container{
+    @include mixin.size(70%, 90%);
+    @include mixin.flex(column, flex-start, center);
+    @include mixin.border(15px, var(--box-shadow), var(--border));  
+    padding: 2em; 
+    overflow: hidden;
+    
+    header{
+        @include mixin.size(100%, fit-content);
+
+        h1{
+            @include mixin.flex(row, space-between, flex-end);
+            margin-bottom: 1em;
+    
+            span{
+                @include mixin.font('poppins', 1em, 400);
+            }
+
+            p{
+                &:first-of-type{
+                    @include mixin.font('unbounded', 1.2em, 600);
+                    padding-left: .5em;
+                }
+
+                &:last-of-type{
+                    @include mixin.font('poppins', 1em, 400); 
+                    @include mixin.border(10px, var(--box-shadow), var(--border));  
+                    padding: .3em .6em;
+                    background-color: white;
+                }
+            }
+        }
+
+        .input-container{
+            @include mixin.flex(row, space-between, center);
+            input{
+                @include mixin.border(100px, var(--box-shadow), var(--border)); 
+                @include mixin.font('poppins', .9em, 400);
+                background-color: white;
+                padding: 1.2em 1em;
+            } 
+            
+            .clear-search{
+                @include mixin.border(100px, var(--box-shadow), var(--border)); 
+                background-color: white;
+                padding: .55em;
+                margin-left: 1em;
+                
+                &:hover{
+                    background-color: var(--black-09);
+                    color: white;
+                    cursor: pointer;
+                }
+            }
+        }
+
+        .progress-container{
+            margin-top: 1em;
+            .progress-counter-container{
+                @include mixin.font('poppins', .9em, 500);
+                span{
+                    margin-right: .2em
+                }
+            }
+
+            .progress{
+                background-color: var(--light-grey-2);
+                border: var(--border)
+            }
+        }
+    }
+
+    .result-container{
+        @include mixin.size(100%, 100%);
+        border-top: var(--border-light);
+        padding-top: 2em;
+        margin: 2em 0em .5em 0em;
+
+        .result-alert{
+            @include mixin.border(10px, var(--box-shadow), var(--border));  
+            background-color: white;
+        }
+    }
+
+    .send-invite{
+        @include mixin.flex(row, flex-start, center);
+        @include mixin.border(100px, var(--box-shadow), var(--border));  
+        @include mixin.size(fit-content, fit-content);
+        @include mixin.font('unbounded', 1.05em, 500);
+        padding: .6em 1.5em;
+        margin-top: 1.5em;
+        background-color: white;
+
+        &:hover{
+            background-color: var(--black-09);
+            color: white;
+            cursor: pointer;
+        }
+
+        svg{
+            margin-right: .6em;
+        }
+    }
+}

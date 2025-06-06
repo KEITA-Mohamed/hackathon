@@ -1,6 +1,11 @@
 @use '/src/app/mixin';
 
-.main-container{
+.main-container-error{
+    @include mixin.flex(column, center, center);
+    @include mixin.size(100%, 100%);
+}
+
+.error-container{
     @include mixin.flex(column, center, center);
     @include mixin.size(25vw, fit-content);
     @include mixin.border(25px, var(--box-shadow), var(--error-border));

@@ -9,17 +9,18 @@ export const isOpenFilters: Signal<boolean> = signal<boolean>(false);
 export const model: Signal<string> = signal<string>('...');
 export const date: Signal<string> = signal<string>('...');
 export const search: Signal<string> = signal<string>('...');
+export const currentChat: Signal<number> = signal<number>(0);
 
-export const items: Signal<Array<{title: string, model: string, date: string}>> = signal<Array<{title: string, model: string, date: string}>>([
+export const convs: Signal<Array<{title: string, model: string, date: string}>> = signal<Array<{title: string, model: string, date: string}>>([
     {title: "Maison", model: 'MISTRAL', date: 'LUNDI'}, 
     {title: "Appartement", model: 'MISTRAL', date: 'MARDI'}, 
     {title: "Chaussure", model: 'GEMINI', date: 'LUNDI'}, 
     {title: "Fourchette", model: 'O3', date: 'MERCREDI'}
 ]);
 
-export const filtersValues: Signal<{name: string[], value: Signal[]}> = signal({
+export const filtersValues: Signal<{name: string[], value: Signal<string>[]}> = signal({
     name: ['model', 'date'],
-    filterValue: [model, date]
+    value: [model, date]
 })
 
 export const modelFilters: Signal<Filters[]> = signal<Filters[]>([
@@ -37,9 +38,3 @@ export const dateFilters: Signal<Filters[]> = signal<Filters[]>([
     {name: 'Jeudi', value: 'JEUDI'},
     {name: 'Vendredi', value: 'VENDREDI'}
 ]);
-
-// export const chatListFilter = signal({
-//         filtersParams: filtersValues.value,
-//         modelFilters: modelFilters.value,
-//         dateFilters: dateFilters.value,
-// })

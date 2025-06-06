@@ -1,0 +1,50 @@
+@use '/src/app/mixin';
+
+.main-container{
+    @include mixin.size(100%, 100%);
+    @include mixin.flex(column, center, center);
+
+    .upload-container{
+        @include mixin.formGlobal;
+        @include mixin.header;
+        @include mixin.formFooter;
+        @include mixin.size(fit-content, fit-content);
+        @include mixin.flex(column, center, center);
+    
+        h1{
+            padding: clamp(10px, 1%, 20px) clamp(30px, 1%, 80px) !important;
+        }
+    
+        .load-container{
+            @include mixin.size(fit-content, fit-content);
+            @include mixin.flex(column, center, center);
+            @include mixin.border(20px, var(--box-shadow), var(--border));
+            padding: 3em 6em 2em 6em;
+    
+            h3, p{
+                text-align: center;
+            }
+    
+            p{
+                @include mixin.font('poppins', .9em, 400);                                              
+                margin-top: .9em;
+                color: var(--light-grey)
+            }
+        }
+    
+        .csv-button{
+            @include mixin.border(100px, none, var(--border));
+            background-color: var(--light-grey-02) !important;
+            padding: 1em 2em !important;
+            height: 3.5em;
+            
+            &:hover{
+                background-color: var(--light-grey-2) !important;
+            }
+        }
+    
+        label{
+            font-size: 1em !important;
+        }
+    }
+}

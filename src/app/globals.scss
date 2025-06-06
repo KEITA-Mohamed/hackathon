@@ -19,22 +19,32 @@
 
   --light-grey: rgb(150, 150, 150);
   --light-grey-2: rgb(200, 200, 200);
-  --light-grey-025: rgb(150, 150, 150, .25);
+  --light-grey-02: rgb(150, 150, 150, .2);
   --light-grey-03: rgb(150, 150, 150, .3);
   --light-grey-05: rgb(150, 150, 150, .5);
 
   --white-025: rgba(255, 255, 255, .3);
   --black-09: rgba(20, 20, 20, .9);
+  // --black-09: rgba(211, 20, 20, 0.9);
 
   --error-background: rgb(255, 199, 199);
   --error-color: rgb(116, 0, 0);
   --error-border: 1px solid rgb(185, 116, 116);
+
+  --success-background: rgb(199, 255, 202);
+  --success-color: rgb(0, 116, 12);
+  --success-border: 1px solid rgb(116, 185, 129);
+
+  --progress-background: rgb(255, 250, 199);
+  --progress-color: rgb(116, 99, 0);
+  --progress-border: 1px solid rgb(185, 168, 116);
 
   --box-shadow: 0px 1.5px 8px 0px rgba(50, 50, 50, .4);
   --box-shadow-medium: 0px 1.5px 8px 0px rgba(50, 50, 50, .35);
   --box-shadow-light: 0px 1.5px 8px 0px rgba(50, 50, 50, .25);
   --transition-time: 200ms;
   --border: 1px solid var(--light-grey);
+  --border-light: 1px solid var(--light-grey-2);
 }
 
 //@media (prefers-color-scheme: dark) {
@@ -50,7 +60,7 @@
 }
 
 body {
-  @include mixin.flex(column, center, center);
+  // @include mixin.flex(column, center, center);
   @include mixin.size(100vw, 100vh);
   background: #ffffff;
   color: var(--foreground);
@@ -84,4 +94,17 @@ input{
 
 input, button, a{
   transition: var(--transition-time) all;
+}
+
+button{
+  outline: none;
+}
+
+.shadow{
+  position: sticky;
+  z-index: 0;
+  top: 0;
+  height: 0px;
+  width: 100%;
+  box-shadow: 0px 0px 10px 20px var(--background);
 }

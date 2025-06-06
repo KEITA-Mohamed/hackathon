@@ -1,6 +1,11 @@
 @use '/src/app/mixin';
+@include mixin.select();
 
 .main-container{
+    @include mixin.size(100%, 100%);
+    @include mixin.flex(column, center, center);
+}
+#invite-container{
     @include mixin.formGlobal;
     @include mixin.header;
     @include mixin.formFooter;
@@ -9,5 +14,25 @@
         @include mixin.formContainer;
         @include mixin.formNameContainer;
         @include mixin.formFieldContainer;
+    }
+}
+
+.select{
+    p{
+        margin-top: 1%;
+        width: 100% !important;
+        border-radius: 100px;
+        font-size: .95em !important;
+        box-shadow: none !important;
+    }
+
+    ul{
+        transform: translateY(85%) !important;
+        width: calc(94%);
+        right: unset !important;
+
+        li{
+            font-size: .95em !important;
+        }
     }
 }

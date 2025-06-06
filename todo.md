@@ -30,3 +30,41 @@
 - Les tokens (suivis, décompté, ...)
 - CSV
  -Responsive
+
+- Ajouter une tache
+- Select sur invit-signup
+- Active chat + titre en haut
+
+
+- Dashboard
+    - Evaluation
+        - Liste 
+    - Tâches
+        - Liste des tâches > éditer + supprimer 
+        - Ajouter une tâche        
+    - Membres
+        - Liste
+            - Etudiants
+            - Enseignats
+            - Jury
+        - Ajouter
+            - Invite
+            - Import
+        
+
+
+Revenu micro-entrepreneur Etape 3
+- Type d'activité ? Esque BNC prestation non commercial -> d'autant plus prestation de service
+
+- Repartition des groupes
+- Champs tache pour le hackaton
+- ForgotPassword
+
+# A faire
+- Reformulation du besoin
+- Revoir le dictionnaire des donnés
+- Revoir le Json des données
+- Développer choix techniques
+- Planification > calcul vélocité
+- Modélisation > arbre de données
+- Maquette de groupe

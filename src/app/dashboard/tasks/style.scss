@@ -1,0 +1,70 @@
+@use '/src/app/mixin';
+
+#main-container{
+    @include mixin.flex(column, center, center);
+    @include mixin.header;
+}
+
+#task-lists-container{
+    @include mixin.flex(row, center, center);
+    @include mixin.size(100%, 100%);
+
+    .task-list{
+        @include mixin.flex(column, center, center);
+        @include mixin.size(100%, 100%); 
+    }
+    
+    button{
+        @include mixin.flex(row, center, center);
+        @include mixin.size(100%, fit-content);
+    
+        a, p{
+            @include mixin.border(100px, var(--box-shadow), var(--border));
+            background-color: white;
+            padding: 1em 2em;
+            margin: 2em 1em 0em 1em;
+            @include mixin.font('unbounded', .9em, 450);
+    
+            &:hover{
+                background-color: var(--black-09);
+                color: white;
+            }
+        }
+    }
+}
+
+.main-container{
+    @include mixin.size(100%, 100%);
+    @include mixin.flex(column, center, center);
+}
+#invite-container{
+    @include mixin.formGlobal;
+    @include mixin.header;
+    @include mixin.formFooter;
+
+    .form-container{
+        @include mixin.formContainer;
+        @include mixin.formNameContainer;
+        @include mixin.formFieldContainer;
+    }
+}
+
+.select{
+    p{
+        margin-top: 1%;
+        width: 100% !important;
+        border-radius: 100px;
+        font-size: .95em !important;
+        box-shadow: none !important;
+    }
+
+    ul{
+        transform: translateY(85%) !important;
+        width: calc(94%);
+        right: unset !important;
+
+        li{
+            font-size: .95em !important;
+        }
+    }
+}

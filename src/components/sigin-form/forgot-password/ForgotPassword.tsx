@@ -52,38 +52,40 @@ export default function ForgotPassword() {
 
     return (
         <div className="main-container">
-            <header>
-                <h1>Mot de passe oublié</h1>
-                {/* <p>Entrez votre adresse email pour recevoir un lien de réinitialisation de mot de passe.</p> */}
-            </header>
-            <form onSubmit={handleSubmit}>
-                <div className='form-container'>
-                    <div className='field-container'>
-                        <h2>Adresse email</h2>
-                        <input
-                            id="email"
-                            type="email"
-                            placeholder="exemple@domaine.com"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            required
-                            disabled={isLoading}
-                        />
-                    </div>
-                    {message && (
-                        <div
-                            className={`mt-4 p-3 rounded-md ${message.type === "success" ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"}`}
-                        >
-                            {message.text}
+            <div id='forgot-password-container'>                
+                <header>
+                    <h1>Mot de passe oublié</h1>
+                    {/* <p>Entrez votre adresse email pour recevoir un lien de réinitialisation de mot de passe.</p> */}
+                </header>
+                <form onSubmit={handleSubmit}>
+                    <div className='form-container'>
+                        <div className='field-container'>
+                            <h2>Adresse email</h2>
+                            <input
+                                id="email"
+                                type="email"
+                                placeholder="exemple@domaine.com"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                required
+                                disabled={isLoading}
+                            />
                         </div>
-                    )}
-                </div>
-                <footer>
-                    <button type="submit" disabled={isLoading}>
-                        {isLoading ? "Envoi en cours..." : "Réinitialisation"}
-                    </button>
-                </footer>
-            </form>
+                        {message && (
+                            <div
+                                className={`mt-4 p-3 rounded-md ${message.type === "success" ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"}`}
+                            >
+                                {message.text}
+                            </div>
+                        )}
+                    </div>
+                    <footer>
+                        <button type="submit" disabled={isLoading}>
+                            {isLoading ? "Envoi en cours..." : "Réinitialisation"}
+                        </button>
+                    </footer>
+                </form>
+            </div>
         </div>
     )
 }

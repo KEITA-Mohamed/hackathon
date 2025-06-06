@@ -1,46 +1,20 @@
 import './style.scss'
-import Dashboard from "@/components/dashboard/Dashboard";
-import Link from 'next/link'
+import DashboardHeader from "@/components/dashboard-header/DashboardHeader";
+import HackatonList from "@/components/hackaton-list/HackatonList";
 
-export default function History () {
+export default function Dashboard () { 
     return (
         <div id="main-container">
-            <Dashboard />
-            <header>
-                <h1>Inscription
-                </h1>
-            </header>
+            <DashboardHeader />
 
-            <section id='student-list'>
-                <ul>
-                    <li>
-                        <Link href="/history">
-                            Nom de l&apos;étudiants
-                            <span>
-                                3 conversations - 12 crédits restants 
-                            </span>
-                        </Link>
-                    </li>
-
-                    <li>
-                        <Link href="/history">
-                            Nom de l&apos;étudiants
-                            <span>
-                                3 conversations - 12 crédits restants 
-                            </span>
-                        </Link>
-                    </li>
-
-                    <li>
-                        <Link href="/history">
-                            Nom de l&apos;étudiants
-                            <span>
-                                3 conversations - 12 crédits restants 
-                            </span>
-                        </Link>
-                    </li>
-                </ul>
-            </section>
+            <div id='grades-lists-container'>
+                <div className='grades-list'>
+                    <header>
+                        <h1>Infos</h1>
+                    </header>
+                    <HackatonList />
+                </div>
+            </div>
         </div>
     )
 }

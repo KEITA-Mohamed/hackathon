@@ -40,7 +40,7 @@ export async function POST(req: NextRequest){
                     password: null,
                     role,
                     passwordToken,
-                    passwordTokenEXPIRATION: moment().add(2, "hours").toDate(),
+                    passwordTokenExpiration: moment().add(2, "hours").toDate(),
 
 
                 },

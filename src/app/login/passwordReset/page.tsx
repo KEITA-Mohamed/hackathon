@@ -10,15 +10,17 @@ export default function passwordResetPage() {
 
     if (!userId || !token) {
         return (
-            <div className='main-container'>
-                <h1>Lien invalide</h1>
-                <p>
-                    Le lien de réinitialisation de mot de passe est invalide ou a expiré. Veuillez demander un nouveau lien de
-                    réinitialisation.
-                </p>
+            <div className='main-container-error'>
+                <div className='error-container'>
+                    <h1>Lien invalide</h1>
+                    <p>
+                        Le lien de réinitialisation de mot de passe est invalide ou a expiré. Veuillez demander un nouveau lien de
+                        réinitialisation.
+                    </p>
+                </div>
             </div>
         )
     }
 
-    return <ResetPasswordForm userId={userId} token={token} />
+    return <ResetPasswordForm userId={userId!} token={token!} />
 }

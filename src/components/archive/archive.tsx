@@ -7,20 +7,23 @@ import {
     isOpenFilters,
     modelFilters,
     dateFilters,
-    filtersValues,
     model,
     date,
     search,
-    items
+    convs,
+    currentChat
 } from '@/signals/filtersSignals';
+import { currentModel } from '@/signals/chatSignals';
 import { Signal } from '@preact/signals-react';
 import searchItems from '../../services/search.service';
 import Select from '../select/select';
+import getTime from '../../services/getTime.service';
 
-export default function Archive ({ wichPage }: {wichPage: string}) { 
+export default function Archive () { 
     useSignals();    
-    const listRef= useRef<HTMLLIElement[]>([]);    
-
+    const listRef= useRef<HTMLLIElement[]>([]);   
+    const [currentDate, currentTime] = getTime();
+ 
     function openFilters( filterState: Signal<boolean> ) {
         filterState.value = !filterState.value;                
     }
@@ -30,43 +33,43 @@ export default function Archive ({ wichPage }: {wichPage: string}) {
         searchItems(listRef.current, search.value);  
     }
     
+    function addConv() {
+        convs.value = [...convs.value, {title: "Nouveau chat", model: currentModel.value, date: currentDate}]
+    }
+
     return (
         <section>
             <div id='chat-list'>
-                <h3 className='gradient'>Conversations archivés</h3>
+                <h3 className='gradient'>Chat</h3>
                 <div id='filters'>
-                    <h4 onClick={()=>{openFilters(isOpenFilters)}} className={`${isOpenFilters.value ? "open-filters-button" : ""}`}>Filtres</h4>
+                    <h4 onClick={()=>{openFilters(isOpenFilters)}} className={`${isOpenFilters.value ? "open-filters-button" : ""}`}>Rechercher un chat</h4>
                     <div id='filters-container' className={`${isOpenFilters.value ? "open-filters" : "close-filters"}`}>
-                        <input onInput={(event)=>{searchbarFilter(search, event as React.ChangeEvent<HTMLInputElement>)}} type="text" placeholder='Rechercher une discussion'/>
+                        <input onInput={(event)=>{searchbarFilter(search, event as React.ChangeEvent<HTMLInputElement>)}} type="text" placeholder='...'/>
                         <div id='history-select-container'>
-                            <Select name='model' filter={ model } filterName='model' filterList={ modelFilters } itemsList={ listRef }/>
-                            <Select name='date' filter={ date } filterName='date' filterList={ dateFilters } itemsList={ listRef }/>                          
+                            <Select name='Model' filter={ model } filterName='model' filterList={ modelFilters } itemsList={ listRef }/>
+                            <Select name='Date' filter={ date } filterName='date' filterList={ dateFilters } itemsList={ listRef }/>                          
                         </div>
                     </div>
                 </div>
 
                 <ul>
                     {                            
-                        items.value.map( ( item, index ) =>
-                        <li ref={ (element: HTMLLIElement) => listRef.current[index] = element } key={ index } className='chat-list-item selected' data-model={item.model} data-date={item.date.toUpperCase()} data-search={item.title.toUpperCase() + ", " + item.model}>
-                            <Link href="/history">
-                                { item.title }
-                                <span><span className='model-name'>{ item.model.toLowerCase() }</span>- {item.date.toLowerCase()} - 12 messages - 12 crédits utilisés</span>
+                        convs.value.map( ( conv, index ) =>
+                        <li onClick={()=>{currentChat.value = index}} ref={ (element: HTMLLIElement) => listRef.current[index] = element } key={ index } className={`chat-list-item selected ${currentChat.value === index ? "active" : ""}`} data-model={conv.model} data-date={conv.date.toUpperCase()} data-search={conv.title.toUpperCase() + ", " + conv.model}>
+                            <Link href="/chat">
+                                { conv.title }
+                                <span className='chat-info'><span className='model-name'>Model &#62; { conv.model.toLowerCase() }</span> - Date &#62; {conv.date.toLowerCase()}</span>
                             </Link>
                         </li>)  
                         
                     }                    
                 </ul>
-            </div>
-
-            { wichPage === "history" &&
-                <button id='current-chat'>
+                <button id='current-chat'onClick={addConv}>
                     <Link href="/chat">
-                        Chat actuel
-                        <span>8 messages</span>
+                        Nouveau chat
                     </Link>
                 </button>
-            }
+            </div>
         </section>
     )
 }

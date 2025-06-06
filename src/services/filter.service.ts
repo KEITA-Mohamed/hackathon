@@ -1,12 +1,12 @@
 import { Signal } from "@preact/signals-react";
 export default function filterItems(elmnt: HTMLElement, field: string, count: number, filters: Signal[], filtersName: string[], last_filter: string, last_filter_value: Signal<string>) {						
     if (count < filters.length) {	        
-        if(filters[count].value !== "..." && filters[count].value == elmnt.dataset[filtersName[count]].toUpperCase()){						
+        if(filters[count].value !== "..." && filters[count].value == elmnt.dataset[filtersName[count]]?.toUpperCase()){						
             elmnt.classList.add('selected');	                    
             next();								
         }  
                           
-        if(filters[count].value !== "..." && filters[count].value !== elmnt.dataset[field].toUpperCase()) {
+        if(filters[count].value !== "..." && filters[count].value !== elmnt.dataset[field]?.toUpperCase()) {
             elmnt.classList.remove('selected');	
             if (filtersName[count] === last_filter) {					
                 if(elmnt.dataset[last_filter] == last_filter_value.value.toUpperCase()){
