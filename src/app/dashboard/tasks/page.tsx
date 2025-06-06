@@ -3,15 +3,18 @@
 import './style.scss'
 import DashboardHeader from "@/components/dashboard-header/DashboardHeader";
 import TaskList from "@/components/task-list/TaskList";
+import AddTask from "@/components/add-task/addTask";
 import Modal from "@/components/modal/modal";
 import { useSignals } from '@preact/signals-react/runtime';
 // For modal ------------------------------------
-import { isOpen, confirm } from '@/signals/modalSignals';
+import { isOpen, confirm, modalTitle } from '@/signals/modalSignals';
 import { effect } from "@preact/signals-react";
 // ----------------------------------------------
 
 export default function Dashboard () { 
     useSignals();
+    modalTitle.value = "Ajouter une tâche";
+
     // For modal ------------------------------------
     function openModal() {        
         isOpen.value = true;
@@ -39,7 +42,7 @@ export default function Dashboard () {
                 </div>                
             </div>   
             <Modal>
-                <div className='field-container'>Children content</div>
+                <AddTask />
             </Modal>         
         </div>
     )

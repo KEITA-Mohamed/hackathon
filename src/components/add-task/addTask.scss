@@ -1,0 +1,18 @@
+@use '/src/app/mixin';
+
+.form-container{
+    @include mixin.formNameContainer;
+    @include mixin.formFieldContainer;
+    width: 100%;
+}
+
+#password-error{
+    @include mixin.font('poppins');                                              
+    margin-top: 1%;
+    color: var(--light-grey);
+}
+
+textarea{
+    border-radius: 15px !important;
+    resize: none;
+}

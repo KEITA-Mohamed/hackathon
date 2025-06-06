@@ -17,13 +17,15 @@
     button{
         @include mixin.flex(row, center, center);
         @include mixin.size(100%, fit-content);
-    
+
         a, p{
             @include mixin.border(100px, var(--box-shadow), var(--border));
+            @include mixin.font('unbounded', .9em, 450);
             background-color: white;
             padding: 1em 2em;
             margin: 2em 1em 0em 1em;
-            @include mixin.font('unbounded', .9em, 450);
+            cursor: pointer;
+            transition: 200ms all !important;
     
             &:hover{
                 background-color: var(--black-09);

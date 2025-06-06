@@ -18,7 +18,10 @@
         z-index: 0;
         top: 0;
         left: 0;
-        background-color: rgba(20, 20, 20, .2);
+        // background-color: rgba(255, 255, 255, .8);
+        background-color: var(--background);
+        opacity: .85;
+        cursor: pointer
     }
 
     .modal-content{
@@ -34,7 +37,9 @@
             h1{
                 @include mixin.border(100px, none, var(--border));
                 padding-bottom: clamp(10px, 1%, 20px) !important;
+                // background-color: var(--background) !important;
                 background-color: white !important;
+                // color: var(--black-09) !important;
             }
         }
 
@@ -42,7 +47,7 @@
             @include mixin.formContainer;
             @include mixin.formNameContainer;
             @include mixin.formFieldContainer;
-            background-color: white;
+            background-color: var(--background);
         }
     }
 }

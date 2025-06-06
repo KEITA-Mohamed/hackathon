@@ -4,17 +4,18 @@ import { useRef } from 'react';
 import { dismissModal, openModal } from '../../services/modal.service';
 import { effect } from "@preact/signals-react";
 import { useSignals } from '@preact/signals-react/runtime';
-import { isOpen, confirm } from '@/signals/modalSignals';
+import { isOpen, confirm, modalTitle } from '@/signals/modalSignals';
 
 export default function Modal ({ children }) {
     useSignals();
     const modal = useRef<HTMLDivElement>(null);
-    
+    let title: string = modalTitle.value;
     effect(()=>{        
         if (isOpen.value === true) {
             openModal(modal.current);
             confirm.value = false;
         }  
+        title = modalTitle.value;
     })
 
     function closeModal(confirmValue: boolean) {
@@ -28,7 +29,7 @@ export default function Modal ({ children }) {
             <div className='modal-background' onClick={ () => { closeModal(false) }}></div>
             <div className='modal-content'>
                 <header>
-                    <h1>Test</h1>
+                    <h1>{ title }</h1>
                 </header>
 
                 {/* <form action=""> */}
