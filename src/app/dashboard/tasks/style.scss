@@ -3,10 +3,6 @@
 #main-container{
     @include mixin.flex(column, center, center);
     @include mixin.header;
-
-    h1{
-        padding-bottom: 0px !important
-    }
 }
 
 #task-lists-container{
@@ -22,7 +18,7 @@
         @include mixin.flex(row, center, center);
         @include mixin.size(100%, fit-content);
     
-        a{
+        a, p{
             @include mixin.border(100px, var(--box-shadow), var(--border));
             background-color: white;
             padding: 1em 2em;
@@ -36,45 +32,6 @@
         }
     }
 }
-
-.modal{
-    @include mixin.flex(column, center, center);
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 100000000;
-    width: 100vw;
-    height: 100vh;
-    transition: var(--trnasition);
-
-    .modal-background{
-        @include mixin.size(100%, 100%);
-        position: absolute;
-        z-index: 0;
-        top: 0;
-        left: 0;
-        background-color: rgba(20, 20, 20, .2);
-    }
-
-    .modal-content{
-        @include mixin.formGlobal;
-        @include mixin.header;
-        @include mixin.formFooter;
-        @include mixin.flex(column, center, center);
-        @include mixin.size(50%, fit-content);       
-        position: relative;
-        z-index: 100;
-
-        .content-container{
-            @include mixin.formContainer;
-            @include mixin.formNameContainer;
-            @include mixin.formFieldContainer;
-            background-color: white;
-        }
-    }
-}
-
-
 
 .main-container{
     @include mixin.size(100%, 100%);
