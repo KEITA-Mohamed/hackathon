@@ -1,17 +1,18 @@
 import { NextRequest, NextResponse } from "next/server";
 import { saveChatToDb, createConversation } from "@/app/services/chat.service";
-import { getCurrentUserId } from "@/lib/auth";
+import { getCurrentUser, getCurrentUserId } from "@/lib/auth";
 
 export async function POST(req: NextRequest) {
     try {
-        // 🧑‍💻 Authentification utilisateur
         const userId = await getCurrentUserId();
+        const user = await getCurrentUser();
+
         if (!userId) {
             return NextResponse.json({ error: "Non authentifié." }, { status: 401 });
         }
 
-        // 🧾 Extraction du prompt
-        const { prompt } = await req.json();
+        const { prompt, convId: existingConvId } = await req.json();
+
         if (!prompt || typeof prompt !== "string") {
             return NextResponse.json({ error: "Le champ 'prompt' est requis et doit être une chaîne." }, { status: 400 });
         }
@@ -22,10 +23,9 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({ error: "Clé API manquante." }, { status: 500 });
         }
 
-        // 💬 Nouvelle conversation liée à l'utilisateur
-        const convId = await createConversation(userId);
+        // 👉 Si le front ne fournit pas de convId, on en crée une
+        const convId = existingConvId ?? await createConversation(userId);
 
-        // 🛰️ Appel à l'API Mistral
         const mistralRes = await fetch("https://api.mistral.ai/v1/chat/completions", {
             method: "POST",
             headers: {
@@ -33,7 +33,7 @@ export async function POST(req: NextRequest) {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                model: "mistral-medium",
+                model: "mistral-medium-latest",
                 messages: [{ role: "user", content: prompt }],
             }),
         });
@@ -47,7 +47,6 @@ export async function POST(req: NextRequest) {
         const json = await mistralRes.json();
 
         const answer = json?.choices?.[0]?.message?.content ?? "Pas de réponse.";
-
 
         await saveChatToDb({
             convId,

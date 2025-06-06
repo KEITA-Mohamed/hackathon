@@ -1,34 +1,34 @@
-import { NextRequest, NextResponse } from "next/server";
-import { GoogleGenerativeAI } from "@google/generative-ai";
-import { saveChatToDb, createConversation } from "@/app/services/chat.service";
-import { getCurrentUserId } from "@/lib/auth";
+import {NextRequest, NextResponse} from "next/server";
+import {GoogleGenerativeAI} from "@google/generative-ai";
+import {saveChatToDb, createConversation} from "@/app/services/chat.service";
+import {getCurrentUser, getCurrentUserId} from "@/lib/auth";
+
 
 export async function POST(req: NextRequest) {
     try {
-
         const userId = await getCurrentUserId();
         if (!userId) {
-            return NextResponse.json({ error: "Non authentifié" }, { status: 401 });
+            return NextResponse.json({error: "Non authentifié"}, {status: 401});
         }
 
-        const { prompt } = await req.json();
+        const {prompt} = await req.json();
         if (!prompt || typeof prompt !== "string") {
-            return NextResponse.json({ error: "Prompt requis." }, { status: 400 });
+            return NextResponse.json({error: "Prompt requis."}, {status: 400});
         }
 
         const apiKey = process.env.GEMINI_API_KEY;
         if (!apiKey) {
             console.error("GEMINI_API_KEY manquante.");
-            return NextResponse.json({ error: "Configuration serveur invalide." }, { status: 500 });
+            return NextResponse.json({error: "Configuration serveur invalide."}, {status: 500});
         }
 
         const convId = await createConversation(userId);
 
         const genAI = new GoogleGenerativeAI(apiKey);
-        const geminiModel = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+        const geminiModel = genAI.getGenerativeModel({model: "gemini-1.5-flash"});
 
         const result = await geminiModel.generateContent({
-            contents: [{ role: "user", parts: [{ text: prompt }] }],
+            contents: [{role: "user", parts: [{text: prompt}]}],
         });
 
         const response = result?.response;
@@ -38,7 +38,6 @@ export async function POST(req: NextRequest) {
         const completionTokens = Number(response.usageMetadata?.candidatesTokenCount || 0);
         const totalTokens = Number(response.usageMetadata?.totalTokenCount || 0);
 
-        // 💾 Sauvegarde dans la base de données
         await saveChatToDb({
             convId,
             userId,
@@ -50,10 +49,10 @@ export async function POST(req: NextRequest) {
             totalTokens,
         });
 
-        return NextResponse.json({ response: answer, convId }, { status: 200 });
+        return NextResponse.json({response: answer, convId}, {status: 200});
 
     } catch (err) {
         console.error("Erreur Gemini :", err);
-        return NextResponse.json({ error: "Erreur serveur" }, { status: 500 });
+        return NextResponse.json({error: "Erreur serveur"}, {status: 500});
     }
 }

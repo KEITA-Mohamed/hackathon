@@ -35,7 +35,7 @@ export async function getCurrentUser() {
             cookieStore.set("user", JSON.stringify(user))
         }
 
-        return user
+        return {user}
     } catch (error) {
         console.error("Erreur lors de la récupération de l'utilisateur:", error)
         return null

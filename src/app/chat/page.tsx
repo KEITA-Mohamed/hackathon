@@ -14,6 +14,7 @@ export default function Chat() {
     useSignals();
     const scrollContainer = useRef<HTMLDivElement>(null);
 
+
     useEffect(() => {
         const timeout = setTimeout(() => {
             if (scrollContainer.current) {

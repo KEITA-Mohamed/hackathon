@@ -17,6 +17,7 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({ errors: { message: "l'utilisateur n'exite pas ou il pas n'est active" } }, { status: 400 })
         }
 
+
         if (user.isActive === true) {
             const match = await bcrypt.compare(body.password, user.password)
 

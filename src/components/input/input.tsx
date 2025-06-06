@@ -1,4 +1,6 @@
 'use client';
+
+
 import './input.scss';
 import {useSignals} from '@preact/signals-react/runtime';
 import {
@@ -9,41 +11,60 @@ import {
     promptLeft,
     modelMessages,
     totalsByModelByUser,
+    currentConvId, isSaveModalOpen, // 👈 le signal qui stocke la conversation active
 } from '@/signals/chatSignals';
 import Message from '@/components/message/message';
+import { MouseEventHandler } from 'react';
+import {
+    Dialog,
+    DialogClose,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle
+} from "@/components/ui/dialog";
 
 export default function Input() {
     useSignals();
 
-    const handleClicSendUserInput = async () => {
+    const handleClickSend = async () => {
         const question = userInput.value.trim();
-        if (!question) return;
+        if (!question) {
+            return
+        }
+        ;
+
 
         loading.value = true;
         response.value = '';
         userInput.value = '';
 
         const model = currentModel.value;
-        const messages = modelMessages.peek()[model] || [];
-
         modelMessages.value = {
             ...modelMessages.value,
             [model]: [
-                ...messages,
+                ...(modelMessages.peek()[model] ?? []),
                 <Message key={Date.now()} name="Moi" text={question} user={true}/>,
             ],
         };
 
         try {
+
             const res = await fetch(`/api/models/${model}`, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                // we need the jwt cookie to id currentuser
-                credentials: 'include',
-                body: JSON.stringify({ prompt: question }),
+                credentials: 'include',              // JWT cookie
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    prompt: question,
+                    convId: currentConvId.value,       // 👈 important !
+                }),
             });
 
             const data = await res.json();
+            if (!res.ok) throw new Error(data.error ?? 'Erreur back-end');
+
+            currentConvId.value = data.convId;
 
             response.value = data.response;
             promptLeft.value -= 1;
@@ -51,7 +72,7 @@ export default function Input() {
             modelMessages.value = {
                 ...modelMessages.value,
                 [model]: [
-                    ...modelMessages.value[model],
+                    ...modelMessages.peek()[model],
                     <Message
                         key={Date.now()}
                         name={model}
@@ -61,23 +82,21 @@ export default function Input() {
                 ],
             };
 
-            await updateTokensFromServer();
-
-        } catch (error) {
-            console.error('Erreur requête IA :', error);
+            await refreshTokens();
+        } catch (err) {
+            console.error('Erreur requête IA :', err);
         } finally {
             loading.value = false;
         }
     };
 
 
-    const updateTokensFromServer = async () => {
+    const refreshTokens = async () => {
         try {
             const res = await fetch('/api/token/getTokensByModelByUser', {
                 credentials: 'include',
             });
-
-            // if (!res.ok) throw new Error(await res.text());
+            if (!res.ok) throw new Error(await res.text());
 
             const json: Record<string, number> = await res.json();
             totalsByModelByUser.value = json;
@@ -86,44 +105,94 @@ export default function Input() {
         }
     };
 
+    const handleClickOpenModal: MouseEventHandler<HTMLButtonElement> = () => {
+        isSaveModalOpen.value = true;
+        console.log("coucou")
+    };
+
+
     return (
         <div id="prompt-container">
+            {/* Sélecteur de modèle (mistral / gemini / …) */}
             <div id="select-container">
                 {['mistral', 'gemini', 'deepseek'].map((model) => (
                     <button
                         key={model}
                         onClick={() => (currentModel.value = model)}
-                        className={`model-btn ${currentModel.value === model ? 'active-model' : ''}`}
+                        className={`model-btn ${
+                            currentModel.value === model ? 'active-model' : ''
+                        }`}
                     >
                         {model}
                     </button>
                 ))}
             </div>
+
+
             <div id="input-container">
                 <input
-                    placeholder="Sélectionnez un modèle 👆, puis entrez votre prompt ici."
+                    placeholder="Sélectionnez un modèle 👆 puis tapez votre prompt ici."
                     type="text"
-                    value={userInput.value}
-                    onChange={(e) => (userInput.value = e.target.value)}
+                    value={loading.value ? '' : userInput.value}
+                    readOnly={loading.value}                 // empêche de taper pendant la réponse
+                    onChange={(e) => {
+                        if (!loading.value) userInput.value = e.target.value;
+                    }}
                     onKeyDown={(e) => {
-                        if (e.key === 'Enter' && !e.shiftKey) {
+                        if (!loading.value && e.key === 'Enter' && !e.shiftKey) {
                             e.preventDefault();
-                            handleClicSendUserInput();
+                            handleClickSend();
                         }
                     }}
                 />
+
                 <button
-                    onClick={handleClicSendUserInput}
+                    onClick={handleClickSend}
                     disabled={loading.value || !userInput.value.trim()}
-                    className={`${
+                    className={
                         loading.value || !userInput.value.trim()
                             ? 'bg-gray-400 cursor-not-allowed'
                             : 'bg-blue-500 hover:bg-blue-600'
-                    }`}
+                    }
                 >
-                    {loading.value ? '...' : <img src="./send.svg" alt="send"/>}
+                    {loading.value ? '…' : <img src="./send.svg" alt="send"/>}
                 </button>
+                <button onClick={handleClickOpenModal}>
+                    enregistrer
+                </button>
+                <Dialog open={isSaveModalOpen.value} onOpenChange={(v) => (isSaveModalOpen.value = v)}>
+                    <DialogContent>
+                        <DialogHeader>
+                            <DialogTitle>Enregistrer la conversation</DialogTitle>
+                            <DialogDescription>
+                                Souhaitez-vous enregistrer cette conversation avant de la quitter ?
+                            </DialogDescription>
+                        </DialogHeader>
+
+                        <DialogFooter>
+                            <DialogClose asChild>
+                                <button
+                                    className="bg-gray-300 px-4 py-2 rounded"
+                                    onClick={() => (isSaveModalOpen.value = false)}
+                                >
+                                    Annuler
+                                </button>
+                            </DialogClose>
+                            <button
+                                className="bg-blue-500 text-white px-4 py-2 rounded"
+                                onClick={() => {
+                                    // 👇 appelle ici une fonction pour enregistrer
+                                    console.log("Enregistrement lancé");
+                                    isSaveModalOpen.value = false;
+                                }}
+                            >
+                                Confirmer
+                            </button>
+                        </DialogFooter>
+                    </DialogContent>
+                </Dialog>
             </div>
+
         </div>
     );
 }
