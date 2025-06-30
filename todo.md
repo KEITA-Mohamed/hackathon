@@ -68,3 +68,23 @@ Revenu micro-entrepreneur Etape 3
 - Planification > calcul vélocité
 - Modélisation > arbre de données
 - Maquette de groupe
+
+# Oral
+Topo sur le projet
+    - Hackaton sur le prompt enginering
+    - Ecole de commerce de Pau
+    - Initialement prévu pour juin/juillet
+    - Finalement évolué pour un rendu en 2026
+    - On vas donc ici vous présenter notre 
+
+Communication inter équipe
+
+Modélisation BDD
+
+Maquettes
+
+Docker
+
+Pour ce projet, j'ai chois de développer les différentes interfaces a la main en Sass , en me passant de Tailwind et de librairie UI du type Shadcn.
+Ce choix as été motivé pars plusieurs fais.
+Dans un premier temps, la deadline du projet était sensiblement plus courte qu'elle ne l'est aujourd'hui, j'ai donc préféré me tourné vers des techniques et méthodes qui je maitrissé déja afin de gagner un maximum de temps sur cette partie. Mais également 

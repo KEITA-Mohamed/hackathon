@@ -12,10 +12,10 @@ export const search: Signal<string> = signal<string>('...');
 export const currentChat: Signal<number> = signal<number>(0);
 
 export const convs: Signal<Array<{title: string, model: string, date: string}>> = signal<Array<{title: string, model: string, date: string}>>([
-    {title: "Maison", model: 'MISTRAL', date: 'LUNDI'}, 
-    {title: "Appartement", model: 'MISTRAL', date: 'MARDI'}, 
-    {title: "Chaussure", model: 'GEMINI', date: 'LUNDI'}, 
-    {title: "Fourchette", model: 'O3', date: 'MERCREDI'}
+    {title: "Chat 1", model: 'MISTRAL', date: 'LUNDI'}, 
+    {title: "Chat 2", model: 'MISTRAL', date: 'MARDI'}, 
+    {title: "Chat 3", model: 'GEMINI', date: 'LUNDI'}, 
+    {title: "Chat 4", model: 'O3', date: 'MERCREDI'}
 ]);
 
 export const filtersValues: Signal<{name: string[], value: Signal<string>[]}> = signal({
